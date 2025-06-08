@@ -54,7 +54,14 @@
             @click="selectProgram(program)"
             @mouseenter="highlightedIndex = getOptionIndex(program.id)"
           >
-            <div class="program-name">{{ program.name }}</div>
+            <div class="program-main">
+              <ProgramDisplay 
+                :programId="program.id"
+                :program="program"
+                variant="default"
+                iconSize="small"
+              />
+            </div>
             <div class="program-type">{{ program.type }}</div>
           </div>
           </div>
@@ -75,6 +82,7 @@
 <script setup>
 import { ref, computed, watch, nextTick } from 'vue'
 import { useConversions } from '../composables/useConversions'
+import ProgramDisplay from './ProgramDisplay.vue'
 
 const props = defineProps({
   modelValue: String,
@@ -111,7 +119,9 @@ const allPrograms = computed(() => {
   return Object.entries(programs).map(([id, program]) => ({
     id,
     name: program.name,
-    type: program.type
+    shortName: program.shortName,
+    type: program.type,
+    dollarValue: program.dollarValue
   }))
 })
 
@@ -462,15 +472,15 @@ watch(filteredPrograms, () => {
   border-left: 3px solid #3498db;
 }
 
-.program-name {
-  font-weight: 500;
-  color: #2c3e50;
+.program-main {
+  flex: 1;
 }
 
 .program-type {
   font-size: 0.8rem;
   color: #6c757d;
   text-transform: capitalize;
+  margin-left: 0.5rem;
 }
 
 .no-results {

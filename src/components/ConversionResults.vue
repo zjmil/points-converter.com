@@ -2,7 +2,25 @@
   <div class="results">
     <h2>Conversion Results</h2>
     
-    <div class="conversion-path">{{ conversionPath }}</div>
+    <div class="conversion-path">
+      <span v-if="results?.directConversion || results?.multiStepRoutes?.length > 0" class="conversion-visual">
+        <ProgramIcon 
+          v-if="results.fromProgram" 
+          :programId="results.fromProgram"
+          :type="results.programs?.[results.fromProgram]?.type"
+          size="medium"
+        />
+        <span class="desktop-path">{{ conversionPath }}</span>
+        <span class="mobile-path">{{ conversionPathMobile }}</span>
+        <ProgramIcon 
+          v-if="results.toProgram" 
+          :programId="results.toProgram"
+          :type="results.programs?.[results.toProgram]?.type"
+          size="medium"
+        />
+      </span>
+      <span v-else>{{ conversionPath }}</span>
+    </div>
     
     <div class="conversion-details" v-html="conversionDetails"></div>
     
@@ -63,6 +81,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { useDollarValues } from '../composables/useDollarValues'
+import ProgramIcon from './ProgramIcon.vue'
 
 const props = defineProps({
   results: Object,
@@ -99,6 +118,29 @@ const conversionPath = computed(() => {
     const toText = formatPointsWithDollar(result, toProgram, programs, props.showDollarValues, props.customDollarValues)
     
     return `${fromText} ${fromName} → ${toText} ${toName}`
+  } else if (multiStepRoutes.length > 0) {
+    return 'No direct conversion available'
+  } else {
+    return 'No conversion path found'
+  }
+})
+
+// Mobile version with short names for space constraints
+const conversionPathMobile = computed(() => {
+  if (!props.results) return ''
+  
+  const { amount, directConversion, multiStepRoutes, programs, fromProgram, toProgram } = props.results
+  const fromShortName = programs[fromProgram]?.shortName || programs[fromProgram]?.name || ''
+  const toShortName = programs[toProgram]?.shortName || programs[toProgram]?.name || ''
+  
+  if (directConversion) {
+    const rate = directConversion.bonus ? directConversion.bonusRate : directConversion.rate
+    const result = Math.floor(amount * rate)
+    
+    const fromText = formatPointsWithDollar(amount, fromProgram, programs, props.showDollarValues, props.customDollarValues)
+    const toText = formatPointsWithDollar(result, toProgram, programs, props.showDollarValues, props.customDollarValues)
+    
+    return `${fromText} ${fromShortName} → ${toText} ${toShortName}`
   } else if (multiStepRoutes.length > 0) {
     return 'No direct conversion available'
   } else {
@@ -263,6 +305,30 @@ const displayRoutes = computed(() => {
   font-weight: 600;
   color: #27ae60;
   margin-bottom: 1rem;
+}
+
+.conversion-visual {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mobile-path {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop-path {
+    display: none;
+  }
+  
+  .mobile-path {
+    display: inline;
+  }
+  
+  .conversion-path {
+    font-size: 1.2rem;
+  }
 }
 
 .conversion-details {

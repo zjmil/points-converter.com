@@ -8,91 +8,109 @@
   "programs": {
     "chase_ur": {
       "name": "Chase Ultimate Rewards",
+      "shortName": "UR",
       "type": "bank",
       "dollarValue": 0.0125
     },
     "amex_mr": {
       "name": "Amex Membership Rewards",
+      "shortName": "MR",
       "type": "bank",
       "dollarValue": 0.0120
     },
     "citi_typ": {
       "name": "Citi ThankYou Points",
+      "shortName": "TYP",
       "type": "bank",
       "dollarValue": 0.0110
     },
     "capital_one": {
       "name": "Capital One Miles",
+      "shortName": "C1",
       "type": "bank",
       "dollarValue": 0.0100
     },
     "marriott": {
       "name": "Marriott Bonvoy",
+      "shortName": "Bonvoy",
       "type": "hotel",
       "dollarValue": 0.0080
     },
     "hilton": {
       "name": "Hilton Honors",
+      "shortName": "Hilton",
       "type": "hotel",
       "dollarValue": 0.0050
     },
     "hyatt": {
       "name": "World of Hyatt",
+      "shortName": "Hyatt",
       "type": "hotel",
       "dollarValue": 0.0180
     },
     "ihg": {
       "name": "IHG One Rewards",
+      "shortName": "IHG",
       "type": "hotel",
       "dollarValue": 0.0070
     },
     "united": {
       "name": "United MileagePlus",
+      "shortName": "United",
       "type": "airline",
       "dollarValue": 0.0120
     },
     "american": {
       "name": "American AAdvantage",
+      "shortName": "American",
       "type": "airline",
       "dollarValue": 0.0120
     },
     "delta": {
       "name": "Delta SkyMiles",
+      "shortName": "Delta",
       "type": "airline",
       "dollarValue": 0.0120
     },
     "southwest": {
       "name": "Southwest Rapid Rewards",
+      "shortName": "Southwest",
       "type": "airline",
       "dollarValue": 0.0140
     },
     "jetblue": {
       "name": "JetBlue TrueBlue",
+      "shortName": "JetBlue",
       "type": "airline",
       "dollarValue": 0.0130
     },
     "british_airways": {
       "name": "British Airways Avios",
+      "shortName": "Avios",
       "type": "airline",
       "dollarValue": 0.0110
     },
     "singapore": {
       "name": "Singapore KrisFlyer",
+      "shortName": "Singapore",
       "type": "airline",
       "dollarValue": 0.0150
     },
     "virgin_atlantic": {
       "name": "Virgin Atlantic Flying Club",
+      "shortName": "Virgin",
       "type": "airline",
       "dollarValue": 0.0130
     },
     "air_france": {
       "name": "Air France/KLM Flying Blue",
+      "shortName": "Flying Blue",
       "type": "airline",
       "dollarValue": 0.0120
     },
     "emirates": {
       "name": "Emirates Skywards",
+      "shortName": "Emirates",
       "type": "airline",
       "dollarValue": 0.0140
     }
