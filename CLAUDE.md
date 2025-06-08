@@ -16,13 +16,20 @@ Points-converter.com is a website that allows users to convert between various p
 
 ```
 /
-├── index.html          # Main HTML file
-├── css/
-│   └── styles.css      # Stylesheet
-├── js/
-│   └── converter.js    # Conversion logic and UI interactions
-└── data/
-    └── conversions.json # Static conversion data
+├── public/              # Deployment directory (what gets served)
+│   ├── index.html       # Main HTML file
+│   ├── css/
+│   │   └── styles.css   # Stylesheet
+│   ├── js/
+│   │   └── converter.js # Conversion logic and UI interactions
+│   ├── data/
+│   │   └── conversions.json # Static conversion data
+│   ├── _headers         # Cloudflare Pages headers
+│   └── _redirects       # Cloudflare Pages redirects
+├── package.json         # npm scripts and dependencies
+├── Makefile            # Alternative command interface
+├── README.md           # Project documentation
+└── CLAUDE.md           # This file
 ```
 
 ## Development Commands
@@ -68,8 +75,8 @@ The `conversions.json` file contains:
 1. Connect GitHub repository to Cloudflare Pages
 2. Build settings:
    - Build command: (leave empty - static site)
-   - Build output directory: `/`
-3. The `_headers` and `_redirects` files are pre-configured
+   - Build output directory: `/public`
+3. The `_headers` and `_redirects` files are pre-configured in the public directory
 
 ### Other Platforms
 - GitHub Pages: Push to `gh-pages` branch or configure in settings

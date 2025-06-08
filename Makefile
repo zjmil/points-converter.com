@@ -6,7 +6,7 @@ help: ## Show this help message
 
 dev: ## Start development server on port 8000
 	@echo "Starting development server on http://localhost:8000"
-	@npx serve -p 8000 || python -m http.server 8000
+	@npx serve public -p 8000 || (cd public && python -m http.server 8000)
 
 serve: dev ## Alias for dev
 
@@ -20,9 +20,9 @@ deploy-test: ## Test the build locally (simulates Cloudflare Pages)
 	@echo "Testing static site build..."
 	@echo "Site is static - no build needed"
 	@echo "Starting preview server on http://localhost:3000"
-	@npx serve -p 3000
+	@npx serve public -p 3000
 
 update-data: ## Open the conversions data file for editing
-	@echo "Opening data/conversions.json for editing..."
+	@echo "Opening public/data/conversions.json for editing..."
 	@echo "Remember to update the 'lastUpdated' field!"
-	@$${EDITOR:-nano} data/conversions.json
+	@$${EDITOR:-nano} public/data/conversions.json

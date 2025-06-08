@@ -42,7 +42,7 @@ Then open http://localhost:8000 in your browser.
 
 ## Updating Data
 
-Edit `data/conversions.json` to:
+Edit `public/data/conversions.json` to:
 - Update conversion rates
 - Add/remove programs
 - Update bonus information
@@ -60,10 +60,10 @@ Remember to update the `lastUpdated` field when making changes.
    - Connect your GitHub repository
    - Build settings:
      - Build command: (leave empty)
-     - Build output directory: `/`
+     - Build output directory: `/public`
 3. Deploy!
 
-The site includes `_headers` for security and caching, and `_redirects` for future API routing.
+The site includes `_headers` for security and caching, and `_redirects` for future API routing in the public directory.
 
 ### Other Platforms
 
