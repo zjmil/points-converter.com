@@ -9,14 +9,26 @@
 import { computed } from 'vue'
 
 const props = defineProps({
-  lastUpdated: String,
+  conversions: Array,
   dataSource: String
 })
 
 const lastUpdatedText = computed(() => {
-  if (!props.lastUpdated) return 'Last updated: Loading...'
-  const date = new Date(props.lastUpdated)
-  return `Last updated: ${date.toLocaleDateString()}`
+  if (!props.conversions || props.conversions.length === 0) {
+    return 'Last updated: Loading...'
+  }
+  
+  // Find the most recent update across all conversions
+  const mostRecentUpdate = props.conversions
+    .filter(conv => conv.lastUpdated)
+    .map(conv => new Date(conv.lastUpdated))
+    .reduce((latest, current) => current > latest ? current : latest, new Date(0))
+  
+  if (mostRecentUpdate.getTime() === 0) {
+    return 'Last updated: Unknown'
+  }
+  
+  return `Last updated: ${mostRecentUpdate.toLocaleDateString()}`
 })
 
 const dataSourceText = computed(() => {

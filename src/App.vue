@@ -5,7 +5,7 @@
     <main>
       <div class="container">
         <DataInfo 
-          :lastUpdated="conversionData?.lastUpdated"
+          :conversions="conversionData?.conversions"
           :dataSource="conversionData?.dataSource"
         />
         

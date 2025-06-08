@@ -42,6 +42,8 @@
                 <ul>
                   <li><strong>Exchange Rate:</strong> 1:{{ step.rate }}</li>
                   <li><strong>Transfer Type:</strong> {{ step.instantTransfer ? 'Instant' : 'May take 1-2 days' }}</li>
+                  <li v-if="step.minAmount"><strong>Minimum Amount:</strong> {{ step.minAmount.toLocaleString() }} points</li>
+                  <li v-if="step.lastUpdated"><strong>Last Updated:</strong> {{ new Date(step.lastUpdated).toLocaleDateString() }}</li>
                   <li v-if="step.bonus" class="bonus-info">
                     <span class="bonus-indicator">BONUS ACTIVE</span>
                     Regular rate: 1:{{ step.baseRate }} → Bonus rate: 1:{{ step.bonusRate }}
@@ -213,6 +215,8 @@ const displayRoutes = computed(() => {
       bonus: step.bonus,
       bonusEndDate: step.bonusEndDate,
       instantTransfer: step.instantTransfer,
+      minAmount: step.minAmount,
+      lastUpdated: step.lastUpdated,
       note: step.note
     }))
     
