@@ -34,7 +34,9 @@ export const mockConversionData = {
       "rate": 1.0,
       "bonus": false,
       "bonusRate": null,
-      "instantTransfer": true
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2024-01-08T12:00:00Z"
     },
     {
       "from": "chase_ur",
@@ -43,7 +45,9 @@ export const mockConversionData = {
       "bonus": true,
       "bonusRate": 1.3,
       "bonusEndDate": "2024-01-31",
-      "instantTransfer": true
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2024-01-08T12:00:00Z"
     },
     {
       "from": "amex_mr",
@@ -51,7 +55,9 @@ export const mockConversionData = {
       "rate": 1.0,
       "bonus": false,
       "bonusRate": null,
-      "instantTransfer": false
+      "instantTransfer": false,
+      "minAmount": 1000,
+      "lastUpdated": "2024-01-08T12:00:00Z"
     },
     {
       "from": "marriott",
@@ -60,7 +66,9 @@ export const mockConversionData = {
       "bonus": false,
       "bonusRate": null,
       "instantTransfer": false,
-      "note": "3:1 ratio"
+      "note": "3:1 ratio",
+      "minAmount": 3000,
+      "lastUpdated": "2024-01-08T12:00:00Z"
     }
   ],
   "affiliateLinks": [

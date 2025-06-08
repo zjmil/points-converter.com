@@ -63,7 +63,9 @@ describe('useConversions', () => {
         "rate": 1.0,
         "bonus": false,
         "bonusRate": null,
-        "instantTransfer": true
+        "instantTransfer": true,
+        "minAmount": 1000,
+        "lastUpdated": "2024-01-08T12:00:00Z"
       })
     })
 

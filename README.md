@@ -8,9 +8,21 @@ A simple web application for converting between loyalty points programs with cur
 - Convert to hotel programs (Hyatt, Marriott, Hilton, IHG)
 - Convert to airline programs (United, American, Delta, Southwest, etc.)
 - Multi-step conversion paths when direct transfers aren't available
-- Current bonus rate indicators
+- Current bonus rate indicators with expiration dates
+- Minimum transfer amount warnings
+- Individual conversion update tracking
+- Clickable transfer previews for quick selection
+- **URL sharing** - Share specific conversions via URL parameters
+- **Data management tools** - Interactive CLI for updating rates
 - Mobile-responsive design
-- Affiliate link placeholders for monetization
+- Configurable advertisements and affiliate links
+
+### URL Sharing
+
+Share specific conversions by using URL parameters:
+- `?from=chase_ur&to=hyatt&amount=50000` - Pre-fill conversion form
+- `?from=amex_mr&to=united` - Set currencies (default amount)
+- Parameters: `from`, `to`, `amount`
 
 ## Quick Start
 
@@ -42,13 +54,37 @@ Then open http://localhost:8000 in your browser.
 
 ## Updating Data
 
-Edit `public/data/conversions.json` to:
-- Update conversion rates
-- Add/remove programs
-- Update bonus information
-- Change affiliate links
+### Interactive Data Manager
 
-Remember to update the `lastUpdated` field when making changes.
+Use the interactive data management tool:
+
+```bash
+npm run update-data
+```
+
+This tool allows you to:
+- Update conversion rates in real-time
+- Add/modify bonus information with end dates
+- Set minimum transfer amounts
+- Add new conversion routes
+- Automatically update timestamps
+
+### Manual Editing
+
+Alternatively, edit `public/data/conversions.json` directly:
+
+```bash
+npm run edit-data
+```
+
+Each conversion now includes:
+- `rate`: Base conversion rate
+- `bonus`: Whether a bonus is currently active
+- `bonusRate`: Enhanced rate during bonus periods
+- `bonusEndDate`: When the bonus expires (optional)
+- `minAmount`: Minimum points required for transfer
+- `lastUpdated`: When this conversion was last verified
+- `instantTransfer`: Whether transfer is immediate
 
 ## Deployment
 

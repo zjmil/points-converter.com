@@ -31,6 +31,14 @@
           :results="conversionResults"
         />
         
+        <ShareButton
+          v-if="showResults"
+          :fromProgram="fromProgram"
+          :toProgram="toProgram"
+          :amount="amount"
+          :programs="conversionData?.programs"
+        />
+        
         <AdPlaceholder 
           v-if="conversionData?.config?.showAdvertisements"
         />
@@ -47,13 +55,14 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import AppHeader from './components/AppHeader.vue'
 import AppFooter from './components/AppFooter.vue'
 import DataInfo from './components/DataInfo.vue'
 import ConversionForm from './components/ConversionForm.vue'
 import TransferPreview from './components/TransferPreview.vue'
 import ConversionResults from './components/ConversionResults.vue'
+import ShareButton from './components/ShareButton.vue'
 import AdPlaceholder from './components/AdPlaceholder.vue'
 import AffiliateLinks from './components/AffiliateLinks.vue'
 import { useConversions } from './composables/useConversions'
@@ -62,6 +71,52 @@ import { useConversions } from './composables/useConversions'
 const fromProgram = ref('')
 const toProgram = ref('')
 const amount = ref(1000)
+
+// URL parameters handling
+const initializeFromURL = () => {
+  // Skip URL initialization in test environment
+  if (typeof window === 'undefined' || window.location.href.includes('localhost:3000')) {
+    return
+  }
+  
+  const urlParams = new URLSearchParams(window.location.search)
+  
+  if (urlParams.has('from')) {
+    fromProgram.value = urlParams.get('from')
+  }
+  if (urlParams.has('to')) {
+    toProgram.value = urlParams.get('to')
+  }
+  if (urlParams.has('amount')) {
+    const urlAmount = parseInt(urlParams.get('amount'))
+    if (!isNaN(urlAmount) && urlAmount > 0) {
+      amount.value = urlAmount
+    }
+  }
+}
+
+// Update URL when values change
+const updateURL = () => {
+  // Skip URL updates in test environment
+  if (typeof window === 'undefined' || window.location.href.includes('localhost:3000')) {
+    return
+  }
+  
+  const params = new URLSearchParams()
+  
+  if (fromProgram.value) {
+    params.set('from', fromProgram.value)
+  }
+  if (toProgram.value) {
+    params.set('to', toProgram.value)
+  }
+  if (amount.value !== 1000) {
+    params.set('amount', amount.value.toString())
+  }
+  
+  const newURL = params.toString() ? `${window.location.pathname}?${params.toString()}` : window.location.pathname
+  window.history.replaceState({}, '', newURL)
+}
 
 // Use conversion composable
 const { conversionData, loadConversionData, findDirectConversion, findMultiStepConversions } = useConversions()
@@ -109,8 +164,12 @@ const handleTransferSelection = ({ fromProgram: newFromProgram, toProgram: newTo
   }
 }
 
+// Watchers to update URL
+watch([fromProgram, toProgram, amount], updateURL)
+
 // Lifecycle
 onMounted(() => {
+  initializeFromURL()
   loadConversionData()
 })
 </script>

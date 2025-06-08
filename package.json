@@ -11,7 +11,8 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
-    "update-data": "echo 'Remember to update lastUpdated in public/data/conversions.json' && $EDITOR public/data/conversions.json"
+    "update-data": "node scripts/update-rates.js",
+    "edit-data": "echo 'Remember to update lastUpdated in public/data/conversions.json' && $EDITOR public/data/conversions.json"
   },
   "keywords": ["points", "loyalty", "conversion", "travel"],
   "author": "",

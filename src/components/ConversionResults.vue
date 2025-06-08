@@ -112,6 +112,25 @@ const conversionDetails = computed(() => {
     <p><strong>Transfer Type:</strong> ${directConversion.instantTransfer ? 'Instant' : 'May take 1-2 days'}</p>
   `
   
+  if (directConversion.minAmount) {
+    const { amount } = props.results
+    if (amount < directConversion.minAmount) {
+      detailsHTML += `
+        <p class="warning-info">
+          <span class="warning-icon">⚠️</span>
+          Minimum transfer amount: ${directConversion.minAmount.toLocaleString()} points
+        </p>
+      `
+    } else {
+      detailsHTML += `<p><strong>Minimum Amount:</strong> ${directConversion.minAmount.toLocaleString()} points</p>`
+    }
+  }
+  
+  if (directConversion.lastUpdated) {
+    const lastUpdated = new Date(directConversion.lastUpdated).toLocaleDateString()
+    detailsHTML += `<p><strong>Last Updated:</strong> ${lastUpdated}</p>`
+  }
+  
   if (directConversion.bonus) {
     detailsHTML += `
       <p class="bonus-info">
@@ -347,5 +366,18 @@ const displayRoutes = computed(() => {
   border-radius: 4px;
   border-left: 3px solid #27ae60;
   margin-top: 0.5rem;
+}
+
+:deep(.warning-info) {
+  background-color: #fff3cd;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border-left: 3px solid #ffc107;
+  margin-top: 0.5rem;
+  color: #856404;
+}
+
+:deep(.warning-icon) {
+  margin-right: 0.5rem;
 }
 </style>
