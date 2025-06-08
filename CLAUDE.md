@@ -97,11 +97,28 @@ Tests are located in `src/test/` and use mock data from `fixtures.js` to ensure 
 ## Deployment
 
 ### Cloudflare Pages
-1. Connect GitHub repository to Cloudflare Pages
-2. Build settings:
+1. **Connect Repository:**
+   - Go to Cloudflare Pages dashboard
+   - Click "Create a project" 
+   - Connect your GitHub repository
+
+2. **Build Settings:**
+   - Framework preset: None (or Vue if available)
    - Build command: `npm run build`
    - Build output directory: `dist`
-3. Environment variables: Node.js version should be 18+ for Vite compatibility
+   - Root directory: `/` (leave empty/default)
+
+3. **Environment Variables:**
+   - `NODE_VERSION = 18` (or 20 - required for Vite)
+
+4. **Advanced Settings (Optional):**
+   - Install command: `npm ci` (faster than npm install in CI)
+
+The build process will:
+- Run `npm install` to install dependencies
+- Execute `npm run build` which runs Vite's production build
+- Output optimized static files to `dist/` directory
+- Serve the built site with automatic deployments on git push
 
 ### Other Platforms
 - GitHub Pages: Push to `gh-pages` branch or configure in settings

@@ -54,16 +54,28 @@ Remember to update the `lastUpdated` field when making changes.
 
 ### Cloudflare Pages (Recommended)
 
-1. Push your code to GitHub
-2. In Cloudflare Pages dashboard:
+1. **Push your code to GitHub**
+
+2. **In Cloudflare Pages dashboard:**
    - Create a new project
    - Connect your GitHub repository
-   - Build settings:
-     - Build command: (leave empty)
-     - Build output directory: `/public`
-3. Deploy!
+   - **Build settings:**
+     - Framework preset: None (or Vue if available)
+     - Build command: `npm run build`
+     - Build output directory: `dist`
+     - Root directory: `/` (leave empty/default)
+   - **Environment variables:**
+     - `NODE_VERSION = 18` (required for Vite)
+   - **Advanced settings (optional):**
+     - Install command: `npm ci`
 
-The site includes `_headers` for security and caching, and `_redirects` for future API routing in the public directory.
+3. **Deploy!**
+
+The build will automatically:
+- Install dependencies with npm
+- Run Vite's optimized production build
+- Deploy the generated static files
+- Set up automatic deployments on future git pushes
 
 ### Other Platforms
 
