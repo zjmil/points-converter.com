@@ -113,6 +113,24 @@
       "shortName": "Emirates",
       "type": "airline",
       "dollarValue": 0.0140
+    },
+    "air_canada": {
+      "name": "Air Canada Aeroplan",
+      "shortName": "Aeroplan",
+      "type": "airline",
+      "dollarValue": 0.0140
+    },
+    "aer_lingus": {
+      "name": "Aer Lingus AerClub",
+      "shortName": "Aer Lingus",
+      "type": "airline",
+      "dollarValue": 0.0120
+    },
+    "iberia": {
+      "name": "Iberia Plus",
+      "shortName": "Iberia",
+      "type": "airline",
+      "dollarValue": 0.0110
     }
   },
   "conversions": [
@@ -124,7 +142,8 @@
       "bonusRate": null,
       "instantTransfer": true,
       "minAmount": 1000,
-      "lastUpdated": "2024-01-08T12:00:00Z"
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
     },
     {
       "from": "chase_ur",
@@ -134,7 +153,8 @@
       "bonusRate": null,
       "instantTransfer": true,
       "minAmount": 1000,
-      "lastUpdated": "2024-01-08T12:00:00Z"
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
     },
     {
       "from": "chase_ur",
@@ -142,7 +162,10 @@
       "rate": 1.0,
       "bonus": false,
       "bonusRate": null,
-      "instantTransfer": true
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
     },
     {
       "from": "chase_ur",
@@ -150,7 +173,10 @@
       "rate": 1.0,
       "bonus": false,
       "bonusRate": null,
-      "instantTransfer": true
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
     },
     {
       "from": "chase_ur",
@@ -158,7 +184,10 @@
       "rate": 1.0,
       "bonus": false,
       "bonusRate": null,
-      "instantTransfer": true
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
     },
     {
       "from": "chase_ur",
@@ -166,7 +195,10 @@
       "rate": 1.0,
       "bonus": false,
       "bonusRate": null,
-      "instantTransfer": true
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
     },
     {
       "from": "chase_ur",
@@ -174,16 +206,21 @@
       "rate": 1.0,
       "bonus": false,
       "bonusRate": null,
-      "instantTransfer": true
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
     },
     {
       "from": "chase_ur",
       "to": "virgin_atlantic",
       "rate": 1.0,
       "bonus": true,
-      "bonusRate": 1.3,
-      "bonusEndDate": "2024-01-31",
-      "instantTransfer": true
+      "bonusRate": 1.25,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
     },
     {
       "from": "chase_ur",
@@ -191,7 +228,10 @@
       "rate": 1.0,
       "bonus": false,
       "bonusRate": null,
-      "instantTransfer": true
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
     },
     {
       "from": "chase_ur",
@@ -199,7 +239,10 @@
       "rate": 1.0,
       "bonus": false,
       "bonusRate": null,
-      "instantTransfer": true
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
     },
     {
       "from": "chase_ur",
@@ -207,7 +250,44 @@
       "rate": 1.0,
       "bonus": false,
       "bonusRate": null,
-      "instantTransfer": true
+      "instantTransfer": false,
+      "note": "Temporarily unavailable",
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
+    },
+    {
+      "from": "chase_ur",
+      "to": "air_canada",
+      "rate": 1.0,
+      "bonus": true,
+      "bonusRate": 1.2,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
+    },
+    {
+      "from": "chase_ur",
+      "to": "aer_lingus",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
+    },
+    {
+      "from": "chase_ur",
+      "to": "iberia",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
     },
     {
       "from": "amex_mr",
