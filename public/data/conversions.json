@@ -233,6 +233,24 @@
       "shortName": "Turkish",
       "type": "airline",
       "dollarValue": 0.0130
+    },
+    "finnair": {
+      "name": "Finnair Plus",
+      "shortName": "Finnair",
+      "type": "airline",
+      "dollarValue": 0.0120
+    },
+    "tap": {
+      "name": "TAP Miles&Go",
+      "shortName": "TAP",
+      "type": "airline",
+      "dollarValue": 0.0110
+    },
+    "virgin_red": {
+      "name": "Virgin Red",
+      "shortName": "Virgin Red",
+      "type": "airline",
+      "dollarValue": 0.0130
     }
   },
   "conversions": [
@@ -843,7 +861,10 @@
       "rate": 1.0,
       "bonus": false,
       "bonusRate": null,
-      "instantTransfer": true
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
     },
     {
       "from": "capital_one",
@@ -851,7 +872,10 @@
       "rate": 1.0,
       "bonus": false,
       "bonusRate": null,
-      "instantTransfer": true
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
     },
     {
       "from": "capital_one",
@@ -859,7 +883,10 @@
       "rate": 1.0,
       "bonus": false,
       "bonusRate": null,
-      "instantTransfer": true
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
     },
     {
       "from": "capital_one",
@@ -867,7 +894,178 @@
       "rate": 1.0,
       "bonus": false,
       "bonusRate": null,
-      "instantTransfer": true
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "jetblue",
+      "rate": 0.6,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/",
+      "note": "5:3 transfer ratio (1,000 Capital One miles = 600 TrueBlue points)"
+    },
+    {
+      "from": "capital_one",
+      "to": "eva_air",
+      "rate": 0.75,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/",
+      "note": "2:1.5 transfer ratio (1,000 Capital One miles = 750 Infinity MileageLands miles)"
+    },
+    {
+      "from": "capital_one",
+      "to": "aeromexico",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "air_canada",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "avianca",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "cathay_pacific",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "etihad",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "finnair",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "qantas",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "tap",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "turkish",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "virgin_red",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "accor",
+      "rate": 0.5,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/",
+      "note": "2:1 conversion ratio (1,000 Capital One miles = 500 Accor points)"
+    },
+    {
+      "from": "capital_one",
+      "to": "choice",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "wyndham",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
     },
     {
       "from": "marriott",
