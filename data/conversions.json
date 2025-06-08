@@ -1,0 +1,363 @@
+{
+  "lastUpdated": "2024-01-08T12:00:00Z",
+  "dataSource": "Official program websites",
+  "programs": {
+    "chase_ur": {
+      "name": "Chase Ultimate Rewards",
+      "type": "bank"
+    },
+    "amex_mr": {
+      "name": "Amex Membership Rewards",
+      "type": "bank"
+    },
+    "citi_typ": {
+      "name": "Citi ThankYou Points",
+      "type": "bank"
+    },
+    "capital_one": {
+      "name": "Capital One Miles",
+      "type": "bank"
+    },
+    "marriott": {
+      "name": "Marriott Bonvoy",
+      "type": "hotel"
+    },
+    "hilton": {
+      "name": "Hilton Honors",
+      "type": "hotel"
+    },
+    "hyatt": {
+      "name": "World of Hyatt",
+      "type": "hotel"
+    },
+    "ihg": {
+      "name": "IHG One Rewards",
+      "type": "hotel"
+    },
+    "united": {
+      "name": "United MileagePlus",
+      "type": "airline"
+    },
+    "american": {
+      "name": "American AAdvantage",
+      "type": "airline"
+    },
+    "delta": {
+      "name": "Delta SkyMiles",
+      "type": "airline"
+    },
+    "southwest": {
+      "name": "Southwest Rapid Rewards",
+      "type": "airline"
+    },
+    "jetblue": {
+      "name": "JetBlue TrueBlue",
+      "type": "airline"
+    },
+    "british_airways": {
+      "name": "British Airways Avios",
+      "type": "airline"
+    },
+    "singapore": {
+      "name": "Singapore KrisFlyer",
+      "type": "airline"
+    },
+    "virgin_atlantic": {
+      "name": "Virgin Atlantic Flying Club",
+      "type": "airline"
+    },
+    "air_france": {
+      "name": "Air France/KLM Flying Blue",
+      "type": "airline"
+    },
+    "emirates": {
+      "name": "Emirates Skywards",
+      "type": "airline"
+    }
+  },
+  "conversions": [
+    {
+      "from": "chase_ur",
+      "to": "hyatt",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "chase_ur",
+      "to": "marriott",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "chase_ur",
+      "to": "ihg",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "chase_ur",
+      "to": "united",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "chase_ur",
+      "to": "southwest",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "chase_ur",
+      "to": "jetblue",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "chase_ur",
+      "to": "british_airways",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "chase_ur",
+      "to": "virgin_atlantic",
+      "rate": 1.0,
+      "bonus": true,
+      "bonusRate": 1.3,
+      "bonusEndDate": "2024-01-31",
+      "instantTransfer": true
+    },
+    {
+      "from": "chase_ur",
+      "to": "singapore",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "chase_ur",
+      "to": "air_france",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "chase_ur",
+      "to": "emirates",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "amex_mr",
+      "to": "hilton",
+      "rate": 2.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "amex_mr",
+      "to": "marriott",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": false
+    },
+    {
+      "from": "amex_mr",
+      "to": "delta",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "amex_mr",
+      "to": "jetblue",
+      "rate": 0.8,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "amex_mr",
+      "to": "british_airways",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "amex_mr",
+      "to": "virgin_atlantic",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "amex_mr",
+      "to": "singapore",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "amex_mr",
+      "to": "air_france",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "amex_mr",
+      "to": "emirates",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "citi_typ",
+      "to": "jetblue",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "citi_typ",
+      "to": "virgin_atlantic",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "citi_typ",
+      "to": "singapore",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "citi_typ",
+      "to": "air_france",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "citi_typ",
+      "to": "emirates",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "capital_one",
+      "to": "british_airways",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "capital_one",
+      "to": "air_france",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "capital_one",
+      "to": "emirates",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "capital_one",
+      "to": "singapore",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true
+    },
+    {
+      "from": "marriott",
+      "to": "united",
+      "rate": 0.33,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": false,
+      "note": "3:1 ratio, better with 60k transfers (3:1.1)"
+    },
+    {
+      "from": "marriott",
+      "to": "american",
+      "rate": 0.33,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": false,
+      "note": "3:1 ratio, better with 60k transfers (3:1.1)"
+    },
+    {
+      "from": "marriott",
+      "to": "delta",
+      "rate": 0.33,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": false,
+      "note": "3:1 ratio, better with 60k transfers (3:1.1)"
+    }
+  ],
+  "affiliateLinks": [
+    {
+      "name": "Chase Sapphire Preferred",
+      "program": "chase_ur",
+      "bonus": "60,000 points",
+      "url": "#",
+      "annualFee": "$95"
+    },
+    {
+      "name": "Amex Gold Card",
+      "program": "amex_mr",
+      "bonus": "75,000 points",
+      "url": "#",
+      "annualFee": "$250"
+    },
+    {
+      "name": "Capital One Venture X",
+      "program": "capital_one",
+      "bonus": "75,000 miles",
+      "url": "#",
+      "annualFee": "$395"
+    }
+  ]
+}

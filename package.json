@@ -1,0 +1,18 @@
+{
+  "name": "points-converter",
+  "version": "1.0.0",
+  "description": "Convert between loyalty points programs with current exchange rates",
+  "scripts": {
+    "dev": "npx serve -p 8000",
+    "serve": "npx serve -p 8000",
+    "serve:python": "python -m http.server 8000",
+    "preview": "npx serve -p 3000",
+    "update-data": "echo 'Remember to update lastUpdated in data/conversions.json' && $EDITOR data/conversions.json"
+  },
+  "keywords": ["points", "loyalty", "conversion", "travel"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}
