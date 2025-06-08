@@ -17,7 +17,7 @@ export function useConversions() {
   
   const findDirectConversion = (from, to) => {
     if (!conversionData.value) return null
-    return conversionData.value.conversions.find(c => c.from === from && c.to === to)
+    return conversionData.value.conversions.find(c => c.from === from && c.to === to) || null
   }
   
   const findMultiStepConversions = (from, to) => {

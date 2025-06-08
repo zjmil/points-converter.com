@@ -84,7 +84,7 @@ describe('App Integration Tests', () => {
     expect(preview.exists()).toBe(false)
   })
 
-  it('shows conversion results after clicking convert', async () => {
+  it('shows conversion results automatically when both programs are selected', async () => {
     const wrapper = mount(App)
     
     // Wait for data to load
@@ -95,18 +95,13 @@ describe('App Integration Tests', () => {
     const amountInput = wrapper.find('#fromAmount')
     const fromSelect = wrapper.find('#fromProgram')
     const toSelect = wrapper.find('#toProgram')
-    const convertBtn = wrapper.find('.convert-btn')
     
     await amountInput.setValue('10000')
     await fromSelect.setValue('chase_ur')
     await toSelect.setValue('hyatt')
     await wrapper.vm.$nextTick()
     
-    // Click convert
-    await convertBtn.trigger('click')
-    await wrapper.vm.$nextTick()
-    
-    // Should show conversion results
+    // Should show conversion results automatically
     expect(wrapper.find('.results').exists()).toBe(true)
     expect(wrapper.text()).toContain('Conversion Results')
     expect(wrapper.text()).toContain('10,000 Chase Ultimate Rewards → 10,000 World of Hyatt')
@@ -151,28 +146,23 @@ describe('App Integration Tests', () => {
     alertSpy.mockRestore()
   })
 
-  it('prevents conversion with invalid inputs', async () => {
-    const alertSpy = vi.spyOn(window, 'alert').mockImplementation(() => {})
-    
+  it('does not show results with incomplete inputs', async () => {
     const wrapper = mount(App)
     
     // Wait for data to load
     await new Promise(resolve => setTimeout(resolve, 100))
     await wrapper.vm.$nextTick()
     
-    // Try to convert without filling all fields
-    const convertBtn = wrapper.find('.convert-btn')
-    await convertBtn.trigger('click')
+    // Only fill partial fields
+    const fromSelect = wrapper.find('#fromProgram')
+    await fromSelect.setValue('chase_ur')
     await wrapper.vm.$nextTick()
     
-    expect(alertSpy).toHaveBeenCalledWith('Please fill in all fields')
-    
-    alertSpy.mockRestore()
+    // Should not show conversion results
+    expect(wrapper.find('.results').exists()).toBe(false)
   })
 
-  it('prevents conversion between same programs', async () => {
-    const alertSpy = vi.spyOn(window, 'alert').mockImplementation(() => {})
-    
+  it('does not show results when same programs are selected', async () => {
     const wrapper = mount(App)
     
     // Wait for data to load
@@ -183,19 +173,14 @@ describe('App Integration Tests', () => {
     const amountInput = wrapper.find('#fromAmount')
     const fromSelect = wrapper.find('#fromProgram')
     const toSelect = wrapper.find('#toProgram')
-    const convertBtn = wrapper.find('.convert-btn')
     
     await amountInput.setValue('1000')
     await fromSelect.setValue('chase_ur')
     await toSelect.setValue('chase_ur')
     await wrapper.vm.$nextTick()
     
-    await convertBtn.trigger('click')
-    await wrapper.vm.$nextTick()
-    
-    expect(alertSpy).toHaveBeenCalledWith('Please select different programs')
-    
-    alertSpy.mockRestore()
+    // Should not show conversion results
+    expect(wrapper.find('.results').exists()).toBe(false)
   })
 
   it('loads affiliate links', async () => {

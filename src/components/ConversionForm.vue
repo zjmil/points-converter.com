@@ -8,7 +8,6 @@
         :value="amount"
         @input="$emit('update:amount', parseInt($event.target.value))"
         min="1"
-        @keypress.enter="$emit('convert')"
       >
     </div>
 
@@ -66,13 +65,6 @@
       </select>
     </div>
 
-    <button 
-      class="convert-btn"
-      @click="$emit('convert')"
-      :disabled="!amount || !fromProgram || !toProgram"
-    >
-      Convert
-    </button>
   </div>
 </template>
 
@@ -88,7 +80,7 @@ const props = defineProps({
   conversions: Array
 })
 
-defineEmits(['update:fromProgram', 'update:toProgram', 'update:amount', 'convert'])
+defineEmits(['update:fromProgram', 'update:toProgram', 'update:amount'])
 
 const { getReachablePrograms, getSourcePrograms, conversionData } = useConversions()
 
@@ -220,26 +212,6 @@ const toPlaceholder = computed(() => {
   align-self: center;
 }
 
-.convert-btn {
-  background-color: #3498db;
-  color: white;
-  border: none;
-  padding: 0.75rem 2rem;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.convert-btn:hover {
-  background-color: #2980b9;
-}
-
-.convert-btn:disabled {
-  background-color: #bdc3c7;
-  cursor: not-allowed;
-}
 
 @media (max-width: 768px) {
   .conversion-form {

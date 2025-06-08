@@ -15,7 +15,6 @@
           v-model:amount="amount"
           :programs="conversionData?.programs"
           :conversions="conversionData?.conversions"
-          @convert="handleConvert"
         />
         
         <TransferPreview
@@ -59,7 +58,6 @@ import { useConversions } from './composables/useConversions'
 const fromProgram = ref('')
 const toProgram = ref('')
 const amount = ref(1000)
-const conversionResults = ref(null)
 
 // Use conversion composable
 const { conversionData, loadConversionData, findDirectConversion, findMultiStepConversions } = useConversions()
@@ -69,26 +67,21 @@ const showPreview = computed(() => {
   return (fromProgram.value && !toProgram.value) || (!fromProgram.value && toProgram.value)
 })
 
-const showResults = computed(() => {
-  return conversionResults.value !== null
-})
-
-// Methods
-const handleConvert = () => {
-  if (!amount.value || !fromProgram.value || !toProgram.value) {
-    alert('Please fill in all fields')
-    return
+const conversionResults = computed(() => {
+  // Only calculate if we have all required data and inputs
+  if (!amount.value || !fromProgram.value || !toProgram.value || !conversionData.value) {
+    return null
   }
   
+  // Don't show results for same program
   if (fromProgram.value === toProgram.value) {
-    alert('Please select different programs')
-    return
+    return null
   }
   
   const directConversion = findDirectConversion(fromProgram.value, toProgram.value)
   const multiStepRoutes = findMultiStepConversions(fromProgram.value, toProgram.value)
   
-  conversionResults.value = {
+  return {
     amount: amount.value,
     fromProgram: fromProgram.value,
     toProgram: toProgram.value,
@@ -96,7 +89,12 @@ const handleConvert = () => {
     multiStepRoutes,
     programs: conversionData.value.programs
   }
-}
+})
+
+const showResults = computed(() => {
+  return conversionResults.value !== null
+})
+
 
 // Lifecycle
 onMounted(() => {

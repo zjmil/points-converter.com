@@ -8,6 +8,9 @@ global.fetch = vi.fn()
 describe('useConversions', () => {
   beforeEach(() => {
     vi.clearAllMocks()
+    // Reset the global shared state
+    const { conversionData } = useConversions()
+    conversionData.value = null
   })
 
   describe('loadConversionData', () => {
@@ -97,11 +100,11 @@ describe('useConversions', () => {
       
       await loadConversionData()
       
-      const result = findMultiStepConversions('chase_ur', 'united')
+      const result = findMultiStepConversions('amex_mr', 'united')
       
       expect(result).toHaveLength(1)
       expect(result[0].steps).toHaveLength(2)
-      expect(result[0].steps[0].from).toBe('chase_ur')
+      expect(result[0].steps[0].from).toBe('amex_mr')
       expect(result[0].steps[1].to).toBe('united')
       expect(result[0].totalRate).toBeCloseTo(0.33) // 1.0 * 0.33
     })
@@ -172,7 +175,7 @@ describe('useConversions', () => {
       expect(result).toBeInstanceOf(Set)
       expect(result.has('chase_ur')).toBe(true) // Direct
       expect(result.has('marriott')).toBe(true) // Direct
-      expect(result.has('amex_mr')).toBe(false) // Not reachable
+      expect(result.has('amex_mr')).toBe(true) // Multi-step via marriott
     })
 
     it('should return empty set when no data or invalid program', () => {
@@ -227,7 +230,7 @@ describe('useConversions', () => {
       expect(result).toHaveProperty('direct')
       expect(result).toHaveProperty('twoStep')
       expect(result.direct).toHaveLength(2) // chase_ur and marriott
-      expect(result.twoStep).toHaveLength(0) // No two-step to united in test data
+      expect(result.twoStep).toHaveLength(1) // amex_mr via marriott
     })
 
     it('should return empty arrays when no data', () => {

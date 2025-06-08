@@ -43,7 +43,6 @@ describe('ConversionForm', () => {
     expect(wrapper.find('input[type="number"]').exists()).toBe(true)
     expect(wrapper.find('#fromProgram').exists()).toBe(true)
     expect(wrapper.find('#toProgram').exists()).toBe(true)
-    expect(wrapper.find('.convert-btn').exists()).toBe(true)
   })
 
   it('displays amount input with correct value', () => {
@@ -99,64 +98,9 @@ describe('ConversionForm', () => {
     expect(wrapper.emitted('update:toProgram')[0]).toEqual(['hyatt'])
   })
 
-  it('emits convert event when convert button is clicked', async () => {
-    const wrapper = mount(ConversionForm, {
-      props: {
-        ...defaultProps,
-        fromProgram: 'chase_ur',
-        toProgram: 'hyatt',
-        amount: 1000
-      }
-    })
 
-    const convertBtn = wrapper.find('.convert-btn')
-    await convertBtn.trigger('click')
-    
-    expect(wrapper.emitted('convert')).toHaveLength(1)
-  })
 
-  it('disables convert button when required fields are missing', () => {
-    const wrapper = mount(ConversionForm, {
-      props: {
-        ...defaultProps,
-        fromProgram: '',
-        toProgram: '',
-        amount: 0
-      }
-    })
 
-    const convertBtn = wrapper.find('.convert-btn')
-    expect(convertBtn.element.disabled).toBe(true)
-  })
-
-  it('enables convert button when all fields are filled', () => {
-    const wrapper = mount(ConversionForm, {
-      props: {
-        ...defaultProps,
-        fromProgram: 'chase_ur',
-        toProgram: 'hyatt',
-        amount: 1000
-      }
-    })
-
-    const convertBtn = wrapper.find('.convert-btn')
-    expect(convertBtn.element.disabled).toBe(false)
-  })
-
-  it('triggers convert on Enter key press in amount input', async () => {
-    const wrapper = mount(ConversionForm, {
-      props: {
-        ...defaultProps,
-        fromProgram: 'chase_ur',
-        toProgram: 'hyatt'
-      }
-    })
-
-    const amountInput = wrapper.find('input[type="number"]')
-    await amountInput.trigger('keypress.enter')
-    
-    expect(wrapper.emitted('convert')).toHaveLength(1)
-  })
 
   it('shows filtered options when fromProgram is selected', () => {
     const wrapper = mount(ConversionForm, {
