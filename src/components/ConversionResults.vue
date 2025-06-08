@@ -62,10 +62,15 @@
 
 <script setup>
 import { computed, ref } from 'vue'
+import { useDollarValues } from '../composables/useDollarValues'
 
 const props = defineProps({
-  results: Object
+  results: Object,
+  showDollarValues: Boolean,
+  customDollarValues: Object
 })
+
+const { formatPointsWithDollar } = useDollarValues()
 
 // Track which routes are expanded
 const expandedRoutes = ref(new Set())
@@ -89,7 +94,11 @@ const conversionPath = computed(() => {
   if (directConversion) {
     const rate = directConversion.bonus ? directConversion.bonusRate : directConversion.rate
     const result = Math.floor(amount * rate)
-    return `${amount.toLocaleString()} ${fromName} → ${result.toLocaleString()} ${toName}`
+    
+    const fromText = formatPointsWithDollar(amount, fromProgram, programs, props.showDollarValues, props.customDollarValues)
+    const toText = formatPointsWithDollar(result, toProgram, programs, props.showDollarValues, props.customDollarValues)
+    
+    return `${fromText} ${fromName} → ${toText} ${toName}`
   } else if (multiStepRoutes.length > 0) {
     return 'No direct conversion available'
   } else {
@@ -186,9 +195,10 @@ const displayRoutes = computed(() => {
     const isAlternative = props.results.directConversion
     const isExpanded = expandedRoutes.value.has(index)
     
+    const resultText = formatPointsWithDollar(result, toProgram, programs, props.showDollarValues, props.customDollarValues)
     const title = isAlternative 
-      ? `Alternative ${index + 1}: ${result.toLocaleString()} ${toName}`
-      : `Route ${index + 1}: ${result.toLocaleString()} ${toName}`
+      ? `Alternative ${index + 1}: ${resultText} ${toName}`
+      : `Route ${index + 1}: ${resultText} ${toName}`
     
     let currentAmount = amount
     const steps = route.steps.map(step => {
@@ -197,7 +207,10 @@ const displayRoutes = computed(() => {
       const stepFromName = programs[step.from]?.name || ''
       const stepToName = programs[step.to]?.name || ''
       
-      const text = `${currentAmount.toLocaleString()} ${stepFromName} → ${stepResult.toLocaleString()} ${stepToName} (1:${stepRate})`
+      const fromText = formatPointsWithDollar(currentAmount, step.from, programs, props.showDollarValues, props.customDollarValues)
+      const toText = formatPointsWithDollar(stepResult, step.to, programs, props.showDollarValues, props.customDollarValues)
+      
+      const text = `${fromText} ${stepFromName} → ${toText} ${stepToName} (1:${stepRate})`
       
       currentAmount = stepResult
       

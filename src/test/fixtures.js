@@ -8,23 +8,28 @@ export const mockConversionData = {
   "programs": {
     "chase_ur": {
       "name": "Chase Ultimate Rewards",
-      "type": "bank"
+      "type": "bank",
+      "dollarValue": 0.0125
     },
     "amex_mr": {
       "name": "Amex Membership Rewards", 
-      "type": "bank"
+      "type": "bank",
+      "dollarValue": 0.0120
     },
     "hyatt": {
       "name": "World of Hyatt",
-      "type": "hotel"
+      "type": "hotel",
+      "dollarValue": 0.0180
     },
     "united": {
       "name": "United MileagePlus",
-      "type": "airline"
+      "type": "airline",
+      "dollarValue": 0.0120
     },
     "marriott": {
       "name": "Marriott Bonvoy",
-      "type": "hotel"
+      "type": "hotel",
+      "dollarValue": 0.0080
     }
   },
   "conversions": [

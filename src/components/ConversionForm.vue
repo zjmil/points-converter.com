@@ -9,6 +9,9 @@
         @input="$emit('update:amount', parseInt($event.target.value))"
         min="1"
       >
+      <div v-if="showDollarValues && fromProgram && amountDollarValue" class="dollar-hint">
+        {{ amountDollarValue }}
+      </div>
     </div>
 
     <ProgramSearch
@@ -40,16 +43,21 @@
 import { computed } from 'vue'
 import ProgramSearch from './ProgramSearch.vue'
 import { useConversions } from '../composables/useConversions'
+import { useDollarValues } from '../composables/useDollarValues'
 
 const props = defineProps({
   fromProgram: String,
   toProgram: String,
   amount: Number,
   programs: Object,
-  conversions: Array
+  conversions: Array,
+  showDollarValues: Boolean,
+  customDollarValues: Object
 })
 
 const emit = defineEmits(['update:fromProgram', 'update:toProgram', 'update:amount'])
+
+const { formatDollarValue, getProgramDollarValue } = useDollarValues()
 
 // Computed refs for v-model binding
 const fromProgram = computed({
@@ -60,6 +68,16 @@ const fromProgram = computed({
 const toProgram = computed({
   get: () => props.toProgram,
   set: (value) => emit('update:toProgram', value)
+})
+
+// Calculate dollar value for current amount
+const amountDollarValue = computed(() => {
+  if (!props.fromProgram || !props.amount || !props.programs) return null
+  
+  const dollarValue = getProgramDollarValue(props.fromProgram, props.programs, props.customDollarValues)
+  if (!dollarValue) return null
+  
+  return formatDollarValue(props.amount, dollarValue)
 })
 
 // The filtering logic is now handled by the ProgramSearch component
@@ -102,6 +120,13 @@ const toProgram = computed({
 .form-group input:focus {
   outline: none;
   border-color: #3498db;
+}
+
+.dollar-hint {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 0.25rem;
+  font-style: italic;
 }
 
 .arrow {

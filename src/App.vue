@@ -9,12 +9,22 @@
           :dataSource="conversionData?.dataSource"
         />
         
+        <DollarValueToggle v-model="showDollarValues" />
+        
+        <AdvancedSettings 
+          v-if="conversionData?.programs"
+          :programs="conversionData.programs"
+          v-model:customDollarValues="customDollarValues"
+        />
+        
         <ConversionForm
           v-model:fromProgram="fromProgram"
           v-model:toProgram="toProgram"
           v-model:amount="amount"
           :programs="conversionData?.programs"
           :conversions="conversionData?.conversions"
+          :showDollarValues="showDollarValues"
+          :customDollarValues="customDollarValues"
         />
         
         <TransferPreview
@@ -29,6 +39,8 @@
         <ConversionResults
           v-if="showResults"
           :results="conversionResults"
+          :showDollarValues="showDollarValues"
+          :customDollarValues="customDollarValues"
         />
         
         <ShareButton
@@ -59,6 +71,8 @@ import { ref, computed, onMounted, watch } from 'vue'
 import AppHeader from './components/AppHeader.vue'
 import AppFooter from './components/AppFooter.vue'
 import DataInfo from './components/DataInfo.vue'
+import DollarValueToggle from './components/DollarValueToggle.vue'
+import AdvancedSettings from './components/AdvancedSettings.vue'
 import ConversionForm from './components/ConversionForm.vue'
 import TransferPreview from './components/TransferPreview.vue'
 import ConversionResults from './components/ConversionResults.vue'
@@ -71,6 +85,8 @@ import { useConversions } from './composables/useConversions'
 const fromProgram = ref('')
 const toProgram = ref('')
 const amount = ref(1000)
+const showDollarValues = ref(false)
+const customDollarValues = ref({})
 
 // URL parameters handling
 const initializeFromURL = () => {
