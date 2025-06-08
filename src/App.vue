@@ -30,9 +30,12 @@
           :results="conversionResults"
         />
         
-        <AdPlaceholder />
+        <AdPlaceholder 
+          v-if="conversionData?.config?.showAdvertisements"
+        />
         
         <AffiliateLinks
+          v-if="conversionData?.config?.showAffiliateLinks"
           :links="conversionData?.affiliateLinks"
         />
       </div>

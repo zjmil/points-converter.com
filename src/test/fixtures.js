@@ -1,6 +1,10 @@
 export const mockConversionData = {
   "lastUpdated": "2024-01-08T12:00:00Z",
   "dataSource": "Test data",
+  "config": {
+    "showAdvertisements": true,
+    "showAffiliateLinks": true
+  },
   "programs": {
     "chase_ur": {
       "name": "Chase Ultimate Rewards",

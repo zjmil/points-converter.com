@@ -1,6 +1,10 @@
 {
   "lastUpdated": "2024-01-08T12:00:00Z",
   "dataSource": "Official program websites",
+  "config": {
+    "showAdvertisements": false,
+    "showAffiliateLinks": false
+  },
   "programs": {
     "chase_ur": {
       "name": "Chase Ultimate Rewards",
