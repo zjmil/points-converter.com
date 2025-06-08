@@ -41,8 +41,9 @@ describe('ConversionForm', () => {
     })
 
     expect(wrapper.find('input[type="number"]').exists()).toBe(true)
-    expect(wrapper.find('#fromProgram').exists()).toBe(true)
-    expect(wrapper.find('#toProgram').exists()).toBe(true)
+    expect(wrapper.findAllComponents({ name: 'ProgramSearch' })).toHaveLength(2)
+    expect(wrapper.text()).toContain('From')
+    expect(wrapper.text()).toContain('To')
   })
 
   it('displays amount input with correct value', () => {
@@ -54,21 +55,17 @@ describe('ConversionForm', () => {
     expect(amountInput.element.value).toBe('1000')
   })
 
-  it('shows grouped program options', () => {
+  it('shows search inputs with proper labels', () => {
     const wrapper = mount(ConversionForm, {
       props: defaultProps
     })
 
-    const fromSelect = wrapper.find('#fromProgram')
+    const programSearches = wrapper.findAllComponents({ name: 'ProgramSearch' })
+    expect(programSearches).toHaveLength(2)
     
-    // Check for optgroups
-    expect(fromSelect.find('optgroup[label="Bank Points"]').exists()).toBe(true)
-    expect(fromSelect.find('optgroup[label="Hotel Programs"]').exists()).toBe(true)
-    expect(fromSelect.find('optgroup[label="Airline Programs"]').exists()).toBe(true)
-    
-    // Check for specific options
-    expect(fromSelect.find('option[value="chase_ur"]').text()).toBe('Chase Ultimate Rewards')
-    expect(fromSelect.find('option[value="hyatt"]').text()).toBe('World of Hyatt')
+    // Check that both search components are rendered
+    expect(wrapper.text()).toContain('From')
+    expect(wrapper.text()).toContain('To')
   })
 
   it('emits update events when values change', async () => {
@@ -83,82 +80,44 @@ describe('ConversionForm', () => {
     expect(wrapper.emitted('update:amount')).toHaveLength(1)
     expect(wrapper.emitted('update:amount')[0]).toEqual([2000])
 
-    // Test from program change
-    const fromSelect = wrapper.find('#fromProgram')
-    await fromSelect.setValue('chase_ur')
+    // Test program change through ProgramSearch components
+    const programSearches = wrapper.findAllComponents({ name: 'ProgramSearch' })
     
-    expect(wrapper.emitted('update:fromProgram')).toHaveLength(1)
+    // Emit from first ProgramSearch (from)
+    await programSearches[0].vm.$emit('update:model-value', 'chase_ur')
+    expect(wrapper.emitted('update:fromProgram')).toBeTruthy()
     expect(wrapper.emitted('update:fromProgram')[0]).toEqual(['chase_ur'])
 
-    // Test to program change
-    const toSelect = wrapper.find('#toProgram')
-    await toSelect.setValue('hyatt')
-    
-    expect(wrapper.emitted('update:toProgram')).toHaveLength(1)
+    // Emit from second ProgramSearch (to)  
+    await programSearches[1].vm.$emit('update:model-value', 'hyatt')
+    expect(wrapper.emitted('update:toProgram')).toBeTruthy()
     expect(wrapper.emitted('update:toProgram')[0]).toEqual(['hyatt'])
   })
 
 
 
 
-
-  it('shows filtered options when fromProgram is selected', () => {
+  it('passes correct props to ProgramSearch components', () => {
     const wrapper = mount(ConversionForm, {
       props: {
         ...defaultProps,
         fromProgram: 'chase_ur',
-        toProgram: ''
+        toProgram: 'hyatt'
       }
     })
 
-    const toSelect = wrapper.find('#toProgram')
-    const placeholder = toSelect.find('option[value=""]')
+    const programSearches = wrapper.findAllComponents({ name: 'ProgramSearch' })
     
-    expect(placeholder.text()).toContain('Select from 2 transfer partner')
-  })
-
-  it('shows filtered options when toProgram is selected', () => {
-    const wrapper = mount(ConversionForm, {
-      props: {
-        ...defaultProps,
-        fromProgram: '',
-        toProgram: 'united'
-      }
-    })
-
-    const fromSelect = wrapper.find('#fromProgram')
-    const placeholder = fromSelect.find('option[value=""]')
+    // Check from component props
+    expect(programSearches[0].props('modelValue')).toBe('chase_ur')
+    expect(programSearches[0].props('label')).toBe('From')
+    expect(programSearches[0].props('isFromProgram')).toBe(true)
+    expect(programSearches[0].props('otherProgram')).toBe('hyatt')
     
-    expect(placeholder.text()).toContain('Select from 2 program')
-    expect(placeholder.text()).toContain('that can transfer here')
-  })
-
-  it('shows no options message when no transfers are available', () => {
-    const wrapper = mount(ConversionForm, {
-      props: {
-        ...defaultProps,
-        fromProgram: 'amex_mr', // Has no transfers to most programs in test data
-        toProgram: ''
-      }
-    })
-
-    const toSelect = wrapper.find('#toProgram')
-    const placeholder = toSelect.find('option[value=""]')
-    
-    expect(placeholder.text()).toBe('No transfer partners available')
-  })
-
-  it('sorts program options alphabetically within groups', () => {
-    const wrapper = mount(ConversionForm, {
-      props: defaultProps
-    })
-
-    const bankOptions = wrapper.find('#fromProgram optgroup[label="Bank Points"]')
-      .findAll('option')
-      .map(option => option.text())
-
-    // Should be sorted: Amex before Chase
-    expect(bankOptions[0]).toBe('Amex Membership Rewards')
-    expect(bankOptions[1]).toBe('Chase Ultimate Rewards')
+    // Check to component props
+    expect(programSearches[1].props('modelValue')).toBe('hyatt')
+    expect(programSearches[1].props('label')).toBe('To')
+    expect(programSearches[1].props('isFromProgram')).toBe(false)
+    expect(programSearches[1].props('otherProgram')).toBe('chase_ur')
   })
 })

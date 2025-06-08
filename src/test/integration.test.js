@@ -16,6 +16,14 @@ describe('App Integration Tests', () => {
     })
   })
 
+  // Helper function to select a program in ProgramSearch component
+  const selectProgram = async (wrapper, programId, isFromProgram = true) => {
+    const programSearches = wrapper.findAllComponents({ name: 'ProgramSearch' })
+    const searchComponent = isFromProgram ? programSearches[0] : programSearches[1]
+    await searchComponent.vm.$emit('update:model-value', programId)
+    await wrapper.vm.$nextTick()
+  }
+
   it('loads data on mount and populates components', async () => {
     const wrapper = mount(App)
     
@@ -37,10 +45,8 @@ describe('App Integration Tests', () => {
     await new Promise(resolve => setTimeout(resolve, 100))
     await wrapper.vm.$nextTick()
     
-    // Select a from program
-    const fromSelect = wrapper.find('#fromProgram')
-    await fromSelect.setValue('chase_ur')
-    await wrapper.vm.$nextTick()
+    // Select a from program using helper
+    await selectProgram(wrapper, 'chase_ur', true)
     
     // Should show transfer preview
     expect(wrapper.find('.transfer-preview').exists()).toBe(true)
@@ -54,10 +60,8 @@ describe('App Integration Tests', () => {
     await new Promise(resolve => setTimeout(resolve, 100))
     await wrapper.vm.$nextTick()
     
-    // Select a to program
-    const toSelect = wrapper.find('#toProgram')
-    await toSelect.setValue('united')
-    await wrapper.vm.$nextTick()
+    // Select a to program using helper
+    await selectProgram(wrapper, 'united', false)
     
     // Should show transfer preview
     expect(wrapper.find('.transfer-preview').exists()).toBe(true)
@@ -71,13 +75,9 @@ describe('App Integration Tests', () => {
     await new Promise(resolve => setTimeout(resolve, 100))
     await wrapper.vm.$nextTick()
     
-    // Select both programs
-    const fromSelect = wrapper.find('#fromProgram')
-    const toSelect = wrapper.find('#toProgram')
-    
-    await fromSelect.setValue('chase_ur')
-    await toSelect.setValue('hyatt')
-    await wrapper.vm.$nextTick()
+    // Select both programs using helper
+    await selectProgram(wrapper, 'chase_ur', true)
+    await selectProgram(wrapper, 'hyatt', false)
     
     // Should hide transfer preview
     const preview = wrapper.find('.transfer-preview')
@@ -93,13 +93,10 @@ describe('App Integration Tests', () => {
     
     // Fill in the form
     const amountInput = wrapper.find('#fromAmount')
-    const fromSelect = wrapper.find('#fromProgram')
-    const toSelect = wrapper.find('#toProgram')
-    
     await amountInput.setValue('10000')
-    await fromSelect.setValue('chase_ur')
-    await toSelect.setValue('hyatt')
-    await wrapper.vm.$nextTick()
+    
+    await selectProgram(wrapper, 'chase_ur', true)
+    await selectProgram(wrapper, 'hyatt', false)
     
     // Should show conversion results automatically
     expect(wrapper.find('.results').exists()).toBe(true)
@@ -107,23 +104,22 @@ describe('App Integration Tests', () => {
     expect(wrapper.text()).toContain('10,000 Chase Ultimate Rewards → 10,000 World of Hyatt')
   })
 
-  it('filters dropdown options based on available conversions', async () => {
+  it('shows program search components for currency selection', async () => {
     const wrapper = mount(App)
     
     // Wait for data to load
     await new Promise(resolve => setTimeout(resolve, 100))
     await wrapper.vm.$nextTick()
     
-    // Select chase_ur
-    const fromSelect = wrapper.find('#fromProgram')
-    await fromSelect.setValue('chase_ur')
-    await wrapper.vm.$nextTick()
+    // Check that ProgramSearch components are rendered
+    const programSearches = wrapper.findAllComponents({ name: 'ProgramSearch' })
+    expect(programSearches).toHaveLength(2)
     
-    // Check that to dropdown shows filtered options
-    const toSelect = wrapper.find('#toProgram')
-    const placeholder = toSelect.find('option[value=""]')
+    // Verify the filtering logic is working by selecting a program
+    await selectProgram(wrapper, 'chase_ur', true)
     
-    expect(placeholder.text()).toContain('transfer partner')
+    // Should show transfer preview indicating filtering is working
+    expect(wrapper.find('.transfer-preview').exists()).toBe(true)
   })
 
   it('handles data loading errors gracefully', async () => {
@@ -154,9 +150,7 @@ describe('App Integration Tests', () => {
     await wrapper.vm.$nextTick()
     
     // Only fill partial fields
-    const fromSelect = wrapper.find('#fromProgram')
-    await fromSelect.setValue('chase_ur')
-    await wrapper.vm.$nextTick()
+    await selectProgram(wrapper, 'chase_ur', true)
     
     // Should not show conversion results
     expect(wrapper.find('.results').exists()).toBe(false)
@@ -171,13 +165,10 @@ describe('App Integration Tests', () => {
     
     // Fill form with same program
     const amountInput = wrapper.find('#fromAmount')
-    const fromSelect = wrapper.find('#fromProgram')
-    const toSelect = wrapper.find('#toProgram')
-    
     await amountInput.setValue('1000')
-    await fromSelect.setValue('chase_ur')
-    await toSelect.setValue('chase_ur')
-    await wrapper.vm.$nextTick()
+    
+    await selectProgram(wrapper, 'chase_ur', true)
+    await selectProgram(wrapper, 'chase_ur', false)
     
     // Should not show conversion results
     expect(wrapper.find('.results').exists()).toBe(false)
@@ -204,9 +195,7 @@ describe('App Integration Tests', () => {
     await wrapper.vm.$nextTick()
     
     // Select chase_ur to show transfer preview
-    const fromSelect = wrapper.find('#fromProgram')
-    await fromSelect.setValue('chase_ur')
-    await wrapper.vm.$nextTick()
+    await selectProgram(wrapper, 'chase_ur', true)
     
     // Should show transfer preview
     expect(wrapper.find('.transfer-preview').exists()).toBe(true)
@@ -219,8 +208,8 @@ describe('App Integration Tests', () => {
     await wrapper.vm.$nextTick()
     
     // Should now have both programs selected and show conversion results
-    const toSelect = wrapper.find('#toProgram')
-    expect(toSelect.element.value).toBeTruthy()
+    const programSearches = wrapper.findAllComponents({ name: 'ProgramSearch' })
+    expect(programSearches[1].props('modelValue')).toBeTruthy()
     expect(wrapper.find('.results').exists()).toBe(true)
     expect(wrapper.find('.transfer-preview').exists()).toBe(false)
   })

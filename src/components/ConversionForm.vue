@@ -11,65 +11,34 @@
       >
     </div>
 
-    <div class="form-group">
-      <label for="fromProgram">From</label>
-      <select 
-        id="fromProgram"
-        :value="fromProgram"
-        @change="$emit('update:fromProgram', $event.target.value)"
-      >
-        <option value="">{{ fromPlaceholder }}</option>
-        <optgroup v-if="filteredFromPrograms.bank.length" label="Bank Points">
-          <option v-for="prog in filteredFromPrograms.bank" :key="prog.id" :value="prog.id">
-            {{ prog.name }}
-          </option>
-        </optgroup>
-        <optgroup v-if="filteredFromPrograms.hotel.length" label="Hotel Programs">
-          <option v-for="prog in filteredFromPrograms.hotel" :key="prog.id" :value="prog.id">
-            {{ prog.name }}
-          </option>
-        </optgroup>
-        <optgroup v-if="filteredFromPrograms.airline.length" label="Airline Programs">
-          <option v-for="prog in filteredFromPrograms.airline" :key="prog.id" :value="prog.id">
-            {{ prog.name }}
-          </option>
-        </optgroup>
-      </select>
-    </div>
+    <ProgramSearch
+      v-model="fromProgram"
+      label="From"
+      placeholder="Search or click to choose source program..."
+      :programs="programs"
+      :other-program="toProgram"
+      :is-from-program="true"
+      @update:model-value="$emit('update:fromProgram', $event)"
+    />
 
     <div class="arrow">→</div>
 
-    <div class="form-group">
-      <label for="toProgram">To</label>
-      <select 
-        id="toProgram"
-        :value="toProgram"
-        @change="$emit('update:toProgram', $event.target.value)"
-      >
-        <option value="">{{ toPlaceholder }}</option>
-        <optgroup v-if="filteredToPrograms.bank.length" label="Bank Points">
-          <option v-for="prog in filteredToPrograms.bank" :key="prog.id" :value="prog.id">
-            {{ prog.name }}
-          </option>
-        </optgroup>
-        <optgroup v-if="filteredToPrograms.hotel.length" label="Hotel Programs">
-          <option v-for="prog in filteredToPrograms.hotel" :key="prog.id" :value="prog.id">
-            {{ prog.name }}
-          </option>
-        </optgroup>
-        <optgroup v-if="filteredToPrograms.airline.length" label="Airline Programs">
-          <option v-for="prog in filteredToPrograms.airline" :key="prog.id" :value="prog.id">
-            {{ prog.name }}
-          </option>
-        </optgroup>
-      </select>
-    </div>
+    <ProgramSearch
+      v-model="toProgram"
+      label="To"
+      placeholder="Search or click to choose destination..."
+      :programs="programs"
+      :other-program="fromProgram"
+      :is-from-program="false"
+      @update:model-value="$emit('update:toProgram', $event)"
+    />
 
   </div>
 </template>
 
 <script setup>
 import { computed } from 'vue'
+import ProgramSearch from './ProgramSearch.vue'
 import { useConversions } from '../composables/useConversions'
 
 const props = defineProps({
@@ -80,88 +49,20 @@ const props = defineProps({
   conversions: Array
 })
 
-defineEmits(['update:fromProgram', 'update:toProgram', 'update:amount'])
+const emit = defineEmits(['update:fromProgram', 'update:toProgram', 'update:amount'])
 
-const { getReachablePrograms, getSourcePrograms, conversionData } = useConversions()
-
-// Group programs by type
-const groupedPrograms = computed(() => {
-  const programs = conversionData.value?.programs || props.programs
-  if (!programs) return { bank: [], hotel: [], airline: [] }
-  
-  const groups = { bank: [], hotel: [], airline: [] }
-  
-  Object.entries(programs).forEach(([id, program]) => {
-    const prog = { id, name: program.name, type: program.type }
-    if (groups[program.type]) {
-      groups[program.type].push(prog)
-    }
-  })
-  
-  // Sort each group alphabetically
-  Object.keys(groups).forEach(type => {
-    groups[type].sort((a, b) => a.name.localeCompare(b.name))
-  })
-  
-  return groups
+// Computed refs for v-model binding
+const fromProgram = computed({
+  get: () => props.fromProgram,
+  set: (value) => emit('update:fromProgram', value)
 })
 
-// Filter from programs based on to selection
-const filteredFromPrograms = computed(() => {
-  if (!props.toProgram) {
-    return groupedPrograms.value
-  }
-  
-  const sourcePrograms = getSourcePrograms(props.toProgram)
-  const filtered = { bank: [], hotel: [], airline: [] }
-  
-  Object.keys(filtered).forEach(type => {
-    filtered[type] = groupedPrograms.value[type].filter(prog => 
-      sourcePrograms.has(prog.id)
-    )
-  })
-  
-  return filtered
+const toProgram = computed({
+  get: () => props.toProgram,
+  set: (value) => emit('update:toProgram', value)
 })
 
-// Filter to programs based on from selection
-const filteredToPrograms = computed(() => {
-  if (!props.fromProgram) {
-    return groupedPrograms.value
-  }
-  
-  const reachablePrograms = getReachablePrograms(props.fromProgram)
-  const filtered = { bank: [], hotel: [], airline: [] }
-  
-  Object.keys(filtered).forEach(type => {
-    filtered[type] = groupedPrograms.value[type].filter(prog => 
-      reachablePrograms.has(prog.id)
-    )
-  })
-  
-  return filtered
-})
-
-// Dynamic placeholders
-const fromPlaceholder = computed(() => {
-  if (!props.toProgram) return 'Select a program'
-  
-  const sourcePrograms = getSourcePrograms(props.toProgram)
-  if (sourcePrograms.size === 0) {
-    return 'No programs can transfer to this destination'
-  }
-  return `Select from ${sourcePrograms.size} program${sourcePrograms.size === 1 ? '' : 's'} that can transfer here`
-})
-
-const toPlaceholder = computed(() => {
-  if (!props.fromProgram) return 'Select a program'
-  
-  const reachablePrograms = getReachablePrograms(props.fromProgram)
-  if (reachablePrograms.size === 0) {
-    return 'No transfer partners available'
-  }
-  return `Select from ${reachablePrograms.size} transfer partner${reachablePrograms.size === 1 ? '' : 's'}`
-})
+// The filtering logic is now handled by the ProgramSearch component
 </script>
 
 <style scoped>
@@ -189,8 +90,7 @@ const toPlaceholder = computed(() => {
   color: #555;
 }
 
-.form-group input,
-.form-group select {
+.form-group input {
   width: 100%;
   padding: 0.75rem;
   border: 2px solid #ddd;
@@ -199,8 +99,7 @@ const toPlaceholder = computed(() => {
   transition: border-color 0.3s;
 }
 
-.form-group input:focus,
-.form-group select:focus {
+.form-group input:focus {
   outline: none;
   border-color: #3498db;
 }
