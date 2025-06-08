@@ -195,4 +195,33 @@ describe('App Integration Tests', () => {
     expect(wrapper.text()).toContain('Test Card')
     expect(wrapper.text()).toContain('60,000 points')
   })
+
+  it('allows clicking transfer previews to populate other currency', async () => {
+    const wrapper = mount(App)
+    
+    // Wait for data to load
+    await new Promise(resolve => setTimeout(resolve, 100))
+    await wrapper.vm.$nextTick()
+    
+    // Select chase_ur to show transfer preview
+    const fromSelect = wrapper.find('#fromProgram')
+    await fromSelect.setValue('chase_ur')
+    await wrapper.vm.$nextTick()
+    
+    // Should show transfer preview
+    expect(wrapper.find('.transfer-preview').exists()).toBe(true)
+    
+    // Click on a transfer item
+    const transferItems = wrapper.findAll('.transfer-item')
+    expect(transferItems.length).toBeGreaterThan(0)
+    
+    await transferItems[0].trigger('click')
+    await wrapper.vm.$nextTick()
+    
+    // Should now have both programs selected and show conversion results
+    const toSelect = wrapper.find('#toProgram')
+    expect(toSelect.element.value).toBeTruthy()
+    expect(wrapper.find('.results').exists()).toBe(true)
+    expect(wrapper.find('.transfer-preview').exists()).toBe(false)
+  })
 })

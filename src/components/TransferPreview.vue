@@ -5,7 +5,8 @@
       <div 
         v-for="transfer in allTransfers" 
         :key="getTransferKey(transfer)"
-        class="transfer-item"
+        class="transfer-item clickable"
+        @click="selectTransfer(transfer)"
       >
         <div class="transfer-item-header">
           <div class="transfer-item-title">{{ transfer.title }}</div>
@@ -31,6 +32,8 @@ const props = defineProps({
   programs: Object,
   conversions: Array
 })
+
+const emit = defineEmits(['selectTransfer'])
 
 const { getTransfersFrom, getTransfersTo, conversionData } = useConversions()
 
@@ -161,6 +164,19 @@ const allTransfers = computed(() => {
 const getTransferKey = (transfer) => {
   return `${transfer.title}-${transfer.rate}-${transfer.isDirect}`
 }
+
+const selectTransfer = (transfer) => {
+  // Determine which program to populate based on current selection
+  if (props.fromProgram && !props.toProgram) {
+    // From program is selected, populate to program
+    const toProgram = transfer.transferData.to || transfer.transferData.steps?.[transfer.transferData.steps.length - 1]?.to
+    emit('selectTransfer', { toProgram })
+  } else if (!props.fromProgram && props.toProgram) {
+    // To program is selected, populate from program  
+    const fromProgram = transfer.transferData.from || transfer.transferData.steps?.[0]?.from
+    emit('selectTransfer', { fromProgram })
+  }
+}
 </script>
 
 <style scoped>
@@ -187,11 +203,17 @@ const getTransferKey = (transfer) => {
   border: 1px solid #e1e5e9;
   border-radius: 8px;
   padding: 1rem;
-  transition: box-shadow 0.2s;
+  transition: all 0.2s ease;
 }
 
-.transfer-item:hover {
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+.transfer-item.clickable {
+  cursor: pointer;
+}
+
+.transfer-item.clickable:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+  border-color: #3498db;
 }
 
 .transfer-item-header {

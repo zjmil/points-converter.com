@@ -23,6 +23,7 @@
           :toProgram="toProgram"
           :programs="conversionData?.programs"
           :conversions="conversionData?.conversions"
+          @selectTransfer="handleTransferSelection"
         />
         
         <ConversionResults
@@ -98,6 +99,15 @@ const showResults = computed(() => {
   return conversionResults.value !== null
 })
 
+// Methods
+const handleTransferSelection = ({ fromProgram: newFromProgram, toProgram: newToProgram }) => {
+  if (newFromProgram) {
+    fromProgram.value = newFromProgram
+  }
+  if (newToProgram) {
+    toProgram.value = newToProgram
+  }
+}
 
 // Lifecycle
 onMounted(() => {

@@ -14,15 +14,44 @@
           v-for="(route, index) in displayRoutes" 
           :key="index"
           class="conversion-step"
+          :class="{ 'clickable': !route.isExpanded, 'expanded': route.isExpanded }"
+          @click="toggleRouteDetails(index)"
         >
-          <h4>{{ route.title }}</h4>
-          <ol>
-            <li v-for="step in route.steps" :key="step.text">
-              {{ step.text }}
-              <span v-if="step.hasBonus" class="bonus-indicator">BONUS</span>
-            </li>
-          </ol>
-          <p><strong>Total Rate:</strong> 1:{{ route.totalRate }}</p>
+          <h4>
+            {{ route.title }}
+            <span class="expand-icon">{{ route.isExpanded ? '−' : '+' }}</span>
+          </h4>
+          
+          <div v-if="!route.isExpanded" class="route-summary">
+            <p><strong>Total Rate:</strong> 1:{{ route.totalRate }}</p>
+            <p class="click-hint">Click for details</p>
+          </div>
+          
+          <div v-else class="route-details">
+            <ol>
+              <li v-for="step in route.steps" :key="step.text">
+                {{ step.text }}
+                <span v-if="step.hasBonus" class="bonus-indicator">BONUS</span>
+              </li>
+            </ol>
+            
+            <div class="step-details">
+              <p><strong>Total Rate:</strong> 1:{{ route.totalRate }}</p>
+              <div v-for="(step, stepIndex) in route.stepDetails" :key="stepIndex" class="step-info">
+                <p><strong>Step {{ stepIndex + 1 }}:</strong></p>
+                <ul>
+                  <li><strong>Exchange Rate:</strong> 1:{{ step.rate }}</li>
+                  <li><strong>Transfer Type:</strong> {{ step.instantTransfer ? 'Instant' : 'May take 1-2 days' }}</li>
+                  <li v-if="step.bonus" class="bonus-info">
+                    <span class="bonus-indicator">BONUS ACTIVE</span>
+                    Regular rate: 1:{{ step.baseRate }} → Bonus rate: 1:{{ step.bonusRate }}
+                    <span v-if="step.bonusEndDate"> (Ends {{ new Date(step.bonusEndDate).toLocaleDateString() }})</span>
+                  </li>
+                  <li v-if="step.note"><strong>Note:</strong> {{ step.note }}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -30,11 +59,23 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 const props = defineProps({
   results: Object
 })
+
+// Track which routes are expanded
+const expandedRoutes = ref(new Set())
+
+// Toggle route details
+const toggleRouteDetails = (index) => {
+  if (expandedRoutes.value.has(index)) {
+    expandedRoutes.value.delete(index)
+  } else {
+    expandedRoutes.value.add(index)
+  }
+}
 
 const conversionPath = computed(() => {
   if (!props.results) return ''
@@ -122,6 +163,7 @@ const displayRoutes = computed(() => {
   return multiStepRoutes.map((route, index) => {
     const result = Math.floor(amount * route.totalRate)
     const isAlternative = props.results.directConversion
+    const isExpanded = expandedRoutes.value.has(index)
     
     const title = isAlternative 
       ? `Alternative ${index + 1}: ${result.toLocaleString()} ${toName}`
@@ -144,10 +186,23 @@ const displayRoutes = computed(() => {
       }
     })
     
+    // Create detailed step information for expanded view
+    const stepDetails = route.steps.map(step => ({
+      rate: step.bonus ? step.bonusRate : step.rate,
+      baseRate: step.rate,
+      bonusRate: step.bonusRate,
+      bonus: step.bonus,
+      bonusEndDate: step.bonusEndDate,
+      instantTransfer: step.instantTransfer,
+      note: step.note
+    }))
+    
     return {
       title,
       steps,
-      totalRate: route.totalRate.toFixed(2)
+      stepDetails,
+      totalRate: route.totalRate.toFixed(2),
+      isExpanded
     }
   })
 })
@@ -197,11 +252,74 @@ const displayRoutes = computed(() => {
   background-color: #f8f9fa;
   border-radius: 6px;
   border-left: 3px solid #e74c3c;
+  transition: all 0.3s ease;
+}
+
+.conversion-step.clickable {
+  cursor: pointer;
+  border-left-color: #3498db;
+}
+
+.conversion-step.clickable:hover {
+  background-color: #e9ecef;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.conversion-step.expanded {
+  border-left-color: #27ae60;
+  background-color: #f0f8f0;
 }
 
 .conversion-step h4 {
   margin-bottom: 0.5rem;
   color: #2c3e50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.expand-icon {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #3498db;
+}
+
+.route-summary {
+  margin: 0.5rem 0;
+}
+
+.click-hint {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  margin: 0.25rem 0 0 0;
+}
+
+.route-details {
+  margin-top: 1rem;
+}
+
+.step-details {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #dee2e6;
+}
+
+.step-info {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background-color: #ffffff;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+}
+
+.step-info ul {
+  margin: 0.5rem 0 0 0;
+  padding-left: 1.25rem;
+}
+
+.step-info li {
+  margin-bottom: 0.25rem;
 }
 
 .conversion-step ol {

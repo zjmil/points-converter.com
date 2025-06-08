@@ -212,6 +212,48 @@ describe('TransferPreview', () => {
     expect(transferList.classes()).toContain('transfer-list')
   })
 
+  it('makes transfer items clickable and emits selectTransfer event', async () => {
+    const wrapper = mount(TransferPreview, {
+      props: {
+        ...defaultProps,
+        fromProgram: 'chase_ur',
+        toProgram: ''
+      }
+    })
+
+    const transferItems = wrapper.findAll('.transfer-item')
+    expect(transferItems.length).toBeGreaterThan(0)
+    
+    // All items should be clickable
+    transferItems.forEach(item => {
+      expect(item.classes()).toContain('clickable')
+    })
+
+    // Click first transfer item
+    await transferItems[0].trigger('click')
+    
+    // Should emit selectTransfer event
+    expect(wrapper.emitted('selectTransfer')).toHaveLength(1)
+    expect(wrapper.emitted('selectTransfer')[0][0]).toHaveProperty('toProgram')
+  })
+
+  it('emits correct program when clicking transfer with toProgram selected', async () => {
+    const wrapper = mount(TransferPreview, {
+      props: {
+        ...defaultProps,
+        fromProgram: '',
+        toProgram: 'united'
+      }
+    })
+
+    const transferItems = wrapper.findAll('.transfer-item')
+    await transferItems[0].trigger('click')
+    
+    // Should emit fromProgram when toProgram is already selected
+    expect(wrapper.emitted('selectTransfer')).toHaveLength(1)
+    expect(wrapper.emitted('selectTransfer')[0][0]).toHaveProperty('fromProgram')
+  })
+
   it('shows hover effects on transfer items', () => {
     const wrapper = mount(TransferPreview, {
       props: {
