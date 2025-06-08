@@ -251,6 +251,102 @@
       "shortName": "Virgin Red",
       "type": "airline",
       "dollarValue": 0.0130
+    },
+    "aegean": {
+      "name": "AEGEAN Miles+Bonus",
+      "shortName": "AEGEAN",
+      "type": "airline",
+      "dollarValue": 0.0120
+    },
+    "air_china": {
+      "name": "Air China PhoenixMiles",
+      "shortName": "Air China",
+      "type": "airline",
+      "dollarValue": 0.0110
+    },
+    "air_new_zealand": {
+      "name": "Air New Zealand Airpoints",
+      "shortName": "Air NZ",
+      "type": "airline",
+      "dollarValue": 0.0150
+    },
+    "alaska": {
+      "name": "Alaska Airlines Mileage Plan",
+      "shortName": "Alaska",
+      "type": "airline",
+      "dollarValue": 0.0180
+    },
+    "asiana": {
+      "name": "Asiana Airlines Asiana Club",
+      "shortName": "Asiana",
+      "type": "airline",
+      "dollarValue": 0.0130
+    },
+    "china_southern": {
+      "name": "China Southern Sky Pearl Club",
+      "shortName": "China Southern",
+      "type": "airline",
+      "dollarValue": 0.0100
+    },
+    "copa": {
+      "name": "Copa Airlines ConnectMiles",
+      "shortName": "Copa",
+      "type": "airline",
+      "dollarValue": 0.0120
+    },
+    "frontier": {
+      "name": "FRONTIER Miles",
+      "shortName": "Frontier",
+      "type": "airline",
+      "dollarValue": 0.0100
+    },
+    "hainan": {
+      "name": "Hainan Airlines Fortune Wings Club",
+      "shortName": "Hainan",
+      "type": "airline",
+      "dollarValue": 0.0100
+    },
+    "intermiles": {
+      "name": "InterMiles",
+      "shortName": "InterMiles",
+      "type": "airline",
+      "dollarValue": 0.0100
+    },
+    "jal": {
+      "name": "Japan Airlines JAL Mileage Bank",
+      "shortName": "JAL",
+      "type": "airline",
+      "dollarValue": 0.0140
+    },
+    "latam": {
+      "name": "LATAM Airlines LATAM Pass",
+      "shortName": "LATAM",
+      "type": "airline",
+      "dollarValue": 0.0130
+    },
+    "multiplus": {
+      "name": "Multiplus Fidelidade LATAM Pass",
+      "shortName": "Multiplus",
+      "type": "airline",
+      "dollarValue": 0.0120
+    },
+    "saudia": {
+      "name": "Saudia Alfursan",
+      "shortName": "Saudia",
+      "type": "airline",
+      "dollarValue": 0.0110
+    },
+    "virgin_australia": {
+      "name": "Virgin Australia Velocity",
+      "shortName": "Virgin Australia",
+      "type": "airline",
+      "dollarValue": 0.0130
+    },
+    "vueling": {
+      "name": "Vueling Club",
+      "shortName": "Vueling",
+      "type": "airline",
+      "dollarValue": 0.0100
     }
   },
   "conversions": [
@@ -1071,10 +1167,13 @@
       "from": "marriott",
       "to": "united",
       "rate": 0.33,
-      "bonus": false,
-      "bonusRate": null,
+      "bonus": true,
+      "bonusRate": 0.37,
       "instantTransfer": false,
-      "note": "3:1 ratio, better with 60k transfers (3:1.1)"
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 10,000 bonus miles per 60,000 points transferred"
     },
     {
       "from": "marriott",
@@ -1083,7 +1182,10 @@
       "bonus": false,
       "bonusRate": null,
       "instantTransfer": false,
-      "note": "3:1 ratio, better with 60k transfers (3:1.1)"
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio, no bonus miles offered"
     },
     {
       "from": "marriott",
@@ -1092,7 +1194,442 @@
       "bonus": false,
       "bonusRate": null,
       "instantTransfer": false,
-      "note": "3:1 ratio, better with 60k transfers (3:1.1)"
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio, no bonus miles offered"
+    },
+    {
+      "from": "marriott",
+      "to": "aegean",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "aer_lingus",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "aeromexico",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "air_canada",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "air_china",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "air_france",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "air_new_zealand",
+      "rate": 0.005,
+      "bonus": true,
+      "bonusRate": 0.006,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "200:1 ratio + 75 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "alaska",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "ana",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "asiana",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "avianca",
+      "rate": 0.33,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio, no bonus miles offered"
+    },
+    {
+      "from": "marriott",
+      "to": "british_airways",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "cathay_pacific",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "china_southern",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "copa",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "emirates",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "etihad",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "frontier",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "hainan",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "hawaiian",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "iberia",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "intermiles",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "jal",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "latam",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "multiplus",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "qantas",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "qatar",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "saudia",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "singapore",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "southwest",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "tap",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "thai",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "turkish",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "virgin_atlantic",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "virgin_australia",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "vueling",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
     }
   ],
   "affiliateLinks": [
