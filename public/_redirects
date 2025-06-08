@@ -1,5 +1,0 @@
-# Redirects for Cloudflare Pages
-# Format: from to [status]
-
-# Example future API endpoint redirects
-# /api/* https://api.points-converter.com/:splat 200

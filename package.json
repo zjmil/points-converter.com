@@ -2,17 +2,30 @@
   "name": "points-converter",
   "version": "1.0.0",
   "description": "Convert between loyalty points programs with current exchange rates",
+  "type": "module",
   "scripts": {
-    "dev": "npx serve public -p 8000",
-    "serve": "npx serve public -p 8000",
-    "serve:python": "cd public && python -m http.server 8000",
-    "preview": "npx serve public -p 3000",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "serve": "vite",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
     "update-data": "echo 'Remember to update lastUpdated in public/data/conversions.json' && $EDITOR public/data/conversions.json"
   },
   "keywords": ["points", "loyalty", "conversion", "travel"],
   "author": "",
   "license": "MIT",
+  "dependencies": {
+    "vue": "^3.4.0"
+  },
   "devDependencies": {
-    "serve": "^14.2.1"
+    "@vitejs/plugin-vue": "^5.0.0",
+    "@vue/test-utils": "^2.4.0",
+    "jsdom": "^23.0.0",
+    "vite": "^5.0.0",
+    "vitest": "^1.0.0",
+    "@vitest/coverage-v8": "^1.0.0",
+    "@vitest/ui": "^1.0.0"
   }
 }
