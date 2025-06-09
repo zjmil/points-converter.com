@@ -4,11 +4,6 @@
     
     <main>
       <div class="container">
-        <DataInfo 
-          :conversions="conversionData?.conversions"
-          :dataSource="conversionData?.dataSource"
-        />
-        
         <DollarValueToggle v-model="showDollarValues" />
         
         <AdvancedSettings 
@@ -70,7 +65,6 @@
 import { ref, computed, onMounted, watch } from 'vue'
 import AppHeader from './components/AppHeader.vue'
 import AppFooter from './components/AppFooter.vue'
-import DataInfo from './components/DataInfo.vue'
 import DollarValueToggle from './components/DollarValueToggle.vue'
 import AdvancedSettings from './components/AdvancedSettings.vue'
 import ConversionForm from './components/ConversionForm.vue'
