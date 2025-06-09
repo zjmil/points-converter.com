@@ -29,8 +29,8 @@
                   @input="updateCentsValue(program.id, $event.target.value)"
                   class="cents-input"
                 >
-                <span class="cents-symbol">¢</span>
               </div>
+              <span class="cents-symbol">¢</span>
               <button 
                 @click="resetToDefault(program.id)"
                 class="reset-button"
@@ -211,19 +211,19 @@ const resetAllToDefaults = () => {
 }
 
 .program-setting {
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  gap: 1rem;
+  display: flex;
   align-items: center;
   padding: 0.75rem;
   background: #f8f9fa;
   border-radius: 6px;
+  gap: 1rem;
 }
 
 .program-label {
   font-weight: 500;
   color: #2c3e50;
   cursor: pointer;
+  flex: 1;
 }
 
 .input-wrapper {
@@ -233,12 +233,11 @@ const resetAllToDefaults = () => {
 }
 
 .cents-symbol {
-  position: absolute;
-  right: 0.75rem;
+  margin-left: 0.5rem;
   color: #666;
   font-weight: 500;
-  pointer-events: none;
-  z-index: 1;
+  font-size: 0.95em;
+  vertical-align: middle;
 }
 
 .cents-input {
@@ -248,6 +247,18 @@ const resetAllToDefaults = () => {
   border-radius: 4px;
   font-size: 0.9rem;
   text-align: right;
+  /* Hide number input spinners for Chrome, Safari, Edge */
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+.cents-input::-webkit-outer-spin-button,
+.cents-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.cents-input[type=number]::-ms-input-spin-button {
+  display: none;
 }
 
 .cents-input:focus {
@@ -256,14 +267,17 @@ const resetAllToDefaults = () => {
 }
 
 .reset-button {
-  padding: 0.5rem 1rem;
+  padding: 0.3rem 0.75rem;
   background: #e9ecef;
   border: none;
   border-radius: 4px;
   color: #495057;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   cursor: pointer;
   transition: background-color 0.2s;
+  margin-left: 0.5rem;
+  white-space: nowrap;
+  align-self: center;
 }
 
 .reset-button:hover {
