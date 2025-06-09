@@ -38,14 +38,6 @@
           :customDollarValues="customDollarValues"
         />
         
-        <ShareButton
-          v-if="showResults"
-          :fromProgram="fromProgram"
-          :toProgram="toProgram"
-          :amount="amount"
-          :programs="conversionData?.programs"
-        />
-        
         <AdPlaceholder 
           v-if="conversionData?.config?.showAdvertisements"
         />
@@ -70,7 +62,6 @@ import AdvancedSettings from './components/AdvancedSettings.vue'
 import ConversionForm from './components/ConversionForm.vue'
 import TransferPreview from './components/TransferPreview.vue'
 import ConversionResults from './components/ConversionResults.vue'
-import ShareButton from './components/ShareButton.vue'
 import AdPlaceholder from './components/AdPlaceholder.vue'
 import AffiliateLinks from './components/AffiliateLinks.vue'
 import { useConversions } from './composables/useConversions'

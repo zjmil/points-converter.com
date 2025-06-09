@@ -99,6 +99,9 @@ const amountDollarValue = computed(() => {
 .form-group {
   flex: 1;
   min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .form-group label {
@@ -127,24 +130,29 @@ const amountDollarValue = computed(() => {
   color: #666;
   margin-top: 0.25rem;
   font-style: italic;
+  min-height: 1.2em; /* Reserve space for the hint even when not shown */
 }
 
 .arrow {
   font-size: 2rem;
   color: #3498db;
   padding: 0 0.5rem;
-  align-self: center;
+  align-self: flex-end;
+  margin-bottom: 1.5rem;
+  /* Center arrow between the two ProgramSearch boxes */
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
-
 
 @media (max-width: 768px) {
   .conversion-form {
     flex-direction: column;
   }
-  
   .arrow {
     transform: rotate(90deg);
     margin: 1rem 0;
+    align-self: center;
   }
 }
 </style>
