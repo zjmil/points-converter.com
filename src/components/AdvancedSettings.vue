@@ -7,7 +7,7 @@
     
     <div v-if="isExpanded" class="settings-content">
       <p class="settings-description">
-        Customize the estimated dollar value per point for each program. These values are used when "Show dollar values" is enabled.
+        Customize the estimated cents per point value for each program. These values are used when "Show dollar values" is enabled.
       </p>
       
       <div class="program-groups">
@@ -15,21 +15,21 @@
           <h4 class="group-title">{{ getGroupDisplayName(groupName) }}</h4>
           <div class="program-list">
             <div v-for="program in groupPrograms" :key="program.id" class="program-setting">
-              <label :for="`dollar-${program.id}`" class="program-label">
+              <label :for="`cents-${program.id}`" class="program-label">
                 {{ program.name }}
               </label>
               <div class="input-wrapper">
-                <span class="currency-symbol">$</span>
                 <input
-                  :id="`dollar-${program.id}`"
+                  :id="`cents-${program.id}`"
                   type="number"
-                  step="0.001"
+                  step="0.01"
                   min="0"
-                  max="1"
-                  :value="getDollarValue(program.id)"
-                  @input="updateDollarValue(program.id, $event.target.value)"
-                  class="dollar-input"
+                  max="100"
+                  :value="getCentsValue(program.id)"
+                  @input="updateCentsValue(program.id, $event.target.value)"
+                  class="cents-input"
                 >
+                <span class="cents-symbol">¢</span>
               </div>
               <button 
                 @click="resetToDefault(program.id)"
@@ -98,6 +98,12 @@ const getGroupDisplayName = (groupName) => {
   return names[groupName] || groupName
 }
 
+const getCentsValue = (programId) => {
+  // Convert dollar value to cents
+  const dollarValue = getDollarValue(programId)
+  return (dollarValue * 100).toFixed(2)
+}
+
 const getDollarValue = (programId) => {
   // Return custom value if set, otherwise default value
   if (props.customDollarValues && props.customDollarValues[programId] !== undefined) {
@@ -106,12 +112,15 @@ const getDollarValue = (programId) => {
   return props.programs[programId]?.dollarValue || 0
 }
 
-const updateDollarValue = (programId, value) => {
+const updateCentsValue = (programId, value) => {
   const numValue = parseFloat(value)
   if (isNaN(numValue) || numValue < 0) return
   
+  // Convert cents to dollars
+  const dollarValue = numValue / 100
+  
   const newCustomValues = { ...props.customDollarValues }
-  newCustomValues[programId] = numValue
+  newCustomValues[programId] = dollarValue
   
   emit('update:customDollarValues', newCustomValues)
 }
@@ -223,75 +232,62 @@ const resetAllToDefaults = () => {
   position: relative;
 }
 
-.currency-symbol {
+.cents-symbol {
   position: absolute;
-  left: 0.75rem;
+  right: 0.75rem;
   color: #666;
   font-weight: 500;
   pointer-events: none;
   z-index: 1;
 }
 
-.dollar-input {
+.cents-input {
   width: 100px;
-  padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+  padding: 0.5rem 2rem 0.5rem 0.75rem;
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 0.9rem;
   text-align: right;
 }
 
-.dollar-input:focus {
+.cents-input:focus {
   outline: none;
   border-color: #3498db;
 }
 
 .reset-button {
   padding: 0.5rem 1rem;
-  background: #6c757d;
-  color: white;
+  background: #e9ecef;
   border: none;
   border-radius: 4px;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.reset-button:hover {
-  background: #5a6268;
-}
-
-.settings-actions {
-  padding-top: 1rem;
-  border-top: 1px solid #dee2e6;
-  text-align: center;
-}
-
-.reset-all-button {
-  padding: 0.75rem 1.5rem;
-  background: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 6px;
+  color: #495057;
   font-size: 0.9rem;
   cursor: pointer;
   transition: background-color 0.2s;
 }
 
-.reset-all-button:hover {
-  background: #c82333;
+.reset-button:hover {
+  background: #dee2e6;
 }
 
-@media (max-width: 768px) {
-  .program-setting {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-    text-align: center;
-  }
-  
-  .program-label {
-    justify-self: start;
-    text-align: left;
-  }
+.settings-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.reset-all-button {
+  padding: 0.75rem 1.5rem;
+  background: #e9ecef;
+  border: none;
+  border-radius: 4px;
+  color: #495057;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.reset-all-button:hover {
+  background: #dee2e6;
 }
 </style>
