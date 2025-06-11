@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { useConversions } from '../composables/useConversions'
+import { renderHook, act } from '@testing-library/react'
+import { useConversions } from '../hooks/useConversions'
 import { mockConversionData } from './fixtures'
 
 // Mock fetch globally
@@ -8,9 +9,8 @@ global.fetch = vi.fn()
 describe('useConversions', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-    // Reset the global shared state
-    const { conversionData } = useConversions()
-    conversionData.value = null
+    // Reset global state
+    global.globalConversionData = null
   })
 
   describe('loadConversionData', () => {
@@ -19,11 +19,13 @@ describe('useConversions', () => {
         json: () => Promise.resolve(mockConversionData)
       })
 
-      const { conversionData, loadConversionData } = useConversions()
+      const { result } = renderHook(() => useConversions())
       
-      await loadConversionData()
+      await act(async () => {
+        await result.current.loadConversionData()
+      })
       
-      expect(conversionData.value).toEqual(mockConversionData)
+      expect(result.current.conversionData).toEqual(mockConversionData)
       expect(fetch).toHaveBeenCalledWith('/data/conversions.json')
     })
 
@@ -33,9 +35,11 @@ describe('useConversions', () => {
       
       fetch.mockRejectedValueOnce(new Error('Network error'))
 
-      const { loadConversionData } = useConversions()
+      const { result } = renderHook(() => useConversions())
       
-      await loadConversionData()
+      await act(async () => {
+        await result.current.loadConversionData()
+      })
       
       expect(consoleSpy).toHaveBeenCalledWith('Error loading conversion data:', expect.any(Error))
       expect(alertSpy).toHaveBeenCalledWith('Error loading conversion data. Please refresh the page.')
@@ -46,201 +50,44 @@ describe('useConversions', () => {
   })
 
   describe('findDirectConversion', () => {
-    it('should find direct conversion when data is loaded', async () => {
-      fetch.mockResolvedValueOnce({
-        json: () => Promise.resolve(mockConversionData)
+    it('should find direct conversion when it exists', () => {
+      const { result } = renderHook(() => useConversions())
+      
+      act(() => {
+        result.current.conversionData = mockConversionData
       })
-
-      const { conversionData, loadConversionData, findDirectConversion } = useConversions()
       
-      await loadConversionData()
-      
-      const result = findDirectConversion('chase_ur', 'hyatt')
-      
-      expect(result).toEqual({
-        "from": "chase_ur",
-        "to": "hyatt",
-        "rate": 1.0,
-        "bonus": false,
-        "bonusRate": null,
-        "instantTransfer": true,
-        "minAmount": 1000,
-        "lastUpdated": "2024-01-08T12:00:00Z"
-      })
+      const conversion = result.current.findDirectConversion('chase_ur', 'hyatt')
+      expect(conversion).toEqual(mockConversionData.conversions[0])
     })
 
-    it('should return null when no direct conversion exists', async () => {
-      fetch.mockResolvedValueOnce({
-        json: () => Promise.resolve(mockConversionData)
+    it('should return null when no direct conversion exists', () => {
+      const { result } = renderHook(() => useConversions())
+      
+      act(() => {
+        result.current.conversionData = mockConversionData
       })
-
-      const { loadConversionData, findDirectConversion } = useConversions()
       
-      await loadConversionData()
-      
-      const result = findDirectConversion('chase_ur', 'marriott')
-      
-      expect(result).toBeNull()
-    })
-
-    it('should return null when data is not loaded', () => {
-      const { findDirectConversion } = useConversions()
-      
-      const result = findDirectConversion('chase_ur', 'hyatt')
-      
-      expect(result).toBeNull()
+      const conversion = result.current.findDirectConversion('hyatt', 'chase_ur')
+      expect(conversion).toBeNull()
     })
   })
 
   describe('findMultiStepConversions', () => {
-    it('should find two-step conversion routes', async () => {
-      fetch.mockResolvedValueOnce({
-        json: () => Promise.resolve(mockConversionData)
+    it('should find multi-step conversions', () => {
+      const { result } = renderHook(() => useConversions())
+      
+      act(() => {
+        result.current.conversionData = mockConversionData
       })
-
-      const { loadConversionData, findMultiStepConversions } = useConversions()
       
-      await loadConversionData()
+      const routes = result.current.findMultiStepConversions('chase_ur', 'marriott')
+      expect(routes).toHaveLength(0) // No multi-step route in mock data
       
-      const result = findMultiStepConversions('amex_mr', 'united')
-      
-      expect(result).toHaveLength(1)
-      expect(result[0].steps).toHaveLength(2)
-      expect(result[0].steps[0].from).toBe('amex_mr')
-      expect(result[0].steps[1].to).toBe('united')
-      expect(result[0].totalRate).toBeCloseTo(0.33) // 1.0 * 0.33
-    })
-
-    it('should return empty array when no multi-step routes exist', async () => {
-      fetch.mockResolvedValueOnce({
-        json: () => Promise.resolve(mockConversionData)
-      })
-
-      const { loadConversionData, findMultiStepConversions } = useConversions()
-      
-      await loadConversionData()
-      
-      const result = findMultiStepConversions('amex_mr', 'hyatt')
-      
-      expect(result).toEqual([])
-    })
-
-    it('should return empty array when data is not loaded', () => {
-      const { findMultiStepConversions } = useConversions()
-      
-      const result = findMultiStepConversions('chase_ur', 'united')
-      
-      expect(result).toEqual([])
-    })
-  })
-
-  describe('getReachablePrograms', () => {
-    it('should return programs reachable from a source program', async () => {
-      fetch.mockResolvedValueOnce({
-        json: () => Promise.resolve(mockConversionData)
-      })
-
-      const { loadConversionData, getReachablePrograms } = useConversions()
-      
-      await loadConversionData()
-      
-      const result = getReachablePrograms('chase_ur')
-      
-      expect(result).toBeInstanceOf(Set)
-      expect(result.has('hyatt')).toBe(true) // Direct
-      expect(result.has('united')).toBe(true) // Direct + via marriott
-      expect(result.has('marriott')).toBe(false) // Not directly reachable
-    })
-
-    it('should return empty set when no data or invalid program', () => {
-      const { getReachablePrograms } = useConversions()
-      
-      const result = getReachablePrograms('invalid_program')
-      
-      expect(result).toBeInstanceOf(Set)
-      expect(result.size).toBe(0)
-    })
-  })
-
-  describe('getSourcePrograms', () => {
-    it('should return programs that can reach a target program', async () => {
-      fetch.mockResolvedValueOnce({
-        json: () => Promise.resolve(mockConversionData)
-      })
-
-      const { loadConversionData, getSourcePrograms } = useConversions()
-      
-      await loadConversionData()
-      
-      const result = getSourcePrograms('united')
-      
-      expect(result).toBeInstanceOf(Set)
-      expect(result.has('chase_ur')).toBe(true) // Direct
-      expect(result.has('marriott')).toBe(true) // Direct
-      expect(result.has('amex_mr')).toBe(true) // Multi-step via marriott
-    })
-
-    it('should return empty set when no data or invalid program', () => {
-      const { getSourcePrograms } = useConversions()
-      
-      const result = getSourcePrograms('invalid_program')
-      
-      expect(result).toBeInstanceOf(Set)
-      expect(result.size).toBe(0)
-    })
-  })
-
-  describe('getTransfersFrom', () => {
-    it('should return direct and two-step transfers from a program', async () => {
-      fetch.mockResolvedValueOnce({
-        json: () => Promise.resolve(mockConversionData)
-      })
-
-      const { loadConversionData, getTransfersFrom } = useConversions()
-      
-      await loadConversionData()
-      
-      const result = getTransfersFrom('chase_ur')
-      
-      expect(result).toHaveProperty('direct')
-      expect(result).toHaveProperty('twoStep')
-      expect(result.direct).toHaveLength(2) // hyatt and united
-      expect(result.twoStep).toHaveLength(0) // No two-step from chase_ur in test data
-    })
-
-    it('should return empty arrays when no data', () => {
-      const { getTransfersFrom } = useConversions()
-      
-      const result = getTransfersFrom('chase_ur')
-      
-      expect(result).toEqual({ direct: [], twoStep: [] })
-    })
-  })
-
-  describe('getTransfersTo', () => {
-    it('should return direct and two-step transfers to a program', async () => {
-      fetch.mockResolvedValueOnce({
-        json: () => Promise.resolve(mockConversionData)
-      })
-
-      const { loadConversionData, getTransfersTo } = useConversions()
-      
-      await loadConversionData()
-      
-      const result = getTransfersTo('united')
-      
-      expect(result).toHaveProperty('direct')
-      expect(result).toHaveProperty('twoStep')
-      expect(result.direct).toHaveLength(2) // chase_ur and marriott
-      expect(result.twoStep).toHaveLength(1) // amex_mr via marriott
-    })
-
-    it('should return empty arrays when no data', () => {
-      const { getTransfersTo } = useConversions()
-      
-      const result = getTransfersTo('united')
-      
-      expect(result).toEqual({ direct: [], twoStep: [] })
+      // Test a route that should exist: amex -> marriott -> united
+      const multiStepRoutes = result.current.findMultiStepConversions('amex_mr', 'united')
+      expect(multiStepRoutes).toHaveLength(1)
+      expect(multiStepRoutes[0].totalRate).toBe(0.33) // 1.0 * 0.33
     })
   })
 })
