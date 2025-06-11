@@ -23,3 +23,9 @@ npm-debug.log*
 # Build outputs (if any in future)
 dist/
 build/
+
+# Management tool generated files
+public/data/backups/
+scripts/exports/
+scripts/results/
+scripts/logs/
