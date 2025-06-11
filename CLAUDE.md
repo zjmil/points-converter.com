@@ -10,7 +10,44 @@ Points-converter.com is a website that allows users to convert between various p
 
 - Frontend: React 18 + Vite
 - Data: Static JSON files (manually updated)
+- Management Tools: Node.js ES Modules with comprehensive validation and scraping
 - Hosting: Static site hosting (GitHub Pages, Netlify, etc.)
+
+## Important: ES Module Configuration
+
+This project is configured as an ES module (`"type": "module"` in package.json). When creating new scripts or tools:
+
+**Always use ES module syntax:**
+```javascript
+// ✅ Correct
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// For __dirname equivalent:
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default ClassName;
+export { namedExport };
+
+// ❌ Incorrect (CommonJS)
+const fs = require('fs');
+module.exports = ClassName;
+```
+
+**Command line scripts must handle ES modules:**
+```javascript
+// ✅ For module detection
+if (import.meta.url === `file://${process.argv[1]}`) {
+  // Main execution
+}
+
+// ❌ Incorrect
+if (require.main === module) {
+  // This won't work in ES modules
+}
+```
 
 ## Project Structure
 
@@ -28,10 +65,22 @@ Points-converter.com is a website that allows users to convert between various p
 │   ├── test/           # Test files
 │   │   ├── fixtures.js
 │   │   ├── setup.js
+│   │   ├── integrity.test.js  # Data integrity tests
 │   │   └── *.test.jsx
 │   ├── App.jsx         # Main React app
 │   ├── main.jsx        # App entry point
 │   └── style.css       # Global styles
+├── scripts/            # Data management tools (ES modules)
+│   ├── lib/           # Core management libraries
+│   │   ├── validator.js   # Data validation & integrity
+│   │   ├── scraper.js    # Web scraping framework
+│   │   ├── backup.js     # Backup & rollback system
+│   │   └── schema.js     # JSON validation schemas
+│   ├── config/        # Configuration files
+│   │   └── scraping-configs.json
+│   ├── manage-conversions.js  # Main management CLI
+│   ├── update-rates.js       # Legacy rate updater
+│   └── README.md            # Management tools docs
 ├── public/             # Static assets
 │   └── data/
 │       └── conversions.json # Static conversion data
@@ -54,7 +103,11 @@ Points-converter.com is a website that allows users to convert between various p
 - `npm run test` - Run tests in watch mode
 - `npm run test:ui` - Run tests with UI interface
 - `npm run test:coverage` - Run tests with coverage report
+- `npm run test:integrity` - Run data integrity tests
 - `npm run update-data` - Open conversions.json for editing
+- `npm run manage-data` - **Run comprehensive data management tool**
+- `npm run validate-data` - Quick data validation
+- `npm run backup-data` - Create manual backup
 
 ### Using make:
 - `make help` - Show all available commands
@@ -64,6 +117,10 @@ Points-converter.com is a website that allows users to convert between various p
 - `make install` - Install dependencies
 - `make test` - Run tests
 - `make update-data` - Edit conversion data
+- `make manage-data` - **Run comprehensive data management tool**
+- `make validate-data` - Quick data validation
+- `make backup-data` - Create manual backup
+- `make test-integrity` - Run data integrity tests
 
 ## Key Features
 
@@ -73,6 +130,7 @@ Points-converter.com is a website that allows users to convert between various p
 4. Data source and last updated timestamp
 5. Mobile-responsive design
 6. Monetization placeholders for ads and affiliate links
+7. **Comprehensive data management system with validation, scraping, and backup**
 
 ## React Architecture
 

@@ -1,0 +1,156 @@
+{
+  "chase_ur": {
+    "url": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs",
+    "name": "Chase Ultimate Rewards",
+    "selectors": {
+      "partnerList": ".transfer-partner-list, .partner-list",
+      "partnerItem": ".transfer-partner, .partner-item",
+      "partnerName": ".partner-name, .program-name, h3",
+      "transferRate": ".transfer-rate, .ratio, .rate",
+      "bonusInfo": ".bonus-info, .promotion, .bonus-text",
+      "minimumAmount": ".minimum, .min-amount"
+    },
+    "parser": "chase_parser",
+    "updateFrequency": "daily",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (compatible; points-converter-bot/1.0)"
+    },
+    "rateLimit": {
+      "requestsPerMinute": 10,
+      "delayBetweenRequests": 6000
+    }
+  },
+  "amex_mr": {
+    "url": "https://global.americanexpress.com/rewards/transfer",
+    "name": "American Express Membership Rewards",
+    "selectors": {
+      "partnerList": ".transfer-partners, .partner-grid",
+      "partnerItem": ".transfer-partner-item, .partner-card",
+      "partnerName": ".partner-name, .airline-name, .hotel-name",
+      "transferRate": ".transfer-ratio, .ratio",
+      "bonusInfo": ".bonus, .promotion-text",
+      "minimumAmount": ".minimum-transfer"
+    },
+    "parser": "amex_parser",
+    "updateFrequency": "daily",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (compatible; points-converter-bot/1.0)"
+    },
+    "rateLimit": {
+      "requestsPerMinute": 10,
+      "delayBetweenRequests": 6000
+    }
+  },
+  "citi_typ": {
+    "url": "https://www.thankyou.com/partnerProgramsListing.htm",
+    "name": "Citi ThankYou Points",
+    "selectors": {
+      "partnerList": ".partner-grid, .transfer-partners",
+      "partnerItem": ".partner-item, .transfer-option",
+      "partnerName": ".partner-title, .partner-name",
+      "transferRate": ".transfer-ratio, .ratio",
+      "bonusInfo": ".bonus-info, .promotion",
+      "minimumAmount": ".minimum-points"
+    },
+    "parser": "citi_parser",
+    "updateFrequency": "weekly",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (compatible; points-converter-bot/1.0)"
+    },
+    "rateLimit": {
+      "requestsPerMinute": 5,
+      "delayBetweenRequests": 12000
+    }
+  },
+  "capital_one": {
+    "url": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/",
+    "name": "Capital One Miles",
+    "selectors": {
+      "partnerList": ".transfer-partners, .partner-list",
+      "partnerItem": ".partner, .transfer-option",
+      "partnerName": ".partner-name, h3, .airline-name",
+      "transferRate": ".ratio, .transfer-rate",
+      "bonusInfo": ".bonus, .promotion",
+      "minimumAmount": ".minimum"
+    },
+    "parser": "capital_one_parser",
+    "updateFrequency": "weekly",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (compatible; points-converter-bot/1.0)"
+    },
+    "rateLimit": {
+      "requestsPerMinute": 5,
+      "delayBetweenRequests": 12000
+    }
+  },
+  "marriott": {
+    "url": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+    "name": "Marriott Bonvoy",
+    "selectors": {
+      "partnerList": ".airline-partners, .transfer-partners",
+      "partnerItem": ".airline-partner, .partner-item",
+      "partnerName": ".airline-name, .partner-name",
+      "transferRate": ".ratio, .transfer-rate",
+      "bonusInfo": ".bonus-miles, .promotion",
+      "minimumAmount": ".minimum-points"
+    },
+    "parser": "marriott_parser",
+    "updateFrequency": "weekly",
+    "headers": {
+      "User-Agent": "Mozilla/5.0 (compatible; points-converter-bot/1.0)"
+    },
+    "rateLimit": {
+      "requestsPerMinute": 5,
+      "delayBetweenRequests": 12000
+    },
+    "notes": "Marriott transfers typically have 3:1 base ratio with bonus miles for 60k transfers"
+  },
+  "global_configs": {
+    "timeout": 30000,
+    "retryAttempts": 3,
+    "retryDelay": 5000,
+    "userAgents": [
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+      "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36"
+    ],
+    "respectedRobotsTxt": true,
+    "debugMode": false,
+    "saveRawHtml": false,
+    "validateResults": true
+  },
+  "programMapping": {
+    "chase ultimate rewards": "chase_ur",
+    "ur points": "chase_ur",
+    "membership rewards": "amex_mr",
+    "mr points": "amex_mr",
+    "thankyou points": "citi_typ",
+    "typ": "citi_typ",
+    "capital one miles": "capital_one",
+    "venture miles": "capital_one",
+    "marriott bonvoy": "marriott",
+    "marriott points": "marriott",
+    "world of hyatt": "hyatt",
+    "hyatt points": "hyatt",
+    "hilton honors": "hilton",
+    "hilton points": "hilton",
+    "ihg rewards": "ihg",
+    "ihg points": "ihg",
+    "united mileageplus": "united",
+    "united miles": "united",
+    "american advantage": "american",
+    "aa miles": "american",
+    "delta skymiles": "delta",
+    "southwest rapid rewards": "southwest",
+    "jetblue trueblue": "jetblue",
+    "british airways avios": "british_airways",
+    "avios": "british_airways",
+    "singapore krisflyer": "singapore",
+    "virgin atlantic": "virgin_atlantic",
+    "air france klm": "air_france",
+    "flying blue": "air_france",
+    "emirates skywards": "emirates",
+    "air canada aeroplan": "air_canada",
+    "aeroplan": "air_canada"
+  }
+}

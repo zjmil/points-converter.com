@@ -12,7 +12,11 @@
     "test:watch": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
+    "test:integrity": "vitest --run src/test/integrity.test.js",
     "update-data": "node scripts/update-rates.js",
+    "manage-data": "node scripts/manage-conversions.js",
+    "validate-data": "node --input-type=module -e \"import DataValidator from './scripts/lib/validator.js'; import fs from 'fs'; const data = JSON.parse(fs.readFileSync('./public/data/conversions.json', 'utf8')); const validator = new DataValidator(); const report = validator.generateReport(data); console.log(report.summary.valid ? 'Valid' : 'Invalid:', report.summary.totalIssues, 'issues'); process.exit(report.summary.valid ? 0 : 1);\"",
+    "backup-data": "node --input-type=module -e \"import BackupManager from './scripts/lib/backup.js'; const backup = new BackupManager('./public/data/conversions.json'); const result = backup.createBackup('manual'); console.log(result.success ? 'Backup created:' : 'Backup failed:', result.filename || result.error);\"",
     "edit-data": "echo 'Remember to update lastUpdated in public/data/conversions.json' && $EDITOR public/data/conversions.json"
   },
   "keywords": ["points", "loyalty", "conversion", "travel"],
@@ -31,6 +35,9 @@
     "vite": "^5.0.0",
     "vitest": "^1.0.0",
     "@vitest/coverage-v8": "^1.0.0",
-    "@vitest/ui": "^1.0.0"
+    "@vitest/ui": "^1.0.0",
+    "ajv": "^8.12.0",
+    "ajv-formats": "^2.1.1",
+    "cheerio": "^1.0.0-rc.12"
   }
 }

@@ -33,3 +33,19 @@ update-data: ## Open the conversions data file for editing
 	@echo "Opening public/data/conversions.json for editing..."
 	@echo "Remember to update the 'lastUpdated' field!"
 	@$${EDITOR:-nano} public/data/conversions.json
+
+manage-data: ## Run the comprehensive data management tool
+	@echo "Starting advanced data management tool..."
+	@npm run manage-data
+
+validate-data: ## Validate data integrity and referential consistency
+	@echo "Validating conversions data..."
+	@npm run validate-data
+
+backup-data: ## Create a manual backup of the data
+	@echo "Creating data backup..."
+	@npm run backup-data
+
+test-integrity: ## Run data integrity tests
+	@echo "Running data integrity tests..."
+	@npm run test:integrity
