@@ -8,9 +8,9 @@ import TransferPreview from './components/TransferPreview'
 import ConversionResults from './components/ConversionResults'
 import AdPlaceholder from './components/AdPlaceholder'
 import AffiliateLinks from './components/AffiliateLinks'
-import { useConversions } from './hooks/useConversions'
+import { ConversionProvider, useConversions } from './contexts/ConversionContext'
 
-function App() {
+function AppContent() {
   // Reactive state
   const [fromProgram, setFromProgram] = useState('')
   const [toProgram, setToProgram] = useState('')
@@ -19,7 +19,7 @@ function App() {
   const [customDollarValues, setCustomDollarValues] = useState({})
   const [multiStepEnabled, setMultiStepEnabled] = useState(false)
 
-  // Use conversion hook
+  // Use conversion context
   const { conversionData, loadConversionData, findDirectConversion, findMultiStepConversions } = useConversions()
 
   // URL parameters handling
@@ -191,6 +191,14 @@ function App() {
       
       <AppFooter />
     </div>
+  )
+}
+
+function App() {
+  return (
+    <ConversionProvider>
+      <AppContent />
+    </ConversionProvider>
   )
 }
 

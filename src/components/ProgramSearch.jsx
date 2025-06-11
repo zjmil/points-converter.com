@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react'
-import { useConversions } from '../hooks/useConversions'
+import { useConversions } from '../contexts/ConversionContext'
+import { useId } from '../hooks/useId'
 import ProgramDisplay from './ProgramDisplay'
 
 const ProgramSearch = ({
@@ -24,7 +25,7 @@ const ProgramSearch = ({
   const [highlightedIndex, setHighlightedIndex] = useState(-1)
   
   // Generate unique ID for input
-  const inputId = useMemo(() => `program-search-${Math.random().toString(36).substr(2, 9)}`, [])
+  const inputId = useId('program-search')
   
   // Get all programs
   const allPrograms = useMemo(() => {

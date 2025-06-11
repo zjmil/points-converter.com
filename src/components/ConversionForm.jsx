@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import ProgramSearch from './ProgramSearch'
 import { useDollarValues } from '../hooks/useDollarValues'
+import { useMediaQuery } from '../hooks/useMediaQuery'
 
 function ConversionForm({
   fromProgram,
@@ -15,16 +16,17 @@ function ConversionForm({
   customDollarValues
 }) {
   const { formatDollarValue, getProgramDollarValue } = useDollarValues()
+  const isMobile = useMediaQuery('(max-width: 768px)')
 
   // Calculate dollar value for current amount
-  const amountDollarValue = (() => {
+  const amountDollarValue = useMemo(() => {
     if (!fromProgram || !amount || !programs) return null
     
     const dollarValue = getProgramDollarValue(fromProgram, programs, customDollarValues)
     if (!dollarValue) return null
     
     return formatDollarValue(amount, dollarValue)
-  })()
+  }, [fromProgram, amount, programs, customDollarValues, formatDollarValue, getProgramDollarValue])
 
   const styles = {
     conversionForm: {
@@ -37,6 +39,7 @@ function ConversionForm({
       gap: '1rem',
       flexWrap: 'wrap',
       marginBottom: '2rem',
+      ...(isMobile && { flexDirection: 'column' })
     },
     formGroup: {
       flex: 1,
@@ -79,16 +82,12 @@ function ConversionForm({
       display: 'flex',
       alignItems: 'center',
       height: '100%',
+      ...(isMobile && {
+        transform: 'rotate(90deg)',
+        margin: '1rem 0',
+        alignSelf: 'center'
+      })
     }
-  }
-
-  // Media query handling for mobile
-  const isMobile = window.innerWidth <= 768
-  if (isMobile) {
-    styles.conversionForm.flexDirection = 'column'
-    styles.arrow.transform = 'rotate(90deg)'
-    styles.arrow.margin = '1rem 0'
-    styles.arrow.alignSelf = 'center'
   }
 
   return (

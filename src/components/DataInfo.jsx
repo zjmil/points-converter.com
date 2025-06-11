@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react'
+import { useMediaQuery } from '../hooks/useMediaQuery'
 
 const DataInfo = ({ conversions, dataSource }) => {
+  const isMobile = useMediaQuery('(max-width: 768px)')
   const lastUpdatedText = useMemo(() => {
     if (!conversions || conversions.length === 0) {
       return 'Last updated: Loading...'
@@ -33,15 +35,14 @@ const DataInfo = ({ conversions, dataSource }) => {
     flexWrap: 'wrap',
     gap: '1rem',
     fontSize: '0.9rem',
+    ...(isMobile && {
+      flexDirection: 'column',
+      textAlign: 'center',
+    })
   }
 
-  const mediaQueryStyle = window.innerWidth <= 768 ? {
-    flexDirection: 'column',
-    textAlign: 'center',
-  } : {}
-
   return (
-    <div style={{ ...dataInfoStyle, ...mediaQueryStyle }}>
+    <div style={dataInfoStyle}>
       <span>{lastUpdatedText}</span>
       <span>{dataSourceText}</span>
     </div>

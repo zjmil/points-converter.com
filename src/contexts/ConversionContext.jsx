@@ -1,43 +1,38 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import { createContext, useContext, useState, useCallback } from 'react'
 
-// Global shared state - in a real app, this would likely use Context or a state management library
-let globalConversionData = null
-const subscribers = new Set()
+const ConversionContext = createContext(null)
 
-const notifySubscribers = () => {
-  subscribers.forEach(callback => callback(globalConversionData))
-}
+export function ConversionProvider({ children }) {
+  const [conversionData, setConversionData] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
 
-export function useConversions() {
-  const [conversionData, setConversionData] = useState(globalConversionData)
-  
-  // Subscribe to global state changes
-  useEffect(() => {
-    const updateState = (data) => {
-      setConversionData(data)
-    }
-    
-    subscribers.add(updateState)
-    return () => subscribers.delete(updateState)
-  }, [])
-  
   const loadConversionData = useCallback(async () => {
+    setIsLoading(true)
+    setError(null)
+    
     try {
       const response = await fetch('/data/conversions.json')
+      if (!response.ok) {
+        throw new Error('Failed to fetch conversion data')
+      }
+      
       const data = await response.json()
-      globalConversionData = data
-      notifySubscribers()
+      setConversionData(data)
     } catch (error) {
       console.error('Error loading conversion data:', error)
+      setError(error.message)
       alert('Error loading conversion data. Please refresh the page.')
+    } finally {
+      setIsLoading(false)
     }
   }, [])
-  
+
   const findDirectConversion = useCallback((from, to) => {
     if (!conversionData) return null
     return conversionData.conversions.find(c => c.from === from && c.to === to) || null
   }, [conversionData])
-  
+
   const findMultiStepConversions = useCallback((from, to) => {
     if (!conversionData) return []
     
@@ -62,7 +57,7 @@ export function useConversions() {
     
     return routes
   }, [conversionData])
-  
+
   const getReachablePrograms = useCallback((fromProgram) => {
     if (!conversionData || !fromProgram) return new Set()
     
@@ -84,7 +79,7 @@ export function useConversions() {
     
     return reachablePrograms
   }, [conversionData])
-  
+
   const getSourcePrograms = useCallback((toProgram) => {
     if (!conversionData || !toProgram) return new Set()
     
@@ -106,7 +101,7 @@ export function useConversions() {
     
     return sourcePrograms
   }, [conversionData])
-  
+
   const getTransfersFrom = useCallback((fromProgram) => {
     if (!conversionData || !fromProgram) return { direct: [], twoStep: [] }
     
@@ -131,7 +126,7 @@ export function useConversions() {
     
     return { direct, twoStep }
   }, [conversionData])
-  
+
   const getTransfersTo = useCallback((toProgram) => {
     if (!conversionData || !toProgram) return { direct: [], twoStep: [] }
     
@@ -156,9 +151,11 @@ export function useConversions() {
     
     return { direct, twoStep }
   }, [conversionData])
-  
-  return {
+
+  const value = {
     conversionData,
+    isLoading,
+    error,
     loadConversionData,
     findDirectConversion,
     findMultiStepConversions,
@@ -167,4 +164,20 @@ export function useConversions() {
     getTransfersFrom,
     getTransfersTo
   }
+
+  return (
+    <ConversionContext.Provider value={value}>
+      {children}
+    </ConversionContext.Provider>
+  )
+}
+
+export function useConversions() {
+  const context = useContext(ConversionContext)
+  
+  if (!context) {
+    throw new Error('useConversions must be used within a ConversionProvider')
+  }
+  
+  return context
 }

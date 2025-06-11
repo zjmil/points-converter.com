@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useConversions } from '../hooks/useConversions';
+import { useConversions } from '../contexts/ConversionContext';
 
 const TransferPreview = ({ 
   fromProgram, 

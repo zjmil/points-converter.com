@@ -1,34 +1,20 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 const AdvancedSettings = ({ programs, customDollarValues, onCustomDollarValuesChange, onMultiStepEnabledChange }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [multiStepEnabled, setMultiStepEnabled] = useState(false);
+  const [storedSettings, setStoredSettings] = useLocalStorage('points-converter-settings', {
+    customDollarValues: {},
+    multiStepEnabled: false
+  });
 
-  const LOCAL_KEY = 'points-converter-settings';
-
-  const persistSettings = (customValues) => {
-    const settings = JSON.parse(localStorage.getItem(LOCAL_KEY) || '{}');
-    settings.customDollarValues = customValues;
-    localStorage.setItem(LOCAL_KEY, JSON.stringify(settings));
-  };
-
-  const persistMultiStep = (enabled) => {
-    const settings = JSON.parse(localStorage.getItem(LOCAL_KEY) || '{}');
-    settings.multiStepEnabled = enabled;
-    localStorage.setItem(LOCAL_KEY, JSON.stringify(settings));
-    onMultiStepEnabledChange(enabled);
-  };
-
+  // Initialize from localStorage on mount
   useEffect(() => {
-    const settings = JSON.parse(localStorage.getItem(LOCAL_KEY) || '{}');
-    if (settings.customDollarValues) {
-      onCustomDollarValuesChange(settings.customDollarValues);
+    if (storedSettings.customDollarValues && Object.keys(storedSettings.customDollarValues).length > 0) {
+      onCustomDollarValuesChange(storedSettings.customDollarValues);
     }
-    if (typeof settings.multiStepEnabled === 'boolean') {
-      setMultiStepEnabled(settings.multiStepEnabled);
-      onMultiStepEnabledChange(settings.multiStepEnabled);
-    }
-  }, [onCustomDollarValuesChange, onMultiStepEnabledChange]);
+    onMultiStepEnabledChange(storedSettings.multiStepEnabled);
+  }, [onCustomDollarValuesChange, onMultiStepEnabledChange, storedSettings]);
 
   const toggleExpanded = () => {
     setIsExpanded(!isExpanded);
@@ -36,8 +22,8 @@ const AdvancedSettings = ({ programs, customDollarValues, onCustomDollarValuesCh
 
   const handleMultiStepChange = (e) => {
     const enabled = e.target.checked;
-    setMultiStepEnabled(enabled);
-    persistMultiStep(enabled);
+    setStoredSettings(prev => ({ ...prev, multiStepEnabled: enabled }));
+    onMultiStepEnabledChange(enabled);
   };
 
   // Group programs by type
@@ -95,7 +81,7 @@ const AdvancedSettings = ({ programs, customDollarValues, onCustomDollarValuesCh
     newCustomValues[programId] = dollarValue;
     
     onCustomDollarValuesChange(newCustomValues);
-    persistSettings(newCustomValues);
+    setStoredSettings(prev => ({ ...prev, customDollarValues: newCustomValues }));
   };
 
   const resetToDefault = (programId) => {
@@ -103,12 +89,12 @@ const AdvancedSettings = ({ programs, customDollarValues, onCustomDollarValuesCh
     delete newCustomValues[programId];
     
     onCustomDollarValuesChange(newCustomValues);
-    persistSettings(newCustomValues);
+    setStoredSettings(prev => ({ ...prev, customDollarValues: newCustomValues }));
   };
 
   const resetAllToDefaults = () => {
     onCustomDollarValuesChange({});
-    persistSettings({});
+    setStoredSettings(prev => ({ ...prev, customDollarValues: {} }));
   };
 
   const styles = {
@@ -281,7 +267,7 @@ const AdvancedSettings = ({ programs, customDollarValues, onCustomDollarValuesCh
             <label style={styles.toggleLabel}>
               <input 
                 type="checkbox" 
-                checked={multiStepEnabled}
+                checked={storedSettings.multiStepEnabled}
                 onChange={handleMultiStepChange}
               />
               Show multi-step conversions (not recommended)
