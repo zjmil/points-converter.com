@@ -109,6 +109,20 @@ const ConversionResults = ({ results, showDollarValues, customDollarValues }) =>
         {directConversion.note && (
           <p><strong>Note:</strong> {directConversion.note}</p>
         )}
+        
+        {directConversion.source && (
+          <p>
+            <strong>Source:</strong>{' '}
+            <a 
+              href={directConversion.source} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={styles.sourceLink}
+            >
+              Official program website
+            </a>
+          </p>
+        )}
       </div>
     );
   };
@@ -435,6 +449,10 @@ const styles = {
   },
   warningIcon: {
     marginRight: '0.5rem'
+  },
+  sourceLink: {
+    color: '#3498db',
+    textDecoration: 'none'
   }
 };
 
