@@ -17,6 +17,18 @@ body {
     padding: 0 20px;
 }
 
+/* App component styles */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  padding: 2rem 0;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .container {

@@ -1,0 +1,170 @@
+import React, { useState, useCallback, useEffect } from 'react'
+
+// Global shared state - in a real app, this would likely use Context or a state management library
+let globalConversionData = null
+const subscribers = new Set()
+
+const notifySubscribers = () => {
+  subscribers.forEach(callback => callback(globalConversionData))
+}
+
+export function useConversions() {
+  const [conversionData, setConversionData] = useState(globalConversionData)
+  
+  // Subscribe to global state changes
+  useEffect(() => {
+    const updateState = (data) => {
+      setConversionData(data)
+    }
+    
+    subscribers.add(updateState)
+    return () => subscribers.delete(updateState)
+  }, [])
+  
+  const loadConversionData = useCallback(async () => {
+    try {
+      const response = await fetch('/data/conversions.json')
+      const data = await response.json()
+      globalConversionData = data
+      notifySubscribers()
+    } catch (error) {
+      console.error('Error loading conversion data:', error)
+      alert('Error loading conversion data. Please refresh the page.')
+    }
+  }, [])
+  
+  const findDirectConversion = useCallback((from, to) => {
+    if (!conversionData) return null
+    return conversionData.conversions.find(c => c.from === from && c.to === to) || null
+  }, [conversionData])
+  
+  const findMultiStepConversions = useCallback((from, to) => {
+    if (!conversionData) return []
+    
+    const routes = []
+    
+    // Find all programs that 'from' can transfer to
+    const fromTransfers = conversionData.conversions.filter(c => c.from === from)
+    
+    // For each intermediate program, check if it can transfer to 'to'
+    fromTransfers.forEach(firstStep => {
+      const secondStep = conversionData.conversions.find(
+        c => c.from === firstStep.to && c.to === to
+      )
+      
+      if (secondStep) {
+        routes.push({
+          steps: [firstStep, secondStep],
+          totalRate: firstStep.rate * secondStep.rate
+        })
+      }
+    })
+    
+    return routes
+  }, [conversionData])
+  
+  const getReachablePrograms = useCallback((fromProgram) => {
+    if (!conversionData || !fromProgram) return new Set()
+    
+    const reachablePrograms = new Set()
+    
+    // Direct conversions
+    conversionData.conversions
+      .filter(c => c.from === fromProgram)
+      .forEach(c => reachablePrograms.add(c.to))
+    
+    // Two-step conversions
+    conversionData.conversions
+      .filter(c => c.from === fromProgram)
+      .forEach(firstStep => {
+        conversionData.conversions
+          .filter(c => c.from === firstStep.to)
+          .forEach(secondStep => reachablePrograms.add(secondStep.to))
+      })
+    
+    return reachablePrograms
+  }, [conversionData])
+  
+  const getSourcePrograms = useCallback((toProgram) => {
+    if (!conversionData || !toProgram) return new Set()
+    
+    const sourcePrograms = new Set()
+    
+    // Direct conversions TO the selected program
+    conversionData.conversions
+      .filter(c => c.to === toProgram)
+      .forEach(c => sourcePrograms.add(c.from))
+    
+    // Two-step conversions TO the selected program
+    conversionData.conversions
+      .filter(c => c.to === toProgram)
+      .forEach(lastStep => {
+        conversionData.conversions
+          .filter(c => c.to === lastStep.from)
+          .forEach(firstStep => sourcePrograms.add(firstStep.from))
+      })
+    
+    return sourcePrograms
+  }, [conversionData])
+  
+  const getTransfersFrom = useCallback((fromProgram) => {
+    if (!conversionData || !fromProgram) return { direct: [], twoStep: [] }
+    
+    // Direct transfers
+    const direct = conversionData.conversions.filter(c => c.from === fromProgram)
+    
+    // Two-step transfers
+    const twoStep = []
+    conversionData.conversions
+      .filter(c => c.from === fromProgram)
+      .forEach(firstStep => {
+        conversionData.conversions
+          .filter(c => c.from === firstStep.to)
+          .forEach(secondStep => {
+            twoStep.push({
+              to: secondStep.to,
+              steps: [firstStep, secondStep],
+              totalRate: firstStep.rate * secondStep.rate
+            })
+          })
+      })
+    
+    return { direct, twoStep }
+  }, [conversionData])
+  
+  const getTransfersTo = useCallback((toProgram) => {
+    if (!conversionData || !toProgram) return { direct: [], twoStep: [] }
+    
+    // Direct transfers
+    const direct = conversionData.conversions.filter(c => c.to === toProgram)
+    
+    // Two-step transfers
+    const twoStep = []
+    conversionData.conversions
+      .filter(c => c.to === toProgram)
+      .forEach(lastStep => {
+        conversionData.conversions
+          .filter(c => c.to === lastStep.from)
+          .forEach(firstStep => {
+            twoStep.push({
+              from: firstStep.from,
+              steps: [firstStep, lastStep],
+              totalRate: firstStep.rate * lastStep.rate
+            })
+          })
+      })
+    
+    return { direct, twoStep }
+  }, [conversionData])
+  
+  return {
+    conversionData,
+    loadConversionData,
+    findDirectConversion,
+    findMultiStepConversions,
+    getReachablePrograms,
+    getSourcePrograms,
+    getTransfersFrom,
+    getTransfersTo
+  }
+}
