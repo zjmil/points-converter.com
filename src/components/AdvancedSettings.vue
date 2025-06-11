@@ -10,36 +10,52 @@
         Customize the estimated cents per point value for each program. These values are used when "Show dollar values" is enabled.
       </p>
       
+      <div class="toggle-row">
+        <label class="toggle-label">
+          <input type="checkbox" v-model="multiStepEnabled" @change="persistMultiStep" />
+          Show multi-step conversions (not recommended)
+        </label>
+      </div>
+      
       <div class="program-groups">
         <div v-for="(groupPrograms, groupName) in groupedPrograms" :key="groupName" class="program-group">
           <h4 class="group-title">{{ getGroupDisplayName(groupName) }}</h4>
-          <div class="program-list">
-            <div v-for="program in groupPrograms" :key="program.id" class="program-setting">
-              <label :for="`cents-${program.id}`" class="program-label">
-                {{ program.name }}
-              </label>
-              <div class="input-wrapper">
-                <input
-                  :id="`cents-${program.id}`"
-                  type="number"
-                  step="0.01"
-                  min="0"
-                  max="100"
-                  :value="getCentsValue(program.id)"
-                  @input="updateCentsValue(program.id, $event.target.value)"
-                  class="cents-input"
-                >
-              </div>
-              <span class="cents-symbol">¢</span>
-              <button 
-                @click="resetToDefault(program.id)"
-                class="reset-button"
-                type="button"
-              >
-                Reset
-              </button>
-            </div>
-          </div>
+          <table class="program-table">
+            <thead>
+              <tr>
+                <th>Program</th>
+                <th style="width: 120px;">Cents/pt</th>
+                <th style="width: 60px;"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="program in groupPrograms" :key="program.id">
+                <td class="program-label">{{ program.name }}</td>
+                <td>
+                  <input
+                    :id="`cents-${program.id}`"
+                    type="number"
+                    step="0.01"
+                    min="0"
+                    max="100"
+                    :value="getCentsValue(program.id)"
+                    @input="updateCentsValue(program.id, $event.target.value)"
+                    class="cents-input"
+                  >
+                  <span class="cents-symbol">¢</span>
+                </td>
+                <td>
+                  <button 
+                    @click="resetToDefault(program.id)"
+                    class="reset-button"
+                    type="button"
+                  >
+                    Reset
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
       
@@ -53,16 +69,43 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 
 const props = defineProps({
   programs: Object,
   customDollarValues: Object
 })
 
-const emit = defineEmits(['update:customDollarValues'])
+const emit = defineEmits(['update:customDollarValues', 'update:multiStepEnabled'])
 
 const isExpanded = ref(false)
+const multiStepEnabled = ref(false)
+
+const LOCAL_KEY = 'points-converter-settings'
+
+const persistSettings = (customValues) => {
+  const settings = JSON.parse(localStorage.getItem(LOCAL_KEY) || '{}')
+  settings.customDollarValues = customValues
+  localStorage.setItem(LOCAL_KEY, JSON.stringify(settings))
+}
+
+const persistMultiStep = () => {
+  const settings = JSON.parse(localStorage.getItem(LOCAL_KEY) || '{}')
+  settings.multiStepEnabled = multiStepEnabled.value
+  localStorage.setItem(LOCAL_KEY, JSON.stringify(settings))
+  emit('update:multiStepEnabled', multiStepEnabled.value)
+}
+
+onMounted(() => {
+  const settings = JSON.parse(localStorage.getItem(LOCAL_KEY) || '{}')
+  if (settings.customDollarValues) {
+    emit('update:customDollarValues', settings.customDollarValues)
+  }
+  if (typeof settings.multiStepEnabled === 'boolean') {
+    multiStepEnabled.value = settings.multiStepEnabled
+    emit('update:multiStepEnabled', multiStepEnabled.value)
+  }
+})
 
 const toggleExpanded = () => {
   isExpanded.value = !isExpanded.value
@@ -123,6 +166,7 @@ const updateCentsValue = (programId, value) => {
   newCustomValues[programId] = dollarValue
   
   emit('update:customDollarValues', newCustomValues)
+  persistSettings(newCustomValues)
 }
 
 const resetToDefault = (programId) => {
@@ -130,10 +174,12 @@ const resetToDefault = (programId) => {
   delete newCustomValues[programId]
   
   emit('update:customDollarValues', newCustomValues)
+  persistSettings(newCustomValues)
 }
 
 const resetAllToDefaults = () => {
   emit('update:customDollarValues', {})
+  persistSettings({})
 }
 </script>
 
@@ -184,6 +230,19 @@ const resetAllToDefaults = () => {
   line-height: 1.4;
 }
 
+.toggle-row {
+  margin-bottom: 1.5rem;
+}
+
+.toggle-label {
+  font-weight: 500;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
 .program-groups {
   margin-bottom: 1.5rem;
 }
@@ -205,69 +264,68 @@ const resetAllToDefaults = () => {
   padding-bottom: 0.5rem;
 }
 
-.program-list {
-  display: grid;
-  gap: 1rem;
-}
-
-.program-setting {
-  display: flex;
-  align-items: center;
-  padding: 0.75rem;
+.program-table {
+  width: 100%;
+  border-collapse: collapse;
   background: #f8f9fa;
   border-radius: 6px;
-  gap: 1rem;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.program-table th, .program-table td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.program-table th {
+  background: #e9ecef;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #495057;
+}
+
+.program-table tr:nth-child(even) {
+  background: #f4f6f8;
 }
 
 .program-label {
   font-weight: 500;
   color: #2c3e50;
-  cursor: pointer;
-  flex: 1;
 }
 
-.input-wrapper {
-  display: flex;
-  align-items: center;
-  position: relative;
+.cents-input {
+  width: 70px;
+  padding: 0.4rem 1.5rem 0.4rem 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  text-align: right;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.cents-input::-webkit-outer-spin-button,
+.cents-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.cents-input[type=number]::-ms-input-spin-button {
+  display: none;
 }
 
 .cents-symbol {
-  margin-left: 0.5rem;
+  margin-left: 0.2rem;
   color: #666;
   font-weight: 500;
   font-size: 0.95em;
   vertical-align: middle;
 }
 
-.cents-input {
-  width: 100px;
-  padding: 0.5rem 2rem 0.5rem 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  text-align: right;
-  /* Hide number input spinners for Chrome, Safari, Edge */
-  -webkit-appearance: none;
-  -moz-appearance: textfield;
-  appearance: textfield;
-}
-.cents-input::-webkit-outer-spin-button,
-.cents-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-.cents-input[type=number]::-ms-input-spin-button {
-  display: none;
-}
-
-.cents-input:focus {
-  outline: none;
-  border-color: #3498db;
-}
-
 .reset-button {
-  padding: 0.3rem 0.75rem;
+  padding: 0.2rem 0.7rem;
   background: #e9ecef;
   border: none;
   border-radius: 4px;
@@ -275,7 +333,6 @@ const resetAllToDefaults = () => {
   font-size: 0.85rem;
   cursor: pointer;
   transition: background-color 0.2s;
-  margin-left: 0.5rem;
   white-space: nowrap;
   align-self: center;
 }

@@ -10,6 +10,7 @@
           v-if="conversionData?.programs"
           :programs="conversionData.programs"
           v-model:customDollarValues="customDollarValues"
+          v-model:multiStepEnabled="multiStepEnabled"
         />
         
         <ConversionForm
@@ -36,6 +37,7 @@
           :results="conversionResults"
           :showDollarValues="showDollarValues"
           :customDollarValues="customDollarValues"
+          :multiStepEnabled="multiStepEnabled"
         />
         
         <AdPlaceholder 
@@ -72,6 +74,7 @@ const toProgram = ref('')
 const amount = ref(1000)
 const showDollarValues = ref(false)
 const customDollarValues = ref({})
+const multiStepEnabled = ref(false)
 
 // URL parameters handling
 const initializeFromURL = () => {
@@ -139,7 +142,10 @@ const conversionResults = computed(() => {
   }
   
   const directConversion = findDirectConversion(fromProgram.value, toProgram.value)
-  const multiStepRoutes = findMultiStepConversions(fromProgram.value, toProgram.value)
+  let multiStepRoutes = findMultiStepConversions(fromProgram.value, toProgram.value)
+  if (!multiStepEnabled.value) {
+    multiStepRoutes = []
+  }
   
   return {
     amount: amount.value,
