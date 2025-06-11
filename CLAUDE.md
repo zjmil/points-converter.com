@@ -8,7 +8,7 @@ Points-converter.com is a website that allows users to convert between various p
 
 ## Technology Stack
 
-- Frontend: Vue 3 + Vite
+- Frontend: React 18 + Vite
 - Data: Static JSON files (manually updated)
 - Hosting: Static site hosting (GitHub Pages, Netlify, etc.)
 
@@ -17,15 +17,20 @@ Points-converter.com is a website that allows users to convert between various p
 ```
 /
 ├── src/
-│   ├── components/      # Vue components
-│   │   ├── AppHeader.vue
-│   │   ├── ConversionForm.vue
-│   │   ├── TransferPreview.vue
+│   ├── components/      # React components
+│   │   ├── AppHeader.jsx
+│   │   ├── ConversionForm.jsx
+│   │   ├── TransferPreview.jsx
 │   │   └── ...
-│   ├── composables/     # Vue composables
-│   │   └── useConversions.js
-│   ├── App.vue         # Main Vue app
-│   ├── main.js         # App entry point
+│   ├── hooks/          # React custom hooks
+│   │   ├── useConversions.js
+│   │   └── useDollarValues.js
+│   ├── test/           # Test files
+│   │   ├── fixtures.js
+│   │   ├── setup.js
+│   │   └── *.test.jsx
+│   ├── App.jsx         # Main React app
+│   ├── main.jsx        # App entry point
 │   └── style.css       # Global styles
 ├── public/             # Static assets
 │   └── data/
@@ -33,6 +38,7 @@ Points-converter.com is a website that allows users to convert between various p
 ├── dist/               # Build output (generated)
 ├── index.html          # HTML template
 ├── vite.config.js      # Vite configuration
+├── vitest.config.js    # Test configuration
 ├── package.json        # npm scripts and dependencies
 ├── Makefile           # Alternative command interface
 ├── README.md          # Project documentation
@@ -68,6 +74,26 @@ Points-converter.com is a website that allows users to convert between various p
 5. Mobile-responsive design
 6. Monetization placeholders for ads and affiliate links
 
+## React Architecture
+
+The application uses modern React patterns:
+
+### State Management
+- **Local State**: Components use `useState` for local state management
+- **Shared State**: Global conversion data shared via module-level variables and custom hooks
+- **URL State**: URL parameters for bookmarkable conversion states
+- **LocalStorage**: Advanced settings persisted in browser storage
+
+### Custom Hooks
+- **useConversions**: Manages conversion data loading and calculations
+- **useDollarValues**: Handles currency formatting and dollar value calculations
+
+### Component Patterns
+- **Functional Components**: All components use React function syntax with hooks
+- **Controlled Components**: Form inputs use controlled component pattern
+- **Prop Drilling**: Simple prop passing for component communication
+- **Conditional Rendering**: Uses `&&` and ternary operators for dynamic content
+
 ## Data Structure
 
 The `conversions.json` file contains:
@@ -79,12 +105,12 @@ The `conversions.json` file contains:
 
 ## Testing
 
-The project uses Vitest and Vue Test Utils for comprehensive testing:
+The project uses Vitest and React Testing Library for comprehensive testing:
 
 ### Test Types
-- **Unit Tests**: Test individual functions and composables (`src/test/useConversions.test.js`)
-- **Component Tests**: Test Vue components in isolation (`src/test/ConversionForm.test.js`, `src/test/TransferPreview.test.js`)
-- **Integration Tests**: Test full app functionality (`src/test/integration.test.js`)
+- **Unit Tests**: Test individual functions and hooks (`src/test/useConversions.test.js`)
+- **Component Tests**: Test React components in isolation (`src/test/ConversionForm.test.jsx`)
+- **Integration Tests**: Test full app functionality (`src/test/integration.test.jsx`)
 
 ### Running Tests
 - `npm run test` - Run tests in watch mode
@@ -92,7 +118,7 @@ The project uses Vitest and Vue Test Utils for comprehensive testing:
 - `npm run test:coverage` - Generate coverage report
 
 ### Test Structure
-Tests are located in `src/test/` and use mock data from `fixtures.js` to ensure predictable testing conditions.
+Tests are located in `src/test/` and use mock data from `fixtures.js` to ensure predictable testing conditions. React components are tested using React Testing Library with proper mocking of hooks and dependencies.
 
 ## Deployment
 
@@ -103,7 +129,7 @@ Tests are located in `src/test/` and use mock data from `fixtures.js` to ensure 
    - Connect your GitHub repository
 
 2. **Build Settings:**
-   - Framework preset: None (or Vue if available)
+   - Framework preset: None (or React if available)
    - Build command: `npm run build`
    - Build output directory: `dist`
    - Root directory: `/` (leave empty/default)
