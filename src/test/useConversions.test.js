@@ -9,8 +9,8 @@ global.fetch = vi.fn()
 describe('useConversions', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-    // Reset global state
-    global.globalConversionData = null
+    // Reset the module-level variable by reimporting
+    vi.resetModules()
   })
 
   describe('loadConversionData', () => {
@@ -50,22 +50,30 @@ describe('useConversions', () => {
   })
 
   describe('findDirectConversion', () => {
-    it('should find direct conversion when it exists', () => {
+    it('should find direct conversion when it exists', async () => {
+      fetch.mockResolvedValueOnce({
+        json: () => Promise.resolve(mockConversionData)
+      })
+
       const { result } = renderHook(() => useConversions())
       
-      act(() => {
-        result.current.conversionData = mockConversionData
+      await act(async () => {
+        await result.current.loadConversionData()
       })
       
       const conversion = result.current.findDirectConversion('chase_ur', 'hyatt')
       expect(conversion).toEqual(mockConversionData.conversions[0])
     })
 
-    it('should return null when no direct conversion exists', () => {
+    it('should return null when no direct conversion exists', async () => {
+      fetch.mockResolvedValueOnce({
+        json: () => Promise.resolve(mockConversionData)
+      })
+
       const { result } = renderHook(() => useConversions())
       
-      act(() => {
-        result.current.conversionData = mockConversionData
+      await act(async () => {
+        await result.current.loadConversionData()
       })
       
       const conversion = result.current.findDirectConversion('hyatt', 'chase_ur')
@@ -74,11 +82,15 @@ describe('useConversions', () => {
   })
 
   describe('findMultiStepConversions', () => {
-    it('should find multi-step conversions', () => {
+    it('should find multi-step conversions', async () => {
+      fetch.mockResolvedValueOnce({
+        json: () => Promise.resolve(mockConversionData)
+      })
+
       const { result } = renderHook(() => useConversions())
       
-      act(() => {
-        result.current.conversionData = mockConversionData
+      await act(async () => {
+        await result.current.loadConversionData()
       })
       
       const routes = result.current.findMultiStepConversions('chase_ur', 'marriott')
