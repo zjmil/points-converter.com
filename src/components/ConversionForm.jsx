@@ -35,7 +35,7 @@ function ConversionForm({
       borderRadius: '12px',
       boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
       display: 'flex',
-      alignItems: 'flex-end',
+      alignItems: 'flex-start',
       gap: '1rem',
       flexWrap: 'wrap',
       marginBottom: '2rem',
@@ -77,15 +77,17 @@ function ConversionForm({
       fontSize: '2rem',
       color: '#3498db',
       padding: '0 0.5rem',
-      alignSelf: 'flex-end',
-      marginBottom: '1.5rem',
+      alignSelf: 'center',
       display: 'flex',
       alignItems: 'center',
-      height: '100%',
+      justifyContent: 'center',
+      minHeight: '60px', // Match approximate height of input + label
+      marginTop: '1.5rem', // Account for label space
       ...(isMobile && {
         transform: 'rotate(90deg)',
         margin: '1rem 0',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        marginTop: '0'
       })
     }
   }
