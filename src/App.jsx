@@ -9,6 +9,7 @@ import ConversionResults from './components/ConversionResults'
 import AdPlaceholder from './components/AdPlaceholder'
 import AffiliateLinks from './components/AffiliateLinks'
 import { ConversionProvider, useConversions } from './contexts/ConversionContext'
+import { useURLHistory } from './hooks/useURLHistory'
 
 function AppContent() {
   // Reactive state
@@ -22,51 +23,15 @@ function AppContent() {
   // Use conversion context
   const { conversionData, loadConversionData, findDirectConversion, findMultiStepConversions } = useConversions()
 
-  // URL parameters handling
-  const initializeFromURL = () => {
-    // Skip URL initialization in test environment
-    if (typeof window === 'undefined' || window.location.href.includes('localhost:3000')) {
-      return
-    }
-    
-    const urlParams = new URLSearchParams(window.location.search)
-    
-    if (urlParams.has('from')) {
-      setFromProgram(urlParams.get('from'))
-    }
-    if (urlParams.has('to')) {
-      setToProgram(urlParams.get('to'))
-    }
-    if (urlParams.has('amount')) {
-      const urlAmount = parseInt(urlParams.get('amount'))
-      if (!isNaN(urlAmount) && urlAmount > 0) {
-        setAmount(urlAmount)
-      }
-    }
-  }
-
-  // Update URL when values change
-  const updateURL = () => {
-    // Skip URL updates in test environment
-    if (typeof window === 'undefined' || window.location.href.includes('localhost:3000')) {
-      return
-    }
-    
-    const params = new URLSearchParams()
-    
-    if (fromProgram) {
-      params.set('from', fromProgram)
-    }
-    if (toProgram) {
-      params.set('to', toProgram)
-    }
-    if (amount !== 1000) {
-      params.set('amount', amount.toString())
-    }
-    
-    const newURL = params.toString() ? `${window.location.pathname}?${params.toString()}` : window.location.pathname
-    window.history.replaceState({}, '', newURL)
-  }
+  // URL history management
+  const { initializeFromURL, pushURLHistory } = useURLHistory(
+    fromProgram, 
+    toProgram, 
+    amount, 
+    setFromProgram, 
+    setToProgram, 
+    setAmount
+  )
 
   // Computed properties
   const showPreview = useMemo(() => {
@@ -105,24 +70,31 @@ function AppContent() {
   }, [conversionResults])
 
   // Methods
-  const handleTransferSelection = ({ fromProgram: newFromProgram, toProgram: newToProgram }) => {
+  const handleTransferSelection = ({ fromProgram: newFromProgram, toProgram: newToProgram, isUserAction = true }) => {
     if (newFromProgram) {
       setFromProgram(newFromProgram)
     }
     if (newToProgram) {
       setToProgram(newToProgram)
     }
+    // For user actions (like clicking transfers), push new history entry
+    if (isUserAction) {
+      // Use setTimeout to ensure state updates complete first, then push to history
+      setTimeout(pushURLHistory, 0)
+    }
   }
 
   // Effects
   useEffect(() => {
+    // Skip URL initialization in test environment
+    if (typeof window === 'undefined' || window.location.href.includes('localhost:3000')) {
+      loadConversionData()
+      return
+    }
+    
     initializeFromURL()
     loadConversionData()
-  }, [])
-
-  useEffect(() => {
-    updateURL()
-  }, [fromProgram, toProgram, amount])
+  }, [initializeFromURL, loadConversionData])
 
   return (
     <div className="app">

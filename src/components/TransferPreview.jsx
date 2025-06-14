@@ -144,11 +144,11 @@ const TransferPreview = ({
     if (fromProgram && !toProgram) {
       // From program is selected, populate to program
       const toProgram = transfer.transferData.to || transfer.transferData.steps?.[transfer.transferData.steps.length - 1]?.to;
-      onSelectTransfer({ toProgram });
+      onSelectTransfer({ toProgram, isUserAction: true });
     } else if (!fromProgram && toProgram) {
       // To program is selected, populate from program  
       const fromProgram = transfer.transferData.from || transfer.transferData.steps?.[0]?.from;
-      onSelectTransfer({ fromProgram });
+      onSelectTransfer({ fromProgram, isUserAction: true });
     }
   };
 

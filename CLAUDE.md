@@ -109,9 +109,11 @@ if (require.main === module) {
 - `npm run validate-data` - Quick data validation
 - `npm run backup-data` - Create manual backup
 
-### Using make:
+### Using make (recommended for development):
 - `make help` - Show all available commands
-- `make dev` - Start development server
+- `make dev` - **Smart development server** (only starts if not running, logs to dev.log)
+- `make dev-logs` - View development server logs in real-time
+- `make dev-stop` - Stop development server
 - `make build` - Build for production
 - `make deploy-test` - Build and preview
 - `make install` - Install dependencies
@@ -122,6 +124,14 @@ if (require.main === module) {
 - `make backup-data` - Create manual backup
 - `make test-integrity` - Run data integrity tests
 
+**Development Server Management:**
+The `make dev` command provides intelligent server management:
+- Checks if development server is already running on port 5173
+- Only starts server if not already running (prevents conflicts)
+- Runs server in background with logs written to `dev.log`
+- Use `make dev-logs` to view real-time logs
+- Use `make dev-stop` to cleanly stop the server
+
 ## Key Features
 
 1. Points currency conversion with exchange rates
@@ -129,8 +139,10 @@ if (require.main === module) {
 3. Display of current bonuses
 4. Data source and last updated timestamp
 5. Mobile-responsive design
-6. Monetization placeholders for ads and affiliate links
-7. **Comprehensive data management system with validation, scraping, and backup**
+6. **Browser history support** - Back/forward buttons work for program selection
+7. **URL state management** - Bookmarkable conversion states
+8. Monetization placeholders for ads and affiliate links
+9. **Comprehensive data management system with validation, scraping, and backup**
 
 ## React Architecture
 
@@ -145,6 +157,7 @@ The application uses modern React patterns:
 ### Custom Hooks
 - **useConversions**: Manages conversion data loading and calculations
 - **useDollarValues**: Handles currency formatting and dollar value calculations
+- **useURLHistory**: Manages browser history and URL state synchronization
 
 ### Component Patterns
 - **Functional Components**: All components use React function syntax with hooks
