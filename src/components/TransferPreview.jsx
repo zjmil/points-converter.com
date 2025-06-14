@@ -253,7 +253,10 @@ const TransferPreview = ({
         
         {allTransfers.length === 0 && (
           <p className={styles.noTransfers}>
-            No transfers available
+            {!fromProgram && !toProgram 
+              ? "Select a program above to see available transfers"
+              : "No transfers available"
+            }
           </p>
         )}
       </div>

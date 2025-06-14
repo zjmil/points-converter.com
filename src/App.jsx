@@ -37,7 +37,8 @@ function AppContent() {
 
   // Computed properties
   const showPreview = useMemo(() => {
-    return (fromProgram && !toProgram) || (!fromProgram && toProgram)
+    // Always show preview unless we have both programs selected (which shows results)
+    return !(fromProgram && toProgram && fromProgram !== toProgram)
   }, [fromProgram, toProgram])
 
   const conversionResults = useMemo(() => {
