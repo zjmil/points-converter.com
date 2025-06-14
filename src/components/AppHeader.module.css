@@ -8,6 +8,12 @@
 .h1 {
   font-size: 2.5rem;
   margin: 0 0 0.5rem 0;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.h1:hover {
+  opacity: 0.8;
 }
 
 .tagline {

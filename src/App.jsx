@@ -114,6 +114,20 @@ function AppContent() {
     }
   }
 
+  // Reset function to clear all state and go to home
+  const handleReset = () => {
+    setFromProgram('')
+    setToProgram('')
+    setAmount(1000)
+    // Keep dollar values and multi-step settings as user preferences
+    // setShowDollarValues(false)  // Don't reset user preferences
+    // setMultiStepEnabled(false)  // Don't reset user preferences
+    // Clear URL by navigating to home
+    if (typeof window !== 'undefined') {
+      window.history.pushState({}, '', window.location.pathname)
+    }
+  }
+
   // Effects
   useEffect(() => {
     // Skip URL initialization in test environment
@@ -136,7 +150,7 @@ function AppContent() {
 
   return (
     <div className="app">
-      <AppHeader />
+      <AppHeader onReset={handleReset} />
       
       <main>
         <div className="container">
