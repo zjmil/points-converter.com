@@ -171,6 +171,7 @@ function AppContent() {
               programs={conversionData?.programs}
               conversions={conversionData?.conversions}
               onSelectTransfer={handleTransferSelection}
+              multiStepEnabled={multiStepEnabled}
             />
           )}
           

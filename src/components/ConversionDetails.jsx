@@ -1,6 +1,6 @@
 import styles from './ConversionResults.module.css';
 
-const ConversionDetails = ({ results }) => {
+const ConversionDetails = ({ results, multiStepEnabled, findMultiStepConversions }) => {
   if (!results?.directConversion) {
     if (results?.multiStepRoutes?.length > 0) {
       return (
@@ -9,11 +9,24 @@ const ConversionDetails = ({ results }) => {
         </div>
       );
     } else {
-      return (
-        <div className={styles.conversionDetails}>
-          <p>Unfortunately, there is no direct or 2-step conversion path between these programs.</p>
-        </div>
-      );
+      // Check if multi-step routes exist but are disabled
+      const potentialMultiStepRoutes = findMultiStepConversions ? 
+        findMultiStepConversions(results?.fromProgram, results?.toProgram) : [];
+      
+      if (potentialMultiStepRoutes.length > 0 && !multiStepEnabled) {
+        return (
+          <div className={styles.conversionDetails}>
+            <p>Unfortunately, there is no direct conversion path between these programs.</p>
+            <p>Enable "Show multi-step conversions" above to see 2-step conversion routes.</p>
+          </div>
+        );
+      } else {
+        return (
+          <div className={styles.conversionDetails}>
+            <p>Unfortunately, there is no direct or 2-step conversion path between these programs.</p>
+          </div>
+        );
+      }
     }
   }
   

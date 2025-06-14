@@ -1,11 +1,13 @@
 import { useState, useMemo } from 'react';
 import { useDollarValues } from '../hooks/useDollarValues';
+import { useConversions } from '../contexts/ConversionContext';
 import ConversionPath from './ConversionPath';
 import ConversionDetails from './ConversionDetails';
 import styles from './ConversionResults.module.css';
 
-const ConversionResults = ({ results, showDollarValues, customDollarValues }) => {
+const ConversionResults = ({ results, showDollarValues, customDollarValues, multiStepEnabled }) => {
   const { formatPointsWithDollar } = useDollarValues();
+  const { findMultiStepConversions } = useConversions();
   
   // Track which routes are expanded
   const [expandedRoutes, setExpandedRoutes] = useState(new Set());
@@ -94,7 +96,9 @@ const ConversionResults = ({ results, showDollarValues, customDollarValues }) =>
         instantTransfer: step.instantTransfer,
         minAmount: step.minAmount,
         lastUpdated: step.lastUpdated,
-        note: step.note
+        note: step.note,
+        from: step.from,
+        to: step.to
       }));
       
       return {
@@ -117,7 +121,11 @@ const ConversionResults = ({ results, showDollarValues, customDollarValues }) =>
         customDollarValues={customDollarValues}
       />
       
-      <ConversionDetails results={results} />
+      <ConversionDetails 
+        results={results} 
+        multiStepEnabled={multiStepEnabled}
+        findMultiStepConversions={findMultiStepConversions}
+      />
       
       {/* Multi-step alternatives */}
       {hasAlternatives && (
@@ -146,21 +154,26 @@ const ConversionResults = ({ results, showDollarValues, customDollarValues }) =>
                   <div className={styles.routeDetails}>
                     <ol className={styles.stepsList}>
                       {route.steps.map((step, stepIndex) => (
-                        <li key={stepIndex} style={styles.stepItem}>
+                        <li key={stepIndex} className={styles.stepItem}>
                           {step.text}
                           {step.hasBonus && (
-                            <span style={styles.bonusIndicator}>BONUS</span>
+                            <span className={styles.bonusIndicator}>BONUS</span>
                           )}
                         </li>
                       ))}
                     </ol>
                     
-                    <div style={styles.stepDetails}>
+                    <div className={styles.stepDetails}>
                       <p><strong>Total Rate:</strong> 1:{route.totalRate}</p>
-                      {route.stepDetails.map((step, stepIndex) => (
-                        <div key={stepIndex} style={styles.stepInfo}>
-                          <p><strong>Step {stepIndex + 1}:</strong></p>
-                          <ul style={styles.stepInfoList}>
+                      {route.stepDetails.map((step, stepIndex) => {
+                        const fromName = step.from ? (results?.programs?.[step.from]?.name || '') : '';
+                        const toName = step.to ? (results?.programs?.[step.to]?.name || '') : '';
+                        const stepLabel = fromName && toName ? `${fromName} → ${toName}` : `Step ${stepIndex + 1}`;
+                        
+                        return (
+                        <div key={stepIndex} className={styles.stepInfo}>
+                          <p><strong>Step {stepIndex + 1}: {stepLabel}</strong></p>
+                          <ul className={styles.stepInfoList}>
                             <li><strong>Exchange Rate:</strong> 1:{step.rate}</li>
                             <li><strong>Transfer Type:</strong> {step.instantTransfer ? 'Instant' : 'May take 1-2 days'}</li>
                             {step.minAmount && (
@@ -183,7 +196,8 @@ const ConversionResults = ({ results, showDollarValues, customDollarValues }) =>
                             )}
                           </ul>
                         </div>
-                      ))}
+                        )
+                      })}
                     </div>
                   </div>
                 )}

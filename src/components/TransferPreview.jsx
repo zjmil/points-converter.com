@@ -7,7 +7,8 @@ const TransferPreview = ({
   toProgram, 
   programs, 
   conversions, 
-  onSelectTransfer 
+  onSelectTransfer,
+  multiStepEnabled = false
 }) => {
   const { getTransfersFrom, getTransfersTo, conversionData } = useConversions();
 
@@ -58,27 +59,29 @@ const TransferPreview = ({
         });
       });
       
-      // Add two-step transfers
-      twoStep.forEach(transfer => {
-        const targetProgram = programsData[transfer.to]?.name || '';
-        const rate = transfer.totalRate.toFixed(2);
-        
-        const step1From = programsData[transfer.steps[0].from]?.name || '';
-        const step1To = programsData[transfer.steps[0].to]?.name || '';
-        const step2To = programsData[transfer.steps[1].to]?.name || '';
-        
-        const details = [];
-        details.push(`Rate: 1:${rate} (2 steps)`);
-        details.push(`Via: ${step1From} → ${step1To} → ${step2To}`);
-        
-        transfers.push({
-          title: targetProgram,
-          rate: rate,
-          details: details.join(' • '),
-          isDirect: false,
-          transferData: transfer
+      // Add two-step transfers only if multi-step is enabled
+      if (multiStepEnabled) {
+        twoStep.forEach(transfer => {
+          const targetProgram = programsData[transfer.to]?.name || '';
+          const rate = transfer.totalRate.toFixed(2);
+          
+          const step1From = programsData[transfer.steps[0].from]?.name || '';
+          const step1To = programsData[transfer.steps[0].to]?.name || '';
+          const step2To = programsData[transfer.steps[1].to]?.name || '';
+          
+          const details = [];
+          details.push(`Rate: 1:${rate} (2 steps)`);
+          details.push(`Via: ${step1From} → ${step1To} → ${step2To}`);
+          
+          transfers.push({
+            title: targetProgram,
+            rate: rate,
+            details: details.join(' • '),
+            isDirect: false,
+            transferData: transfer
+          });
         });
-      });
+      }
       
     } else if (!fromProgram && toProgram) {
       // Show transfers TO the selected program
@@ -109,31 +112,33 @@ const TransferPreview = ({
         });
       });
       
-      // Add two-step transfers
-      twoStep.forEach(transfer => {
-        const sourceProgram = programsData[transfer.from]?.name || '';
-        const rate = transfer.totalRate.toFixed(2);
-        
-        const step1From = programsData[transfer.steps[0].from]?.name || '';
-        const step1To = programsData[transfer.steps[0].to]?.name || '';
-        const step2To = programsData[transfer.steps[1].to]?.name || '';
-        
-        const details = [];
-        details.push(`Rate: 1:${rate} (2 steps)`);
-        details.push(`Via: ${step1From} → ${step1To} → ${step2To}`);
-        
-        transfers.push({
-          title: sourceProgram,
-          rate: rate,
-          details: details.join(' • '),
-          isDirect: false,
-          transferData: transfer
+      // Add two-step transfers only if multi-step is enabled
+      if (multiStepEnabled) {
+        twoStep.forEach(transfer => {
+          const sourceProgram = programsData[transfer.from]?.name || '';
+          const rate = transfer.totalRate.toFixed(2);
+          
+          const step1From = programsData[transfer.steps[0].from]?.name || '';
+          const step1To = programsData[transfer.steps[0].to]?.name || '';
+          const step2To = programsData[transfer.steps[1].to]?.name || '';
+          
+          const details = [];
+          details.push(`Rate: 1:${rate} (2 steps)`);
+          details.push(`Via: ${step1From} → ${step1To} → ${step2To}`);
+          
+          transfers.push({
+            title: sourceProgram,
+            rate: rate,
+            details: details.join(' • '),
+            isDirect: false,
+            transferData: transfer
+          });
         });
-      });
+      }
     }
     
     return transfers;
-  }, [fromProgram, toProgram, programs, conversions, conversionData, getTransfersFrom, getTransfersTo]);
+  }, [fromProgram, toProgram, programs, conversions, conversionData, getTransfersFrom, getTransfersTo, multiStepEnabled]);
 
   const getTransferKey = (transfer) => {
     return `${transfer.title}-${transfer.rate}-${transfer.isDirect}`;
@@ -143,12 +148,24 @@ const TransferPreview = ({
     // Determine which program to populate based on current selection
     if (fromProgram && !toProgram) {
       // From program is selected, populate to program
-      const toProgram = transfer.transferData.to || transfer.transferData.steps?.[transfer.transferData.steps.length - 1]?.to;
-      onSelectTransfer({ toProgram, isUserAction: true });
+      let toProgramId;
+      if (transfer.isDirect) {
+        toProgramId = transfer.transferData.to;
+      } else {
+        // For multi-step transfers, get the final destination
+        toProgramId = transfer.transferData.to || transfer.transferData.steps?.[transfer.transferData.steps.length - 1]?.to;
+      }
+      onSelectTransfer({ toProgram: toProgramId, isUserAction: true });
     } else if (!fromProgram && toProgram) {
       // To program is selected, populate from program  
-      const fromProgram = transfer.transferData.from || transfer.transferData.steps?.[0]?.from;
-      onSelectTransfer({ fromProgram, isUserAction: true });
+      let fromProgramId;
+      if (transfer.isDirect) {
+        fromProgramId = transfer.transferData.from;
+      } else {
+        // For multi-step transfers, get the initial source
+        fromProgramId = transfer.transferData.from || transfer.transferData.steps?.[0]?.from;
+      }
+      onSelectTransfer({ fromProgram: fromProgramId, isUserAction: true });
     }
   };
 
