@@ -12,9 +12,19 @@ export function ConversionProvider({ children }) {
     setError(null)
     
     try {
-      const response = await fetch('/data/conversions.json')
-      if (!response.ok) {
-        throw new Error('Failed to fetch conversion data')
+      // Try API first, fallback to static JSON if API is not available
+      let response
+      try {
+        response = await fetch('http://localhost:8080/api/v1/conversions')
+        if (!response.ok) {
+          throw new Error('API not available')
+        }
+      } catch (apiError) {
+        console.warn('API not available, falling back to static JSON:', apiError)
+        response = await fetch('/data/conversions.json')
+        if (!response.ok) {
+          throw new Error('Failed to fetch conversion data')
+        }
       }
       
       const data = await response.json()
