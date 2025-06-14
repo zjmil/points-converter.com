@@ -36,7 +36,11 @@ func main() {
 
 	// Add CORS middleware
 	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"http://localhost:5173", "http://localhost:4173"} // Vite dev and preview servers
+	config.AllowOrigins = []string{
+		"https://points-converter.com",     // Production frontend
+		"http://localhost:5173",            // Vite dev server
+		"http://localhost:4173",            // Vite preview server
+	}
 	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
 	config.AllowHeaders = []string{"Origin", "Content-Type", "Accept", "Authorization"}
 	r.Use(cors.New(config))
