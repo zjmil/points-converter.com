@@ -24,7 +24,7 @@ function AppContent() {
   const { conversionData, loadConversionData, findDirectConversion, findMultiStepConversions } = useConversions()
 
   // URL history management
-  const { initializeFromURL, pushURLHistory } = useURLHistory(
+  const { initializeFromURL, pushURLHistory, isPopstateChange } = useURLHistory(
     fromProgram, 
     toProgram, 
     amount, 
@@ -77,10 +77,38 @@ function AppContent() {
     if (newToProgram) {
       setToProgram(newToProgram)
     }
-    // For user actions (like clicking transfers), push new history entry
-    if (isUserAction) {
-      // Use setTimeout to ensure state updates complete first, then push to history
-      setTimeout(pushURLHistory, 0)
+    // For user actions (like clicking transfers), mark for URL history update
+    if (isUserAction && !isPopstateChange()) {
+      setPendingURLUpdate(true)
+    }
+  }
+
+  // Track when changes are user-initiated (not from popstate)
+  const [pendingURLUpdate, setPendingURLUpdate] = useState(false)
+
+  // Handle user-initiated program changes (from dropdowns, etc.)
+  const handleFromProgramChange = (programId) => {
+    setFromProgram(programId)
+    // Mark that we need to push URL history after state updates
+    if (!isPopstateChange()) {
+      setPendingURLUpdate(true)
+    }
+  }
+
+  const handleToProgramChange = (programId) => {
+    setToProgram(programId)
+    // Mark that we need to push URL history after state updates
+    if (!isPopstateChange()) {
+      setPendingURLUpdate(true)
+    }
+  }
+
+  // Handle user-initiated amount changes
+  const handleAmountChange = (newAmount) => {
+    setAmount(newAmount)
+    // Mark that we need to push URL history after state updates
+    if (!isPopstateChange()) {
+      setPendingURLUpdate(true)
     }
   }
 
@@ -95,6 +123,14 @@ function AppContent() {
     initializeFromURL()
     loadConversionData()
   }, [initializeFromURL, loadConversionData])
+
+  // Push URL history when user-initiated changes complete
+  useEffect(() => {
+    if (pendingURLUpdate) {
+      pushURLHistory()
+      setPendingURLUpdate(false)
+    }
+  }, [fromProgram, toProgram, amount, pendingURLUpdate, pushURLHistory])
 
   return (
     <div className="app">
@@ -119,11 +155,11 @@ function AppContent() {
           
           <ConversionForm
             fromProgram={fromProgram}
-            onFromProgramChange={setFromProgram}
+            onFromProgramChange={handleFromProgramChange}
             toProgram={toProgram}
-            onToProgramChange={setToProgram}
+            onToProgramChange={handleToProgramChange}
             amount={amount}
-            onAmountChange={setAmount}
+            onAmountChange={handleAmountChange}
             programs={conversionData?.programs}
             conversions={conversionData?.conversions}
             showDollarValues={showDollarValues}

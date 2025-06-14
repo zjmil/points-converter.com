@@ -6,6 +6,7 @@ import { useEffect, useCallback, useRef } from 'react'
 export const useURLHistory = (fromProgram, toProgram, amount, setFromProgram, setToProgram, setAmount) => {
   const isInitialLoadRef = useRef(true)
   const lastURLRef = useRef('')
+  const isPopstateChangeRef = useRef(false)
 
   // Initialize from URL on mount
   const initializeFromURL = useCallback(() => {
@@ -77,6 +78,9 @@ export const useURLHistory = (fromProgram, toProgram, amount, setFromProgram, se
   // Handle browser back/forward navigation
   useEffect(() => {
     const handlePopState = (event) => {
+      // Mark that the next state changes are from popstate, not user actions
+      isPopstateChangeRef.current = true
+      
       // If we have state in the history entry, use it
       if (event.state) {
         const { fromProgram: historyFrom, toProgram: historyTo, amount: historyAmount } = event.state
@@ -94,6 +98,11 @@ export const useURLHistory = (fromProgram, toProgram, amount, setFromProgram, se
         const amountParam = parseInt(urlParams.get('amount'))
         setAmount(!isNaN(amountParam) && amountParam > 0 ? amountParam : 1000)
       }
+      
+      // Reset the popstate flag after state updates complete
+      setTimeout(() => {
+        isPopstateChangeRef.current = false
+      }, 0)
     }
 
     window.addEventListener('popstate', handlePopState)
@@ -103,17 +112,17 @@ export const useURLHistory = (fromProgram, toProgram, amount, setFromProgram, se
     }
   }, [setFromProgram, setToProgram, setAmount])
 
-  // Update URL when state changes
-  useEffect(() => {
-    if (!isInitialLoadRef.current) {
-      updateURL(false) // Don't push history for programmatic updates
-    }
-  }, [fromProgram, toProgram, amount, updateURL])
+  // Note: We no longer automatically update URL on state changes
+  // All URL updates must be explicit via pushURLHistory or replaceURLHistory
+
+  // Check if current changes are from popstate (browser back/forward)
+  const isPopstateChange = () => isPopstateChangeRef.current
 
   return {
     initializeFromURL,
     updateURLWithHistory: (shouldPush = true) => updateURL(shouldPush),
     pushURLHistory: () => updateURL(true),
-    replaceURLHistory: () => updateURL(false)
+    replaceURLHistory: () => updateURL(false),
+    isPopstateChange
   }
 }
