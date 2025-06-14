@@ -1,5 +1,4 @@
-import React, { useMemo } from 'react'
-import { useMediaQuery } from '../hooks/useMediaQuery'
+import { useMemo } from 'react'
 import styles from './DataInfo.module.css'
 
 const DataInfo = ({ conversions, dataSource }) => {

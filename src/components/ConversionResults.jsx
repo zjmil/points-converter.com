@@ -1,6 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { useDollarValues } from '../hooks/useDollarValues';
-import ProgramIcon from './ProgramIcon';
+import ConversionPath from './ConversionPath';
+import ConversionDetails from './ConversionDetails';
 import styles from './ConversionResults.module.css';
 
 const ConversionResults = ({ results, showDollarValues, customDollarValues }) => {
@@ -20,113 +21,7 @@ const ConversionResults = ({ results, showDollarValues, customDollarValues }) =>
     setExpandedRoutes(newExpanded);
   };
   
-  const conversionPath = useMemo(() => {
-    if (!results) return '';
-    
-    const { amount, directConversion, multiStepRoutes, programs, fromProgram, toProgram } = results;
-    const fromName = programs[fromProgram]?.name || '';
-    const toName = programs[toProgram]?.name || '';
-    
-    if (directConversion) {
-      const rate = directConversion.bonus ? directConversion.bonusRate : directConversion.rate;
-      const result = Math.floor(amount * rate);
-      
-      const fromText = formatPointsWithDollar(amount, fromProgram, programs, showDollarValues, customDollarValues);
-      const toText = formatPointsWithDollar(result, toProgram, programs, showDollarValues, customDollarValues);
-      
-      return `${fromText} ${fromName} → ${toText} ${toName}`;
-    } else if (multiStepRoutes.length > 0) {
-      return 'No direct conversion available';
-    } else {
-      return 'No conversion path found';
-    }
-  }, [results, showDollarValues, customDollarValues, formatPointsWithDollar]);
   
-  // Mobile version with short names for space constraints
-  const conversionPathMobile = useMemo(() => {
-    if (!results) return '';
-    
-    const { amount, directConversion, multiStepRoutes, programs, fromProgram, toProgram } = results;
-    const fromShortName = programs[fromProgram]?.shortName || programs[fromProgram]?.name || '';
-    const toShortName = programs[toProgram]?.shortName || programs[toProgram]?.name || '';
-    
-    if (directConversion) {
-      const rate = directConversion.bonus ? directConversion.bonusRate : directConversion.rate;
-      const result = Math.floor(amount * rate);
-      
-      const fromText = formatPointsWithDollar(amount, fromProgram, programs, showDollarValues, customDollarValues);
-      const toText = formatPointsWithDollar(result, toProgram, programs, showDollarValues, customDollarValues);
-      
-      return `${fromText} ${fromShortName} → ${toText} ${toShortName}`;
-    } else if (multiStepRoutes.length > 0) {
-      return 'No direct conversion available';
-    } else {
-      return 'No conversion path found';
-    }
-  }, [results, showDollarValues, customDollarValues, formatPointsWithDollar]);
-  
-  const renderConversionDetails = () => {
-    if (!results?.directConversion) {
-      if (results?.multiStepRoutes?.length > 0) {
-        return <p>Consider these multi-step conversion routes:</p>;
-      } else {
-        return <p>Unfortunately, there is no direct or 2-step conversion path between these programs.</p>;
-      }
-    }
-    
-    const { directConversion } = results;
-    const rate = directConversion.bonus ? directConversion.bonusRate : directConversion.rate;
-    
-    return (
-      <div>
-        <p><strong>Exchange Rate:</strong> 1:{rate}</p>
-        <p><strong>Transfer Type:</strong> {directConversion.instantTransfer ? 'Instant' : 'May take 1-2 days'}</p>
-        
-        {directConversion.minAmount && (
-          results.amount < directConversion.minAmount ? (
-            <p className={styles.warningInfo}>
-              <span className={styles.warningIcon}>⚠️</span>
-              Minimum transfer amount: {directConversion.minAmount.toLocaleString()} points
-            </p>
-          ) : (
-            <p><strong>Minimum Amount:</strong> {directConversion.minAmount.toLocaleString()} points</p>
-          )
-        )}
-        
-        {directConversion.lastUpdated && (
-          <p><strong>Last Updated:</strong> {new Date(directConversion.lastUpdated).toLocaleDateString()}</p>
-        )}
-        
-        {directConversion.bonus && (
-          <p className={styles.bonusInfo}>
-            <span className={styles.bonusIndicator}>BONUS ACTIVE</span>
-            {' '}Regular rate: 1:{directConversion.rate} → Bonus rate: 1:{directConversion.bonusRate}
-            {directConversion.bonusEndDate && (
-              <span> (Ends {new Date(directConversion.bonusEndDate).toLocaleDateString()})</span>
-            )}
-          </p>
-        )}
-        
-        {directConversion.note && (
-          <p><strong>Note:</strong> {directConversion.note}</p>
-        )}
-        
-        {directConversion.source && (
-          <p>
-            <strong>Source:</strong>{' '}
-            <a 
-              href={directConversion.source} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className={styles.sourceLink}
-            >
-              Official program website
-            </a>
-          </p>
-        )}
-      </div>
-    );
-  };
   
   const hasAlternatives = useMemo(() => {
     if (!results) return false;
@@ -216,34 +111,13 @@ const ConversionResults = ({ results, showDollarValues, customDollarValues }) =>
     <div className={styles.results}>
       <h2>Conversion Results</h2>
       
-      <div className={styles.conversionPath}>
-        {(results?.directConversion || results?.multiStepRoutes?.length > 0) ? (
-          <span className={styles.conversionVisual}>
-            {results.fromProgram && (
-              <ProgramIcon 
-                programId={results.fromProgram}
-                type={results.programs?.[results.fromProgram]?.type}
-                size="medium"
-              />
-            )}
-            <span className={styles.desktopPath}>{conversionPath}</span>
-            <span className={styles.mobilePath}>{conversionPathMobile}</span>
-            {results.toProgram && (
-              <ProgramIcon 
-                programId={results.toProgram}
-                type={results.programs?.[results.toProgram]?.type}
-                size="medium"
-              />
-            )}
-          </span>
-        ) : (
-          <span>{conversionPath}</span>
-        )}
-      </div>
+      <ConversionPath 
+        results={results}
+        showDollarValues={showDollarValues}
+        customDollarValues={customDollarValues}
+      />
       
-      <div className={styles.conversionDetails}>
-        {renderConversionDetails()}
-      </div>
+      <ConversionDetails results={results} />
       
       {/* Multi-step alternatives */}
       {hasAlternatives && (

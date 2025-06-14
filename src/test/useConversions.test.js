@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 import { renderHook, act } from '@testing-library/react'
-import { useConversions } from '../hooks/useConversions'
+import { useConversions, ConversionProvider } from '../contexts/ConversionContext'
 import { mockConversionData } from './fixtures'
 
 // Mock fetch globally
@@ -16,10 +16,13 @@ describe('useConversions', () => {
   describe('loadConversionData', () => {
     it('should load conversion data successfully', async () => {
       fetch.mockResolvedValueOnce({
+        ok: true,
         json: () => Promise.resolve(mockConversionData)
       })
 
-      const { result } = renderHook(() => useConversions())
+      const { result } = renderHook(() => useConversions(), {
+        wrapper: ConversionProvider
+      })
       
       await act(async () => {
         await result.current.loadConversionData()
@@ -35,7 +38,9 @@ describe('useConversions', () => {
       
       fetch.mockRejectedValueOnce(new Error('Network error'))
 
-      const { result } = renderHook(() => useConversions())
+      const { result } = renderHook(() => useConversions(), {
+        wrapper: ConversionProvider
+      })
       
       await act(async () => {
         await result.current.loadConversionData()
@@ -52,10 +57,13 @@ describe('useConversions', () => {
   describe('findDirectConversion', () => {
     it('should find direct conversion when it exists', async () => {
       fetch.mockResolvedValueOnce({
+        ok: true,
         json: () => Promise.resolve(mockConversionData)
       })
 
-      const { result } = renderHook(() => useConversions())
+      const { result } = renderHook(() => useConversions(), {
+        wrapper: ConversionProvider
+      })
       
       await act(async () => {
         await result.current.loadConversionData()
@@ -67,10 +75,13 @@ describe('useConversions', () => {
 
     it('should return null when no direct conversion exists', async () => {
       fetch.mockResolvedValueOnce({
+        ok: true,
         json: () => Promise.resolve(mockConversionData)
       })
 
-      const { result } = renderHook(() => useConversions())
+      const { result } = renderHook(() => useConversions(), {
+        wrapper: ConversionProvider
+      })
       
       await act(async () => {
         await result.current.loadConversionData()
@@ -84,10 +95,13 @@ describe('useConversions', () => {
   describe('findMultiStepConversions', () => {
     it('should find multi-step conversions', async () => {
       fetch.mockResolvedValueOnce({
+        ok: true,
         json: () => Promise.resolve(mockConversionData)
       })
 
-      const { result } = renderHook(() => useConversions())
+      const { result } = renderHook(() => useConversions(), {
+        wrapper: ConversionProvider
+      })
       
       await act(async () => {
         await result.current.loadConversionData()

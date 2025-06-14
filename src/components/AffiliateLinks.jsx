@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './AffiliateLinks.module.css';
 
 const AffiliateLinks = ({ links }) => {
@@ -8,7 +7,7 @@ const AffiliateLinks = ({ links }) => {
       <h3 className={styles.h3}>Need More Points?</h3>
       <p>Check out these credit card offers to earn more points:</p>
       <div className={styles.affiliateLinks}>
-        {links && links.length > 0 ? (
+        {links?.length > 0 ? (
           links.map((link, index) => (
             <div 
               key={link.name}

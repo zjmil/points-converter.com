@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import styles from './DollarValueToggle.module.css';
 
 const DollarValueToggle = ({ value, onChange }) => {

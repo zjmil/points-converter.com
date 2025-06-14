@@ -152,6 +152,13 @@ The application uses modern React patterns:
 - **Prop Drilling**: Simple prop passing for component communication
 - **Conditional Rendering**: Uses `&&` and ternary operators for dynamic content
 
+### Styling Architecture
+- **CSS Modules**: All components use CSS Modules for scoped styling (`*.module.css`)
+- **No Inline Styles**: Avoid inline styles in favor of CSS classes
+- **Responsive Design**: Use CSS media queries for responsive behavior
+- **Utility Functions**: Shared styling utilities in `src/components/utils.js`
+- **Consistent Patterns**: Standardized class naming and CSS organization
+
 ## Data Structure
 
 The `conversions.json` file contains:
@@ -163,20 +170,35 @@ The `conversions.json` file contains:
 
 ## Testing
 
+**⚠️ CRITICAL: Always ensure ALL tests are passing before making changes or commits.**
+
 The project uses Vitest and React Testing Library for comprehensive testing:
+
+### Test Requirements
+- **All tests must pass**: Never commit code that breaks existing tests
+- **Run tests frequently**: Always run `npm run test` after any significant changes
+- **Fix broken tests immediately**: If tests fail, fix them before proceeding
+- **Test-driven development**: Write tests for new features and bug fixes
 
 ### Test Types
 - **Unit Tests**: Test individual functions and hooks (`src/test/useConversions.test.js`)
 - **Component Tests**: Test React components in isolation (`src/test/ConversionForm.test.jsx`)
 - **Integration Tests**: Test full app functionality (`src/test/integration.test.jsx`)
+- **Data Integrity Tests**: Validate conversion data structure and values (`src/test/integrity.test.js`)
 
 ### Running Tests
-- `npm run test` - Run tests in watch mode
+- `npm run test` - **Run tests in non-watch mode (use this for CI/validation)**
+- `npm run test -- --watch` - Run tests in watch mode during development
 - `npm run test:ui` - Open Vitest UI for interactive testing
 - `npm run test:coverage` - Generate coverage report
 
 ### Test Structure
 Tests are located in `src/test/` and use mock data from `fixtures.js` to ensure predictable testing conditions. React components are tested using React Testing Library with proper mocking of hooks and dependencies.
+
+### Before Every Commit
+1. Run `npm run test` to ensure all tests pass
+2. Run `npm run build` to ensure the application builds successfully
+3. Only commit when both tests and build are successful
 
 ## Deployment
 

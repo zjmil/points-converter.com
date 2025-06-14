@@ -14,3 +14,9 @@ Object.defineProperty(window, 'matchMedia', {
     dispatchEvent: vi.fn(),
   })),
 })
+
+// Mock window.alert for tests
+Object.defineProperty(window, 'alert', {
+  writable: true,
+  value: vi.fn(),
+})

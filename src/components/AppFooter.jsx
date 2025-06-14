@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './AppFooter.module.css';
 
 const AppFooter = () => {
@@ -7,7 +6,7 @@ const AppFooter = () => {
     <footer className={styles.footer}>
       <div className="container">
         <p>&copy; 2024 Points Converter. All rights reserved.</p>
-        <p className={`${styles.disclaimer} disclaimer`}>
+        <p className={styles.disclaimer}>
           Exchange rates are subject to change. Always verify with the official program before transferring.
         </p>
       </div>
