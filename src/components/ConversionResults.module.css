@@ -1,0 +1,169 @@
+.results {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+.conversionPath {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #27ae60;
+  margin-bottom: 1rem;
+}
+
+.conversionVisual {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mobilePath {
+  display: none;
+}
+
+.desktopPath {
+  display: inline;
+}
+
+.conversionDetails {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #3498db;
+  margin-bottom: 1rem;
+}
+
+.multiStep {
+  margin-top: 2rem;
+}
+
+.conversionStep {
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  border-left: 3px solid #e74c3c;
+  transition: all 0.3s ease;
+}
+
+.clickable {
+  cursor: pointer;
+  border-left: 3px solid #3498db;
+}
+
+.expanded {
+  border-left: 3px solid #27ae60;
+  background-color: #f0f8f0;
+}
+
+.stepHeader {
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.expandIcon {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #3498db;
+}
+
+.routeSummary {
+  margin: 0.5rem 0;
+}
+
+.clickHint {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  margin: 0.25rem 0 0 0;
+}
+
+.routeDetails {
+  margin-top: 1rem;
+}
+
+.stepsList {
+  margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+.stepItem {
+  margin-bottom: 0.25rem;
+}
+
+.stepDetails {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #dee2e6;
+}
+
+.stepInfo {
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background-color: #ffffff;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+}
+
+.stepInfoList {
+  margin: 0.5rem 0 0 0;
+  padding-left: 1.25rem;
+}
+
+.bonusIndicator {
+  display: inline-block;
+  background-color: #27ae60;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  margin-left: 0.5rem;
+}
+
+.bonusInfo {
+  background-color: #e8f5e8;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border-left: 3px solid #27ae60;
+  margin-top: 0.5rem;
+}
+
+.warningInfo {
+  background-color: #fff3cd;
+  padding: 0.5rem;
+  border-radius: 4px;
+  border-left: 3px solid #ffc107;
+  margin-top: 0.5rem;
+  color: #856404;
+}
+
+.warningIcon {
+  margin-right: 0.5rem;
+}
+
+.sourceLink {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.sourceLink:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .mobilePath {
+    display: inline;
+  }
+  
+  .desktopPath {
+    display: none;
+  }
+  
+  .conversionPath {
+    font-size: 1.2rem;
+  }
+}

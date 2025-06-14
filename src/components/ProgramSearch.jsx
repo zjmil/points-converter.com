@@ -2,6 +2,7 @@ import React, { useState, useMemo, useRef, useEffect } from 'react'
 import { useConversions } from '../contexts/ConversionContext'
 import { useId } from '../hooks/useId'
 import ProgramDisplay from './ProgramDisplay'
+import styles from './ProgramSearch.module.css'
 
 const ProgramSearch = ({
   value,
@@ -252,9 +253,9 @@ const ProgramSearch = ({
   }
   
   return (
-    <div style={styles.programSearch} ref={searchContainerRef}>
-      <label style={styles.label} htmlFor={inputId}>{label}</label>
-      <div style={styles.searchInputWrapper}>
+    <div className={styles.programSearch} ref={searchContainerRef}>
+      <label className={styles.label} htmlFor={inputId}>{label}</label>
+      <div className={styles.searchInputWrapper}>
         <input
           id={inputId}
           ref={searchInputRef}
@@ -266,14 +267,14 @@ const ProgramSearch = ({
           onBlur={handleBlur}
           onKeyDown={handleKeydown}
           autoComplete="off"
-          style={styles.input}
+          className={styles.input}
         />
         {showClearButton ? (
-          <div style={styles.clearButton} onClick={clearSelection}>
+          <div className={styles.clearButton} onClick={clearSelection}>
             ×
           </div>
         ) : (
-          <div style={styles.dropdownArrow} onClick={handleDropdownArrowClick}>
+          <div className={styles.dropdownArrow} onClick={handleDropdownArrowClick}>
             ▼
           </div>
         )}
@@ -281,11 +282,11 @@ const ProgramSearch = ({
       
       {showDropdown && (
         <div 
-          style={styles.dropdown}
+          className={styles.dropdown}
           ref={dropdownRef}
           onMouseDown={handleMouseDown}
         >
-          <div style={styles.dropdownHeader}>
+          <div className={styles.dropdownHeader}>
             {searchQuery && filteredPrograms.length > 0 ? (
               <span>
                 {filteredPrograms.length} result{filteredPrograms.length === 1 ? '' : 's'}
@@ -295,22 +296,19 @@ const ProgramSearch = ({
             ) : null}
           </div>
           
-          <div style={styles.programGroups}>
+          <div className={styles.programGroups}>
             {Object.entries(groupedFilteredPrograms).map(([groupName, groupPrograms]) => (
               groupPrograms.length > 0 && (
-                <div key={groupName} style={styles.programGroup}>
-                  <div style={styles.groupHeader}>{getGroupDisplayName(groupName)}</div>
+                <div key={groupName} className={styles.programGroup}>
+                  <div className={styles.groupHeader}>{getGroupDisplayName(groupName)}</div>
                   {groupPrograms.map((program) => (
                     <div 
                       key={program.id}
-                      style={{
-                        ...styles.programOption,
-                        ...(highlightedIndex === getOptionIndex(program.id) ? styles.highlighted : {})
-                      }}
+                      className={`${styles.programOption} ${highlightedIndex === getOptionIndex(program.id) ? styles.highlighted : ''}`}
                       onClick={() => selectProgram(program)}
                       onMouseEnter={() => handleMouseEnter(program.id)}
                     >
-                      <div style={styles.programMain}>
+                      <div className={styles.programMain}>
                         <ProgramDisplay 
                           programId={program.id}
                           program={program}
@@ -318,7 +316,7 @@ const ProgramSearch = ({
                           iconSize="small"
                         />
                       </div>
-                      <div style={styles.programType}>{program.type}</div>
+                      <div className={styles.programType}>{program.type}</div>
                     </div>
                   ))}
                 </div>
@@ -327,13 +325,13 @@ const ProgramSearch = ({
           </div>
           
           {filteredPrograms.length === 0 && searchQuery && (
-            <div style={styles.noResults}>
+            <div className={styles.noResults}>
               No programs found matching "{searchQuery}"
             </div>
           )}
           
           {!searchQuery && availablePrograms.length === 0 && (
-            <div style={styles.noResults}>
+            <div className={styles.noResults}>
               No programs available for transfer
             </div>
           )}
@@ -343,146 +341,5 @@ const ProgramSearch = ({
   )
 }
 
-// Inline styles converted from the Vue scoped styles
-const styles = {
-  programSearch: {
-    position: 'relative',
-    flex: 1,
-    minWidth: '150px'
-  },
-  
-  label: {
-    display: 'block',
-    marginBottom: '0.5rem',
-    fontWeight: '500',
-    color: '#555'
-  },
-  
-  searchInputWrapper: {
-    position: 'relative'
-  },
-  
-  input: {
-    width: '100%',
-    padding: '0.75rem',
-    paddingRight: '2.5rem',
-    border: '2px solid #ddd',
-    borderRadius: '6px',
-    fontSize: '1rem',
-    transition: 'border-color 0.3s',
-    background: 'white',
-    outline: 'none',
-    boxSizing: 'border-box'
-  },
-  
-  clearButton: {
-    position: 'absolute',
-    right: '0.75rem',
-    top: '50%',
-    transform: 'translateY(-50%)',
-    width: '1.5rem',
-    height: '1.5rem',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    background: '#f8f9fa',
-    borderRadius: '50%',
-    cursor: 'pointer',
-    fontSize: '1.2rem',
-    color: '#6c757d',
-    transition: 'all 0.2s'
-  },
-  
-  dropdownArrow: {
-    position: 'absolute',
-    right: '0.75rem',
-    top: '50%',
-    transform: 'translateY(-50%)',
-    width: '1.5rem',
-    height: '1.5rem',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    cursor: 'pointer',
-    fontSize: '0.8rem',
-    color: '#6c757d',
-    transition: 'all 0.2s',
-    pointerEvents: 'auto'
-  },
-  
-  dropdown: {
-    position: 'absolute',
-    top: '100%',
-    left: '0',
-    right: '0',
-    background: 'white',
-    border: '2px solid #3498db',
-    borderRadius: '6px',
-    boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-    zIndex: 1000,
-    maxHeight: '300px',
-    overflowY: 'auto',
-    marginTop: '2px'
-  },
-  
-  dropdownHeader: {
-    padding: '0.5rem 1rem',
-    fontSize: '0.9rem',
-    color: '#6c757d',
-    borderBottom: '1px solid #f1f3f4'
-  },
-  
-  programGroups: {
-    padding: '0.5rem 0'
-  },
-  
-  programGroup: {
-    marginBottom: '0.5rem'
-  },
-  
-  groupHeader: {
-    padding: '0.5rem 1rem',
-    fontSize: '0.8rem',
-    fontWeight: '600',
-    color: '#495057',
-    background: '#f8f9fa',
-    textTransform: 'uppercase',
-    letterSpacing: '0.5px'
-  },
-  
-  programOption: {
-    padding: '0.75rem 1rem',
-    cursor: 'pointer',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    transition: 'all 0.2s',
-    borderBottom: '1px solid #f1f3f4'
-  },
-  
-  highlighted: {
-    background: '#e3f2fd',
-    borderLeft: '3px solid #3498db',
-    transform: 'translateX(2px)'
-  },
-  
-  programMain: {
-    flex: 1
-  },
-  
-  programType: {
-    fontSize: '0.8rem',
-    color: '#6c757d',
-    textTransform: 'capitalize',
-    marginLeft: '0.5rem'
-  },
-  
-  noResults: {
-    padding: '1rem',
-    textAlign: 'center',
-    color: '#6c757d',
-    fontStyle: 'italic'
-  }
-}
 
 export default ProgramSearch

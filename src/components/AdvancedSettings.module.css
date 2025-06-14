@@ -1,0 +1,177 @@
+.advancedSettings {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.settingsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #f8f9fa;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  user-select: none;
+}
+
+.settingsHeader:hover {
+  background: #e9ecef;
+}
+
+.settingsHeaderH3 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.1rem;
+}
+
+.expandIcon {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #3498db;
+}
+
+.settingsContent {
+  padding: 1.5rem;
+}
+
+.settingsDescription {
+  margin: 0 0 1.5rem 0;
+  color: #666;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.toggleRow {
+  margin-bottom: 1.5rem;
+}
+
+.toggleLabel {
+  font-weight: 500;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.programGroups {
+  margin-bottom: 1.5rem;
+}
+
+.programGroup {
+  margin-bottom: 2rem;
+}
+
+.programGroupLast {
+  margin-bottom: 0;
+}
+
+.groupTitle {
+  margin: 0 0 1rem 0;
+  color: #495057;
+  font-size: 1rem;
+  font-weight: 600;
+  border-bottom: 2px solid #dee2e6;
+  padding-bottom: 0.5rem;
+}
+
+.programTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: #f8f9fa;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.programTableTh {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  background: #e9ecef;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #495057;
+}
+
+.centsColumn {
+  width: 120px;
+}
+
+.actionColumn {
+  width: 60px;
+}
+
+.programTableTd {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.programTableTrEven {
+  background: #f4f6f8;
+}
+
+.programLabel {
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+.centsInput {
+  width: 70px;
+  padding: 0.4rem 1.5rem 0.4rem 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  text-align: right;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.centsSymbol {
+  margin-left: 0.2rem;
+  color: #666;
+  font-weight: 500;
+  font-size: 0.95em;
+  vertical-align: middle;
+}
+
+.resetButton {
+  padding: 0.2rem 0.7rem;
+  background: #e9ecef;
+  border: none;
+  border-radius: 4px;
+  color: #495057;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+  align-self: center;
+}
+
+.resetButton:hover {
+  background: #dee2e6;
+}
+
+.settingsActions {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.resetAllButton {
+  padding: 0.75rem 1.5rem;
+  background: #e9ecef;
+  border: none;
+  border-radius: 4px;
+  color: #495057;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.resetAllButton:hover {
+  background: #dee2e6;
+}

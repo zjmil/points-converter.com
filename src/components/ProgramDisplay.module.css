@@ -1,0 +1,30 @@
+.programDisplay {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.text {
+  font-weight: 500;
+}
+
+.variantCompact .text {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.variantFull .text {
+  font-size: 1.1rem;
+}
+
+.typeBank .text {
+  color: #2c5aa0;
+}
+
+.typeHotel .text {
+  color: #22543d;
+}
+
+.typeAirline .text {
+  color: #1a202c;
+}

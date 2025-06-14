@@ -1,0 +1,59 @@
+.programIcon {
+  display: inline-block;
+  margin-right: 0.5rem;
+  font-style: normal;
+  line-height: 1;
+}
+
+.iconSmall {
+  font-size: 1rem;
+}
+
+.iconMedium {
+  font-size: 1.25rem;
+}
+
+.iconLarge {
+  font-size: 1.5rem;
+}
+
+.iconBank {
+  filter: hue-rotate(210deg);
+}
+
+.iconHotel {
+  filter: hue-rotate(120deg);
+}
+
+.iconAirline {
+  filter: hue-rotate(0deg);
+}
+
+/* Specific program colors */
+.iconChaseUr {
+  color: #003087;
+}
+
+.iconAmexMr {
+  color: #006FCF;
+}
+
+.iconHyatt {
+  color: #943126;
+}
+
+.iconMarriott {
+  color: #B8860B;
+}
+
+.iconUnited {
+  color: #0039A6;
+}
+
+.iconDelta {
+  color: #CE0037;
+}
+
+.iconAmerican {
+  color: #C41E3A;
+}

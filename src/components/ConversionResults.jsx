@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useDollarValues } from '../hooks/useDollarValues';
 import ProgramIcon from './ProgramIcon';
+import styles from './ConversionResults.module.css';
 
 const ConversionResults = ({ results, showDollarValues, customDollarValues }) => {
   const { formatPointsWithDollar } = useDollarValues();
@@ -83,8 +84,8 @@ const ConversionResults = ({ results, showDollarValues, customDollarValues }) =>
         
         {directConversion.minAmount && (
           results.amount < directConversion.minAmount ? (
-            <p style={styles.warningInfo}>
-              <span style={styles.warningIcon}>⚠️</span>
+            <p className={styles.warningInfo}>
+              <span className={styles.warningIcon}>⚠️</span>
               Minimum transfer amount: {directConversion.minAmount.toLocaleString()} points
             </p>
           ) : (
@@ -97,8 +98,8 @@ const ConversionResults = ({ results, showDollarValues, customDollarValues }) =>
         )}
         
         {directConversion.bonus && (
-          <p style={styles.bonusInfo}>
-            <span style={styles.bonusIndicator}>BONUS ACTIVE</span>
+          <p className={styles.bonusInfo}>
+            <span className={styles.bonusIndicator}>BONUS ACTIVE</span>
             {' '}Regular rate: 1:{directConversion.rate} → Bonus rate: 1:{directConversion.bonusRate}
             {directConversion.bonusEndDate && (
               <span> (Ends {new Date(directConversion.bonusEndDate).toLocaleDateString()})</span>
@@ -117,7 +118,7 @@ const ConversionResults = ({ results, showDollarValues, customDollarValues }) =>
               href={directConversion.source} 
               target="_blank" 
               rel="noopener noreferrer"
-              style={styles.sourceLink}
+              className={styles.sourceLink}
             >
               Official program website
             </a>
@@ -212,12 +213,12 @@ const ConversionResults = ({ results, showDollarValues, customDollarValues }) =>
   }, [results, expandedRoutes, showDollarValues, customDollarValues, formatPointsWithDollar]);
 
   return (
-    <div style={styles.results}>
+    <div className={styles.results}>
       <h2>Conversion Results</h2>
       
-      <div style={styles.conversionPath}>
+      <div className={styles.conversionPath}>
         {(results?.directConversion || results?.multiStepRoutes?.length > 0) ? (
-          <span style={styles.conversionVisual}>
+          <span className={styles.conversionVisual}>
             {results.fromProgram && (
               <ProgramIcon 
                 programId={results.fromProgram}
@@ -225,8 +226,8 @@ const ConversionResults = ({ results, showDollarValues, customDollarValues }) =>
                 size="medium"
               />
             )}
-            <span style={styles.desktopPath}>{conversionPath}</span>
-            <span style={styles.mobilePath}>{conversionPathMobile}</span>
+            <span className={styles.desktopPath}>{conversionPath}</span>
+            <span className={styles.mobilePath}>{conversionPathMobile}</span>
             {results.toProgram && (
               <ProgramIcon 
                 programId={results.toProgram}
@@ -240,39 +241,36 @@ const ConversionResults = ({ results, showDollarValues, customDollarValues }) =>
         )}
       </div>
       
-      <div style={styles.conversionDetails}>
+      <div className={styles.conversionDetails}>
         {renderConversionDetails()}
       </div>
       
       {/* Multi-step alternatives */}
       {hasAlternatives && (
-        <div style={styles.multiStep}>
+        <div className={styles.multiStep}>
           <h3>{alternativeTitle}</h3>
-          <div style={styles.alternativeRoutes}>
+          <div className={styles.alternativeRoutes}>
             {displayRoutes.map((route, index) => (
               <div 
                 key={index}
-                style={{
-                  ...styles.conversionStep,
-                  ...(route.isExpanded ? styles.expanded : styles.clickable)
-                }}
+                className={`${styles.conversionStep} ${route.isExpanded ? styles.expanded : styles.clickable}`}
                 onClick={() => toggleRouteDetails(index)}
               >
-                <h4 style={styles.stepHeader}>
+                <h4 className={styles.stepHeader}>
                   {route.title}
-                  <span style={styles.expandIcon}>
+                  <span className={styles.expandIcon}>
                     {route.isExpanded ? '−' : '+'}
                   </span>
                 </h4>
                 
                 {!route.isExpanded ? (
-                  <div style={styles.routeSummary}>
+                  <div className={styles.routeSummary}>
                     <p><strong>Total Rate:</strong> 1:{route.totalRate}</p>
-                    <p style={styles.clickHint}>Click for details</p>
+                    <p className={styles.clickHint}>Click for details</p>
                   </div>
                 ) : (
-                  <div style={styles.routeDetails}>
-                    <ol style={styles.stepsList}>
+                  <div className={styles.routeDetails}>
+                    <ol className={styles.stepsList}>
                       {route.steps.map((step, stepIndex) => (
                         <li key={stepIndex} style={styles.stepItem}>
                           {step.text}
@@ -298,8 +296,8 @@ const ConversionResults = ({ results, showDollarValues, customDollarValues }) =>
                               <li><strong>Last Updated:</strong> {new Date(step.lastUpdated).toLocaleDateString()}</li>
                             )}
                             {step.bonus && (
-                              <li style={styles.bonusInfo}>
-                                <span style={styles.bonusIndicator}>BONUS ACTIVE</span>
+                              <li className={styles.bonusInfo}>
+                                <span className={styles.bonusIndicator}>BONUS ACTIVE</span>
                                 Regular rate: 1:{step.baseRate} → Bonus rate: 1:{step.bonusRate}
                                 {step.bonusEndDate && (
                                   <span> (Ends {new Date(step.bonusEndDate).toLocaleDateString()})</span>
@@ -324,145 +322,5 @@ const ConversionResults = ({ results, showDollarValues, customDollarValues }) =>
   );
 };
 
-// Inline styles converted from CSS
-const styles = {
-  results: {
-    background: 'white',
-    padding: '2rem',
-    borderRadius: '12px',
-    boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-    marginBottom: '2rem'
-  },
-  conversionPath: {
-    fontSize: '1.5rem',
-    fontWeight: '600',
-    color: '#27ae60',
-    marginBottom: '1rem'
-  },
-  conversionVisual: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '0.5rem'
-  },
-  mobilePath: {
-    display: 'none'
-  },
-  desktopPath: {
-    display: 'inline'
-  },
-  conversionDetails: {
-    backgroundColor: '#f8f9fa',
-    padding: '1rem',
-    borderRadius: '8px',
-    borderLeft: '4px solid #3498db',
-    marginBottom: '1rem'
-  },
-  multiStep: {
-    marginTop: '2rem'
-  },
-  alternativeRoutes: {},
-  conversionStep: {
-    padding: '1rem',
-    marginBottom: '0.5rem',
-    backgroundColor: '#f8f9fa',
-    borderRadius: '6px',
-    borderLeft: '3px solid #e74c3c',
-    transition: 'all 0.3s ease'
-  },
-  clickable: {
-    cursor: 'pointer',
-    borderLeft: '3px solid #3498db'
-  },
-  expanded: {
-    borderLeft: '3px solid #27ae60',
-    backgroundColor: '#f0f8f0'
-  },
-  stepHeader: {
-    marginBottom: '0.5rem',
-    color: '#2c3e50',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-  expandIcon: {
-    fontWeight: 'bold',
-    fontSize: '1.2rem',
-    color: '#3498db'
-  },
-  routeSummary: {
-    margin: '0.5rem 0'
-  },
-  clickHint: {
-    color: '#7f8c8d',
-    fontSize: '0.9rem',
-    margin: '0.25rem 0 0 0'
-  },
-  routeDetails: {
-    marginTop: '1rem'
-  },
-  stepsList: {
-    margin: '0.5rem 0',
-    paddingLeft: '1.5rem'
-  },
-  stepItem: {
-    marginBottom: '0.25rem'
-  },
-  stepDetails: {
-    marginTop: '1rem',
-    paddingTop: '1rem',
-    borderTop: '1px solid #dee2e6'
-  },
-  stepInfo: {
-    marginBottom: '1rem',
-    padding: '0.75rem',
-    backgroundColor: '#ffffff',
-    borderRadius: '4px',
-    border: '1px solid #dee2e6'
-  },
-  stepInfoList: {
-    margin: '0.5rem 0 0 0',
-    paddingLeft: '1.25rem'
-  },
-  bonusIndicator: {
-    display: 'inline-block',
-    backgroundColor: '#27ae60',
-    color: 'white',
-    padding: '0.25rem 0.5rem',
-    borderRadius: '4px',
-    fontSize: '0.85rem',
-    marginLeft: '0.5rem'
-  },
-  bonusInfo: {
-    backgroundColor: '#e8f5e8',
-    padding: '0.5rem',
-    borderRadius: '4px',
-    borderLeft: '3px solid #27ae60',
-    marginTop: '0.5rem'
-  },
-  warningInfo: {
-    backgroundColor: '#fff3cd',
-    padding: '0.5rem',
-    borderRadius: '4px',
-    borderLeft: '3px solid #ffc107',
-    marginTop: '0.5rem',
-    color: '#856404'
-  },
-  warningIcon: {
-    marginRight: '0.5rem'
-  },
-  sourceLink: {
-    color: '#3498db',
-    textDecoration: 'none'
-  }
-};
-
-// Note: For full responsive behavior, you would need to implement CSS media queries
-// either through CSS modules, styled-components, or a CSS-in-JS solution.
-// The mobile/desktop path switching would be handled via CSS:
-// @media (max-width: 768px) {
-//   .desktop-path { display: none; }
-//   .mobile-path { display: inline; }
-//   .conversion-path { font-size: 1.2rem; }
-// }
 
 export default ConversionResults;

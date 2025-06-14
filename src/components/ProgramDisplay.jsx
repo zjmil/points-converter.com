@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 import ProgramIcon from './ProgramIcon'
+import styles from './ProgramDisplay.module.css'
 
 const ProgramDisplay = ({
   programId,
@@ -30,53 +31,22 @@ const ProgramDisplay = ({
     return classes
   }, [variant, program])
   
-  const getStyles = () => {
-    const baseStyles = {
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: '0.25rem'
+  const getClassName = () => {
+    const classes = [styles.programDisplay, `variant-${variant}`]
+    if (program?.type) {
+      classes.push(`type-${program.type}`)
     }
-    
-    let textStyles = {
-      fontWeight: '500'
-    }
-    
-    // Variant-specific text styles
-    if (variant === 'compact') {
-      textStyles = {
-        ...textStyles,
-        fontSize: '0.9rem',
-        fontWeight: '600'
-      }
-    } else if (variant === 'full') {
-      textStyles = {
-        ...textStyles,
-        fontSize: '1.1rem'
-      }
-    }
-    
-    // Type-specific text colors to match icons
-    if (program?.type === 'bank') {
-      textStyles.color = '#2c5aa0'
-    } else if (program?.type === 'hotel') {
-      textStyles.color = '#22543d'
-    } else if (program?.type === 'airline') {
-      textStyles.color = '#1a202c'
-    }
-    
-    return { baseStyles, textStyles }
+    return classes.join(' ')
   }
   
-  const { baseStyles, textStyles } = getStyles()
-  
   return (
-    <span style={baseStyles} className={displayClasses.join(' ')}>
+    <span className={getClassName()}>
       <ProgramIcon 
         programId={programId}
         type={program?.type}
         size={iconSize}
       />
-      <span style={textStyles}>
+      <span className={`${styles.text} ${styles[`variant${variant.charAt(0).toUpperCase() + variant.slice(1)}`]} ${program?.type ? styles[`type${program.type.charAt(0).toUpperCase() + program.type.slice(1)}`] : ''}`}>
         {displayText}
       </span>
     </span>

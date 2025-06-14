@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { useConversions } from '../contexts/ConversionContext';
+import styles from './TransferPreview.module.css';
 
 const TransferPreview = ({ 
   fromProgram, 
@@ -161,121 +162,24 @@ const TransferPreview = ({
     });
   };
 
-  const styles = {
-    transferPreview: {
-      background: 'white',
-      padding: '2rem',
-      borderRadius: '12px',
-      boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-      marginBottom: '2rem'
-    },
-    title: {
-      marginBottom: '1rem',
-      color: '#2c3e50'
-    },
-    transferList: {
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-      gap: '1rem'
-    },
-    transferItem: {
-      border: '1px solid #e1e5e9',
-      borderRadius: '8px',
-      padding: '1rem',
-      transition: 'all 0.2s ease',
-      cursor: 'pointer'
-    },
-    transferItemHover: {
-      boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-      transform: 'translateY(-2px)',
-      borderColor: '#3498db'
-    },
-    transferItemHeader: {
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      marginBottom: '0.5rem'
-    },
-    transferItemTitle: {
-      fontWeight: '600',
-      color: '#2c3e50',
-      flex: '1'
-    },
-    transferItemRate: {
-      fontSize: '0.9rem',
-      color: '#7f8c8d'
-    },
-    transferItemDetails: {
-      fontSize: '0.85rem',
-      color: '#95a5a6'
-    },
-    transferItemNote: {
-      marginTop: '0.5rem',
-      padding: '0.5rem',
-      backgroundColor: '#fff3cd',
-      border: '1px solid #ffeaa7',
-      borderRadius: '4px',
-      fontSize: '0.8rem',
-      color: '#856404',
-      display: 'flex',
-      alignItems: 'flex-start',
-      gap: '0.5rem'
-    },
-    transferItemNoteIcon: {
-      flexShrink: '0',
-      marginTop: '2px',
-      color: '#f39c12'
-    },
-    transferItemSource: {
-      marginTop: '0.5rem',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '1rem',
-      fontSize: '0.75rem'
-    },
-    transferItemSourceLink: {
-      color: '#3498db',
-      textDecoration: 'none',
-      display: 'inline-flex',
-      alignItems: 'center',
-      gap: '0.25rem',
-      transition: 'color 0.2s ease'
-    },
-    transferItemUpdated: {
-      color: '#7f8c8d',
-      fontStyle: 'italic'
-    },
-    noTransfers: {
-      gridColumn: '1 / -1',
-      textAlign: 'center',
-      color: '#7f8c8d',
-      fontStyle: 'italic'
-    }
-  };
 
   return (
-    <div style={styles.transferPreview}>
-      <h2 style={styles.title}>{title}</h2>
-      <div style={styles.transferList}>
+    <div className={styles.transferPreview}>
+      <h2 className={styles.title}>{title}</h2>
+      <div className={styles.transferList}>
         {allTransfers.map(transfer => (
           <div 
             key={getTransferKey(transfer)}
-            style={styles.transferItem}
+            className={styles.transferItem}
             onClick={() => selectTransfer(transfer)}
-            onMouseEnter={(e) => {
-              Object.assign(e.currentTarget.style, styles.transferItemHover);
-            }}
-            onMouseLeave={(e) => {
-              Object.assign(e.currentTarget.style, styles.transferItem);
-            }}
           >
-            <div style={styles.transferItemHeader}>
-              <div style={styles.transferItemTitle}>{transfer.title}</div>
-              <div style={styles.transferItemRate}>1:{transfer.rate}</div>
+            <div className={styles.transferItemHeader}>
+              <div className={styles.transferItemTitle}>{transfer.title}</div>
+              <div className={styles.transferItemRate}>1:{transfer.rate}</div>
             </div>
-            <div style={styles.transferItemDetails}>{transfer.details}</div>
+            <div className={styles.transferItemDetails}>{transfer.details}</div>
             {transfer.note && (
-              <div style={styles.transferItemNote}>
+              <div className={styles.transferItemNote}>
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
                   width="14" 
@@ -286,7 +190,7 @@ const TransferPreview = ({
                   strokeWidth="2" 
                   strokeLinecap="round" 
                   strokeLinejoin="round"
-                  style={styles.transferItemNoteIcon}
+                  className={styles.transferItemNoteIcon}
                 >
                   <circle cx="12" cy="12" r="10"></circle>
                   <line x1="12" y1="16" x2="12" y2="12"></line>
@@ -296,20 +200,12 @@ const TransferPreview = ({
               </div>
             )}
             {transfer.source && (
-              <div style={styles.transferItemSource}>
+              <div className={styles.transferItemSource}>
                 <a 
                   href={transfer.source} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  style={styles.transferItemSourceLink}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = '#2980b9';
-                    e.currentTarget.style.textDecoration = 'underline';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = '#3498db';
-                    e.currentTarget.style.textDecoration = 'none';
-                  }}
+                  className={styles.transferItemSourceLink}
                 >
                   View source
                   <svg 
@@ -329,7 +225,7 @@ const TransferPreview = ({
                   </svg>
                 </a>
                 {transfer.lastUpdated && (
-                  <span style={styles.transferItemUpdated}>
+                  <span className={styles.transferItemUpdated}>
                     Updated: {formatDate(transfer.lastUpdated)}
                   </span>
                 )}
@@ -339,7 +235,7 @@ const TransferPreview = ({
         ))}
         
         {allTransfers.length === 0 && (
-          <p style={styles.noTransfers}>
+          <p className={styles.noTransfers}>
             No transfers available
           </p>
         )}

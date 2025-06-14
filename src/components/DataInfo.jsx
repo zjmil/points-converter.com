@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react'
 import { useMediaQuery } from '../hooks/useMediaQuery'
+import styles from './DataInfo.module.css'
 
 const DataInfo = ({ conversions, dataSource }) => {
-  const isMobile = useMediaQuery('(max-width: 768px)')
   const lastUpdatedText = useMemo(() => {
     if (!conversions || conversions.length === 0) {
       return 'Last updated: Loading...'
@@ -25,24 +25,9 @@ const DataInfo = ({ conversions, dataSource }) => {
     return dataSource ? `Source: ${dataSource}` : 'Source: Loading...'
   }, [dataSource])
 
-  const dataInfoStyle = {
-    backgroundColor: '#e8f4f8',
-    padding: '0.75rem 1rem',
-    borderRadius: '8px',
-    marginBottom: '2rem',
-    display: 'flex',
-    justifyContent: 'space-between',
-    flexWrap: 'wrap',
-    gap: '1rem',
-    fontSize: '0.9rem',
-    ...(isMobile && {
-      flexDirection: 'column',
-      textAlign: 'center',
-    })
-  }
 
   return (
-    <div style={dataInfoStyle}>
+    <div className={styles.dataInfo}>
       <span>{lastUpdatedText}</span>
       <span>{dataSourceText}</span>
     </div>

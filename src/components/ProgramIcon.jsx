@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import styles from './ProgramIcon.module.css';
 
 const ProgramIcon = ({ programId, type, size = 'small' }) => {
   
@@ -39,52 +40,22 @@ const ProgramIcon = ({ programId, type, size = 'small' }) => {
     return typeIcons[type] || '💳';
   }, [programId, type]);
 
-  const iconStyle = useMemo(() => {
-    const baseStyle = {
-      display: 'inline-block',
-      marginRight: '0.5rem',
-      fontStyle: 'normal',
-      lineHeight: 1
-    };
-
-    // Size styles
-    const sizeStyles = {
-      small: { fontSize: '1rem' },
-      medium: { fontSize: '1.25rem' },
-      large: { fontSize: '1.5rem' }
-    };
-
-    // Type-specific styling
-    const typeStyles = {
-      bank: { filter: 'hue-rotate(210deg)' }, // Blue tint for banks
-      hotel: { filter: 'hue-rotate(120deg)' }, // Green tint for hotels
-      airline: { filter: 'hue-rotate(0deg)' } // Keep original color for airlines
-    };
-
-    // Specific program colors
-    const programStyles = {
-      'chase_ur': { color: '#003087' }, // Chase blue
-      'amex_mr': { color: '#006FCF' }, // Amex blue
-      'hyatt': { color: '#943126' }, // Hyatt red
-      'marriott': { color: '#B8860B' }, // Marriott gold
-      'united': { color: '#0039A6' }, // United blue
-      'delta': { color: '#CE0037' }, // Delta red
-      'american': { color: '#C41E3A' } // American red
-    };
-
-    return {
-      ...baseStyle,
-      ...sizeStyles[size],
-      ...typeStyles[type],
-      ...programStyles[programId]
-    };
-  }, [size, type, programId]);
+  const getClassName = () => {
+    const classes = [styles.programIcon, styles[`icon${size.charAt(0).toUpperCase() + size.slice(1)}`]]
+    if (type) {
+      classes.push(styles[`icon${type.charAt(0).toUpperCase() + type.slice(1)}`])
+    }
+    if (programId) {
+      const programClass = programId.split('_').map(word => 
+        word.charAt(0).toUpperCase() + word.slice(1)
+      ).join('')
+      classes.push(styles[`icon${programClass}`])
+    }
+    return classes.join(' ')
+  }
 
   return (
-    <span 
-      className={`program-icon icon-${size} icon-${type} ${programId ? `icon-${programId}` : ''}`}
-      style={iconStyle}
-    >
+    <span className={getClassName()}>
       {iconSymbol}
     </span>
   );
