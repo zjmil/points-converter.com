@@ -2,7 +2,8 @@ import React, { useState, useEffect, useMemo } from 'react'
 import AppHeader from './components/AppHeader'
 import AppFooter from './components/AppFooter'
 import DollarValueToggle from './components/DollarValueToggle'
-import AdvancedSettings from './components/AdvancedSettings'
+import MultiStepToggle from './components/MultiStepToggle'
+import CurrencyValues from './components/CurrencyValues'
 import ConversionForm from './components/ConversionForm'
 import TransferPreview from './components/TransferPreview'
 import ConversionResults from './components/ConversionResults'
@@ -10,6 +11,7 @@ import AdPlaceholder from './components/AdPlaceholder'
 import AffiliateLinks from './components/AffiliateLinks'
 import { ConversionProvider, useConversions } from './contexts/ConversionContext'
 import { useURLHistory } from './hooks/useURLHistory'
+import toggleGroupStyles from './components/ToggleGroup.module.css'
 
 function AppContent() {
   // Reactive state
@@ -138,20 +140,16 @@ function AppContent() {
       
       <main>
         <div className="container">
-          <DollarValueToggle 
-            value={showDollarValues} 
-            onChange={setShowDollarValues} 
-          />
-          
-          {conversionData?.programs && (
-            <AdvancedSettings 
-              programs={conversionData.programs}
-              customDollarValues={customDollarValues}
-              onCustomDollarValuesChange={setCustomDollarValues}
-              multiStepEnabled={multiStepEnabled}
-              onMultiStepEnabledChange={setMultiStepEnabled}
+          <div className={toggleGroupStyles.toggleGroup}>
+            <DollarValueToggle 
+              value={showDollarValues} 
+              onChange={setShowDollarValues} 
             />
-          )}
+            
+            <MultiStepToggle 
+              onChange={setMultiStepEnabled}
+            />
+          </div>
           
           <ConversionForm
             fromProgram={fromProgram}
@@ -192,6 +190,14 @@ function AppContent() {
           {conversionData?.config?.showAffiliateLinks && (
             <AffiliateLinks
               links={conversionData?.affiliateLinks}
+            />
+          )}
+          
+          {conversionData?.programs && (
+            <CurrencyValues 
+              programs={conversionData.programs}
+              customDollarValues={customDollarValues}
+              onCustomDollarValuesChange={setCustomDollarValues}
             />
           )}
         </div>

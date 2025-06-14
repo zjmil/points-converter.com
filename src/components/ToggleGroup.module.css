@@ -1,0 +1,19 @@
+.toggleGroup {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .toggleGroup {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .toggleGroup {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

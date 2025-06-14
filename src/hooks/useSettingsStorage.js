@@ -12,7 +12,9 @@ export const useSettingsStorage = (onCustomDollarValuesChange, onMultiStepEnable
     if (storedSettings.customDollarValues && Object.keys(storedSettings.customDollarValues).length > 0) {
       onCustomDollarValuesChange(storedSettings.customDollarValues);
     }
-    onMultiStepEnabledChange(storedSettings.multiStepEnabled);
+    if (onMultiStepEnabledChange) {
+      onMultiStepEnabledChange(storedSettings.multiStepEnabled);
+    }
   }, [onCustomDollarValuesChange, onMultiStepEnabledChange, storedSettings]);
 
   const updateCustomDollarValues = (newCustomValues) => {
