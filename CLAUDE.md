@@ -167,7 +167,7 @@ Both `make dev` and `make api-dev` provide intelligent server management:
 6. **Browser history support** - Back/forward buttons work for program selection
 7. **URL state management** - Bookmarkable conversion states
 8. **Go API backend** - Serves conversion data with fallback to static JSON
-9. **API-first architecture** - Frontend tries production API, then localhost, then static files
+9. **Environment-aware API** - Auto-detects production vs development for correct API endpoint
 10. Monetization placeholders for ads and affiliate links
 11. **Comprehensive data management system with validation, scraping, and backup**
 
@@ -188,9 +188,9 @@ The application uses modern React patterns:
 
 ### Context Management
 - **ConversionContext**: Provides global conversion data and API loading logic
-  - Tries production API first (`https://points-converter-api.fly.dev/api/v1/conversions`)
-  - Falls back to localhost API (`http://localhost:8080/api/v1/conversions`)
-  - Final fallback to static JSON (`/data/conversions.json`)
+  - **Production**: Uses `https://api.points-converter.com/api/v1/conversions`
+  - **Development**: Uses `http://localhost:8080/api/v1/conversions` (localhost detection)
+  - **Fallback**: Static JSON (`/data/conversions.json`) if API fails
 
 ### Component Patterns
 - **Functional Components**: All components use React function syntax with hooks

@@ -15,25 +15,14 @@ export function ConversionProvider({ children }) {
       // Try API first, fallback to static JSON if API is not available
       let response
       try {
-        // Try production API first, then localhost for development
-        const apiUrls = [
-          'https://points-converter-api.fly.dev/api/v1/conversions',
-          'http://localhost:8080/api/v1/conversions'
-        ]
+        // Determine API URL based on environment
+        const isDevelopment = import.meta.env.DEV || window.location.hostname === 'localhost'
+        const apiUrl = isDevelopment 
+          ? 'http://localhost:8080/api/v1/conversions'
+          : 'https://api.points-converter.com/api/v1/conversions'
         
-        let apiError
-        for (const url of apiUrls) {
-          try {
-            response = await fetch(url)
-            if (response.ok) {
-              break
-            }
-          } catch (err) {
-            apiError = err
-          }
-        }
-        
-        if (!response || !response.ok) {
+        response = await fetch(apiUrl)
+        if (!response.ok) {
           throw new Error('API not available')
         }
       } catch (apiError) {
