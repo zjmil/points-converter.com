@@ -1,0 +1,1658 @@
+{
+  "lastUpdated": "2025-06-08T21:45:33Z",
+  "dataSource": "Official program websites",
+  "config": {
+    "showAdvertisements": false,
+    "showAffiliateLinks": false
+  },
+  "programs": {
+    "chase_ur": {
+      "name": "Chase Ultimate Rewards",
+      "shortName": "UR",
+      "type": "bank",
+      "dollarValue": 0.0125
+    },
+    "amex_mr": {
+      "name": "Amex Membership Rewards",
+      "shortName": "MR",
+      "type": "bank",
+      "dollarValue": 0.0120
+    },
+    "citi_typ": {
+      "name": "Citi ThankYou Points",
+      "shortName": "TYP",
+      "type": "bank",
+      "dollarValue": 0.0110
+    },
+    "capital_one": {
+      "name": "Capital One Miles",
+      "shortName": "C1",
+      "type": "bank",
+      "dollarValue": 0.0100
+    },
+    "marriott": {
+      "name": "Marriott Bonvoy",
+      "shortName": "Bonvoy",
+      "type": "hotel",
+      "dollarValue": 0.0080
+    },
+    "hilton": {
+      "name": "Hilton Honors",
+      "shortName": "Hilton",
+      "type": "hotel",
+      "dollarValue": 0.0050
+    },
+    "hyatt": {
+      "name": "World of Hyatt",
+      "shortName": "Hyatt",
+      "type": "hotel",
+      "dollarValue": 0.0180
+    },
+    "ihg": {
+      "name": "IHG One Rewards",
+      "shortName": "IHG",
+      "type": "hotel",
+      "dollarValue": 0.0070
+    },
+    "united": {
+      "name": "United MileagePlus",
+      "shortName": "United",
+      "type": "airline",
+      "dollarValue": 0.0120
+    },
+    "american": {
+      "name": "American AAdvantage",
+      "shortName": "American",
+      "type": "airline",
+      "dollarValue": 0.0120
+    },
+    "delta": {
+      "name": "Delta SkyMiles",
+      "shortName": "Delta",
+      "type": "airline",
+      "dollarValue": 0.0120
+    },
+    "southwest": {
+      "name": "Southwest Rapid Rewards",
+      "shortName": "Southwest",
+      "type": "airline",
+      "dollarValue": 0.0140
+    },
+    "jetblue": {
+      "name": "JetBlue TrueBlue",
+      "shortName": "JetBlue",
+      "type": "airline",
+      "dollarValue": 0.0130
+    },
+    "british_airways": {
+      "name": "British Airways Avios",
+      "shortName": "Avios",
+      "type": "airline",
+      "dollarValue": 0.0110
+    },
+    "singapore": {
+      "name": "Singapore KrisFlyer",
+      "shortName": "Singapore",
+      "type": "airline",
+      "dollarValue": 0.0150
+    },
+    "virgin_atlantic": {
+      "name": "Virgin Atlantic Flying Club",
+      "shortName": "Virgin",
+      "type": "airline",
+      "dollarValue": 0.0130
+    },
+    "air_france": {
+      "name": "Air France/KLM Flying Blue",
+      "shortName": "Flying Blue",
+      "type": "airline",
+      "dollarValue": 0.0120
+    },
+    "emirates": {
+      "name": "Emirates Skywards",
+      "shortName": "Emirates",
+      "type": "airline",
+      "dollarValue": 0.0140
+    },
+    "air_canada": {
+      "name": "Air Canada Aeroplan",
+      "shortName": "Aeroplan",
+      "type": "airline",
+      "dollarValue": 0.0140
+    },
+    "aer_lingus": {
+      "name": "Aer Lingus AerClub",
+      "shortName": "Aer Lingus",
+      "type": "airline",
+      "dollarValue": 0.0120
+    },
+    "iberia": {
+      "name": "Iberia Plus",
+      "shortName": "Iberia",
+      "type": "airline",
+      "dollarValue": 0.0110
+    },
+    "ana": {
+      "name": "ANA Mileage Club",
+      "shortName": "ANA",
+      "type": "airline",
+      "dollarValue": 0.0150
+    },
+    "avianca": {
+      "name": "Avianca LifeMiles",
+      "shortName": "Avianca",
+      "type": "airline",
+      "dollarValue": 0.0140
+    },
+    "cathay_pacific": {
+      "name": "Cathay Pacific Asia Miles",
+      "shortName": "Cathay",
+      "type": "airline",
+      "dollarValue": 0.0140
+    },
+    "etihad": {
+      "name": "Etihad Guest",
+      "shortName": "Etihad",
+      "type": "airline",
+      "dollarValue": 0.0130
+    },
+    "hawaiian": {
+      "name": "Hawaiian Airlines HawaiianMiles",
+      "shortName": "Hawaiian",
+      "type": "airline",
+      "dollarValue": 0.0120
+    },
+    "qantas": {
+      "name": "Qantas Frequent Flyer",
+      "shortName": "Qantas",
+      "type": "airline",
+      "dollarValue": 0.0140
+    },
+    "aeromexico": {
+      "name": "Aeromexico Club Premier",
+      "shortName": "Aeromexico",
+      "type": "airline",
+      "dollarValue": 0.0100
+    },
+    "choice": {
+      "name": "Choice Privileges",
+      "shortName": "Choice",
+      "type": "hotel",
+      "dollarValue": 0.0070
+    },
+    "wyndham": {
+      "name": "Wyndham Rewards",
+      "shortName": "Wyndham",
+      "type": "hotel",
+      "dollarValue": 0.0060
+    },
+    "accor": {
+      "name": "ALL - Accor Live Limitless",
+      "shortName": "Accor",
+      "type": "hotel",
+      "dollarValue": 0.0040
+    },
+    "eva_air": {
+      "name": "EVA Air Infinity MileageLands",
+      "shortName": "EVA Air",
+      "type": "airline",
+      "dollarValue": 0.0130
+    },
+    "leaders_club": {
+      "name": "Leaders Club",
+      "shortName": "Leaders",
+      "type": "hotel",
+      "dollarValue": 0.0050
+    },
+    "preferred_hotels": {
+      "name": "Preferred Hotels & Resorts",
+      "shortName": "I Prefer",
+      "type": "hotel",
+      "dollarValue": 0.0030
+    },
+    "qatar": {
+      "name": "Qatar Airways Privilege Club",
+      "shortName": "Qatar",
+      "type": "airline",
+      "dollarValue": 0.0130
+    },
+    "shop_your_way": {
+      "name": "Shop Your Way",
+      "shortName": "SYW",
+      "type": "retail",
+      "dollarValue": 0.0010
+    },
+    "thai": {
+      "name": "Thai Royal Orchid Plus",
+      "shortName": "Thai",
+      "type": "airline",
+      "dollarValue": 0.0110
+    },
+    "turkish": {
+      "name": "Turkish Airlines Miles&Smiles",
+      "shortName": "Turkish",
+      "type": "airline",
+      "dollarValue": 0.0130
+    },
+    "finnair": {
+      "name": "Finnair Plus",
+      "shortName": "Finnair",
+      "type": "airline",
+      "dollarValue": 0.0120
+    },
+    "tap": {
+      "name": "TAP Miles&Go",
+      "shortName": "TAP",
+      "type": "airline",
+      "dollarValue": 0.0110
+    },
+    "virgin_red": {
+      "name": "Virgin Red",
+      "shortName": "Virgin Red",
+      "type": "airline",
+      "dollarValue": 0.0130
+    },
+    "aegean": {
+      "name": "AEGEAN Miles+Bonus",
+      "shortName": "AEGEAN",
+      "type": "airline",
+      "dollarValue": 0.0120
+    },
+    "air_china": {
+      "name": "Air China PhoenixMiles",
+      "shortName": "Air China",
+      "type": "airline",
+      "dollarValue": 0.0110
+    },
+    "air_new_zealand": {
+      "name": "Air New Zealand Airpoints",
+      "shortName": "Air NZ",
+      "type": "airline",
+      "dollarValue": 0.0150
+    },
+    "alaska": {
+      "name": "Alaska Airlines Mileage Plan",
+      "shortName": "Alaska",
+      "type": "airline",
+      "dollarValue": 0.0180
+    },
+    "asiana": {
+      "name": "Asiana Airlines Asiana Club",
+      "shortName": "Asiana",
+      "type": "airline",
+      "dollarValue": 0.0130
+    },
+    "china_southern": {
+      "name": "China Southern Sky Pearl Club",
+      "shortName": "China Southern",
+      "type": "airline",
+      "dollarValue": 0.0100
+    },
+    "copa": {
+      "name": "Copa Airlines ConnectMiles",
+      "shortName": "Copa",
+      "type": "airline",
+      "dollarValue": 0.0120
+    },
+    "frontier": {
+      "name": "FRONTIER Miles",
+      "shortName": "Frontier",
+      "type": "airline",
+      "dollarValue": 0.0100
+    },
+    "hainan": {
+      "name": "Hainan Airlines Fortune Wings Club",
+      "shortName": "Hainan",
+      "type": "airline",
+      "dollarValue": 0.0100
+    },
+    "intermiles": {
+      "name": "InterMiles",
+      "shortName": "InterMiles",
+      "type": "airline",
+      "dollarValue": 0.0100
+    },
+    "jal": {
+      "name": "Japan Airlines JAL Mileage Bank",
+      "shortName": "JAL",
+      "type": "airline",
+      "dollarValue": 0.0140
+    },
+    "latam": {
+      "name": "LATAM Airlines LATAM Pass",
+      "shortName": "LATAM",
+      "type": "airline",
+      "dollarValue": 0.0130
+    },
+    "multiplus": {
+      "name": "Multiplus Fidelidade LATAM Pass",
+      "shortName": "Multiplus",
+      "type": "airline",
+      "dollarValue": 0.0120
+    },
+    "saudia": {
+      "name": "Saudia Alfursan",
+      "shortName": "Saudia",
+      "type": "airline",
+      "dollarValue": 0.0110
+    },
+    "virgin_australia": {
+      "name": "Virgin Australia Velocity",
+      "shortName": "Virgin Australia",
+      "type": "airline",
+      "dollarValue": 0.0130
+    },
+    "vueling": {
+      "name": "Vueling Club",
+      "shortName": "Vueling",
+      "type": "airline",
+      "dollarValue": 0.0100
+    }
+  },
+  "conversions": [
+    {
+      "from": "chase_ur",
+      "to": "hyatt",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
+    },
+    {
+      "from": "chase_ur",
+      "to": "marriott",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
+    },
+    {
+      "from": "chase_ur",
+      "to": "ihg",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
+    },
+    {
+      "from": "chase_ur",
+      "to": "united",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
+    },
+    {
+      "from": "chase_ur",
+      "to": "southwest",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
+    },
+    {
+      "from": "chase_ur",
+      "to": "jetblue",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
+    },
+    {
+      "from": "chase_ur",
+      "to": "british_airways",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
+    },
+    {
+      "from": "chase_ur",
+      "to": "virgin_atlantic",
+      "rate": 1.0,
+      "bonus": true,
+      "bonusRate": 1.25,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
+    },
+    {
+      "from": "chase_ur",
+      "to": "singapore",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
+    },
+    {
+      "from": "chase_ur",
+      "to": "air_france",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
+    },
+    {
+      "from": "chase_ur",
+      "to": "emirates",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": false,
+      "note": "Temporarily unavailable",
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
+    },
+    {
+      "from": "chase_ur",
+      "to": "air_canada",
+      "rate": 1.0,
+      "bonus": true,
+      "bonusRate": 1.2,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
+    },
+    {
+      "from": "chase_ur",
+      "to": "aer_lingus",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
+    },
+    {
+      "from": "chase_ur",
+      "to": "iberia",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://ultimaterewardspoints.chase.com/transfer-points/list-programs"
+    },
+    {
+      "from": "amex_mr",
+      "to": "hilton",
+      "rate": 2.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://global.americanexpress.com/rewards/transfer"
+    },
+    {
+      "from": "amex_mr",
+      "to": "marriott",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": false,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://global.americanexpress.com/rewards/transfer"
+    },
+    {
+      "from": "amex_mr",
+      "to": "delta",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://global.americanexpress.com/rewards/transfer"
+    },
+    {
+      "from": "amex_mr",
+      "to": "jetblue",
+      "rate": 0.8,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 250,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://global.americanexpress.com/rewards/transfer"
+    },
+    {
+      "from": "amex_mr",
+      "to": "british_airways",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://global.americanexpress.com/rewards/transfer"
+    },
+    {
+      "from": "amex_mr",
+      "to": "virgin_atlantic",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://global.americanexpress.com/rewards/transfer"
+    },
+    {
+      "from": "amex_mr",
+      "to": "singapore",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://global.americanexpress.com/rewards/transfer"
+    },
+    {
+      "from": "amex_mr",
+      "to": "air_france",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://global.americanexpress.com/rewards/transfer"
+    },
+    {
+      "from": "amex_mr",
+      "to": "emirates",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": false,
+      "note": "Temporarily unavailable starting May 28th",
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://global.americanexpress.com/rewards/transfer"
+    },
+    {
+      "from": "amex_mr",
+      "to": "ana",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://global.americanexpress.com/rewards/transfer"
+    },
+    {
+      "from": "amex_mr",
+      "to": "avianca",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://global.americanexpress.com/rewards/transfer"
+    },
+    {
+      "from": "amex_mr",
+      "to": "cathay_pacific",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://global.americanexpress.com/rewards/transfer"
+    },
+    {
+      "from": "amex_mr",
+      "to": "etihad",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://global.americanexpress.com/rewards/transfer"
+    },
+    {
+      "from": "amex_mr",
+      "to": "hawaiian",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "note": "Service ending June 30th, 2025",
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://global.americanexpress.com/rewards/transfer"
+    },
+    {
+      "from": "amex_mr",
+      "to": "qantas",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://global.americanexpress.com/rewards/transfer"
+    },
+    {
+      "from": "amex_mr",
+      "to": "aeromexico",
+      "rate": 1.6,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://global.americanexpress.com/rewards/transfer"
+    },
+    {
+      "from": "amex_mr",
+      "to": "aer_lingus",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://global.americanexpress.com/rewards/transfer"
+    },
+    {
+      "from": "amex_mr",
+      "to": "air_canada",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://global.americanexpress.com/rewards/transfer"
+    },
+    {
+      "from": "amex_mr",
+      "to": "iberia",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://global.americanexpress.com/rewards/transfer"
+    },
+    {
+      "from": "amex_mr",
+      "to": "choice",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://global.americanexpress.com/rewards/transfer"
+    },
+    {
+      "from": "citi_typ",
+      "to": "jetblue",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.thankyou.com/partnerProgramsListing.htm",
+      "note": "Prestige, Strata Premier, AT&T Access More cards only. Other cards transfer at 0.8:1"
+    },
+    {
+      "from": "citi_typ",
+      "to": "virgin_atlantic",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.thankyou.com/partnerProgramsListing.htm"
+    },
+    {
+      "from": "citi_typ",
+      "to": "singapore",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.thankyou.com/partnerProgramsListing.htm"
+    },
+    {
+      "from": "citi_typ",
+      "to": "air_france",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.thankyou.com/partnerProgramsListing.htm"
+    },
+    {
+      "from": "citi_typ",
+      "to": "emirates",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": false,
+      "note": "Temporarily unavailable",
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.thankyou.com/partnerProgramsListing.htm"
+    },
+    {
+      "from": "citi_typ",
+      "to": "wyndham",
+      "rate": 1.0,
+      "bonus": true,
+      "bonusRate": 1.25,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.thankyou.com/partnerProgramsListing.htm",
+      "note": "25% bonus through June 21, 2025. Prestige/Strata Premier get 1.25:1, others get 1:1"
+    },
+    {
+      "from": "citi_typ",
+      "to": "aeromexico",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.thankyou.com/partnerProgramsListing.htm"
+    },
+    {
+      "from": "citi_typ",
+      "to": "accor",
+      "rate": 0.5,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.thankyou.com/partnerProgramsListing.htm"
+    },
+    {
+      "from": "citi_typ",
+      "to": "avianca",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.thankyou.com/partnerProgramsListing.htm"
+    },
+    {
+      "from": "citi_typ",
+      "to": "cathay_pacific",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.thankyou.com/partnerProgramsListing.htm"
+    },
+    {
+      "from": "citi_typ",
+      "to": "choice",
+      "rate": 2.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.thankyou.com/partnerProgramsListing.htm",
+      "note": "Prestige/Strata Premier get 2:1, others get 1.5:1"
+    },
+    {
+      "from": "citi_typ",
+      "to": "etihad",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.thankyou.com/partnerProgramsListing.htm"
+    },
+    {
+      "from": "citi_typ",
+      "to": "eva_air",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.thankyou.com/partnerProgramsListing.htm"
+    },
+    {
+      "from": "citi_typ",
+      "to": "leaders_club",
+      "rate": 0.2,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.thankyou.com/partnerProgramsListing.htm"
+    },
+    {
+      "from": "citi_typ",
+      "to": "preferred_hotels",
+      "rate": 4.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.thankyou.com/partnerProgramsListing.htm"
+    },
+    {
+      "from": "citi_typ",
+      "to": "qantas",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.thankyou.com/partnerProgramsListing.htm"
+    },
+    {
+      "from": "citi_typ",
+      "to": "qatar",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.thankyou.com/partnerProgramsListing.htm"
+    },
+    {
+      "from": "citi_typ",
+      "to": "shop_your_way",
+      "rate": 10.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.thankyou.com/partnerProgramsListing.htm"
+    },
+    {
+      "from": "citi_typ",
+      "to": "thai",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.thankyou.com/partnerProgramsListing.htm"
+    },
+    {
+      "from": "citi_typ",
+      "to": "turkish",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.thankyou.com/partnerProgramsListing.htm"
+    },
+    {
+      "from": "capital_one",
+      "to": "british_airways",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "air_france",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "emirates",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "singapore",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "jetblue",
+      "rate": 0.6,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/",
+      "note": "5:3 transfer ratio (1,000 Capital One miles = 600 TrueBlue points)"
+    },
+    {
+      "from": "capital_one",
+      "to": "eva_air",
+      "rate": 0.75,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/",
+      "note": "2:1.5 transfer ratio (1,000 Capital One miles = 750 Infinity MileageLands miles)"
+    },
+    {
+      "from": "capital_one",
+      "to": "aeromexico",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "air_canada",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "avianca",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "cathay_pacific",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "etihad",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "finnair",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "qantas",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "tap",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "turkish",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "virgin_red",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "accor",
+      "rate": 0.5,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/",
+      "note": "2:1 conversion ratio (1,000 Capital One miles = 500 Accor points)"
+    },
+    {
+      "from": "capital_one",
+      "to": "choice",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "capital_one",
+      "to": "wyndham",
+      "rate": 1.0,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": true,
+      "minAmount": 1000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.capitalone.com/learn-grow/money-management/venture-miles-transfer-partnerships/"
+    },
+    {
+      "from": "marriott",
+      "to": "united",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.37,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 10,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "american",
+      "rate": 0.33,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio, no bonus miles offered"
+    },
+    {
+      "from": "marriott",
+      "to": "delta",
+      "rate": 0.33,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio, no bonus miles offered"
+    },
+    {
+      "from": "marriott",
+      "to": "aegean",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "aer_lingus",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "aeromexico",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "air_canada",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "air_china",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "air_france",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "air_new_zealand",
+      "rate": 0.005,
+      "bonus": true,
+      "bonusRate": 0.006,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "200:1 ratio + 75 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "alaska",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "ana",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "asiana",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "avianca",
+      "rate": 0.33,
+      "bonus": false,
+      "bonusRate": null,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio, no bonus miles offered"
+    },
+    {
+      "from": "marriott",
+      "to": "british_airways",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "cathay_pacific",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "china_southern",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "copa",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "emirates",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "etihad",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "frontier",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "hainan",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "hawaiian",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "iberia",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "intermiles",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "jal",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "latam",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "multiplus",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "qantas",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "qatar",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "saudia",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "singapore",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "southwest",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "tap",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "thai",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "turkish",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "virgin_atlantic",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "virgin_australia",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    },
+    {
+      "from": "marriott",
+      "to": "vueling",
+      "rate": 0.33,
+      "bonus": true,
+      "bonusRate": 0.42,
+      "instantTransfer": false,
+      "minAmount": 3000,
+      "lastUpdated": "2025-06-08T21:45:33Z",
+      "source": "https://www.marriott.com/loyalty/redeem/travel/points-to-miles.mi",
+      "note": "3:1 ratio + 5,000 bonus miles per 60,000 points transferred"
+    }
+  ],
+  "affiliateLinks": [
+    {
+      "name": "Chase Sapphire Preferred",
+      "program": "chase_ur",
+      "bonus": "60,000 points",
+      "url": "#",
+      "annualFee": "$95"
+    },
+    {
+      "name": "Amex Gold Card",
+      "program": "amex_mr",
+      "bonus": "75,000 points",
+      "url": "#",
+      "annualFee": "$250"
+    },
+    {
+      "name": "Capital One Venture X",
+      "program": "capital_one",
+      "bonus": "75,000 miles",
+      "url": "#",
+      "annualFee": "$395"
+    }
+  ]
+}

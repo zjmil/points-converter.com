@@ -9,9 +9,10 @@ Points-converter.com is a website that allows users to convert between various p
 ## Technology Stack
 
 - Frontend: React 18 + Vite
-- Data: Static JSON files (manually updated)
+- Backend API: Go with Gin framework (serves conversion data)
+- Data: Static JSON files (manually updated) + Go API
 - Management Tools: Node.js ES Modules with comprehensive validation and scraping
-- Hosting: Static site hosting (GitHub Pages, Netlify, etc.)
+- Hosting: Frontend on static hosting (GitHub Pages, Netlify, etc.) + API on Fly.io
 
 ## Important: ES Module Configuration
 
@@ -59,9 +60,12 @@ if (require.main === module) {
 │   │   ├── ConversionForm.jsx
 │   │   ├── TransferPreview.jsx
 │   │   └── ...
+│   ├── contexts/       # React contexts
+│   │   └── ConversionContext.jsx  # API/data loading context
 │   ├── hooks/          # React custom hooks
 │   │   ├── useConversions.js
-│   │   └── useDollarValues.js
+│   │   ├── useDollarValues.js
+│   │   └── useURLHistory.js
 │   ├── test/           # Test files
 │   │   ├── fixtures.js
 │   │   ├── setup.js
@@ -70,6 +74,14 @@ if (require.main === module) {
 │   ├── App.jsx         # Main React app
 │   ├── main.jsx        # App entry point
 │   └── style.css       # Global styles
+├── api/                # Go API backend
+│   ├── main.go         # API server entry point
+│   ├── go.mod          # Go module dependencies
+│   ├── go.sum          # Go module checksums
+│   ├── Dockerfile      # Docker configuration for deployment
+│   ├── fly.toml        # Fly.io deployment configuration
+│   ├── conversions.json # Copy of data for Docker build
+│   └── api.log         # API server logs (generated)
 ├── scripts/            # Data management tools (ES modules)
 │   ├── lib/           # Core management libraries
 │   │   ├── validator.js   # Data validation & integrity
@@ -85,6 +97,7 @@ if (require.main === module) {
 │   └── data/
 │       └── conversions.json # Static conversion data
 ├── dist/               # Build output (generated)
+├── dev.log             # Frontend dev server logs (generated)
 ├── index.html          # HTML template
 ├── vite.config.js      # Vite configuration
 ├── vitest.config.js    # Test configuration
@@ -111,13 +124,23 @@ if (require.main === module) {
 
 ### Using make (recommended for development):
 - `make help` - Show all available commands
-- `make dev` - **Smart development server** (only starts if not running, logs to dev.log)
-- `make dev-logs` - View development server logs in real-time
-- `make dev-stop` - Stop development server
-- `make build` - Build for production
-- `make deploy-test` - Build and preview
-- `make install` - Install dependencies
+
+**Frontend Development:**
+- `make dev` - **Smart frontend server** (only starts if not running, logs to dev.log)
+- `make dev-logs` - View frontend server logs (reads dev.log)
+- `make dev-stop` - Stop frontend development server
+
+**Backend API Development:**
+- `make api-dev` - **Smart API server** (only starts if not running, logs to api/api.log)
+- `make api-logs` - View API server logs (reads api/api.log)
+- `make api-stop` - Stop API development server
+
+**Build & Test:**
+- `make build` - Build frontend for production
+- `make install` - Install frontend dependencies
 - `make test` - Run tests
+
+**Data Management:**
 - `make update-data` - Edit conversion data
 - `make manage-data` - **Run comprehensive data management tool**
 - `make validate-data` - Quick data validation
@@ -125,12 +148,14 @@ if (require.main === module) {
 - `make test-integrity` - Run data integrity tests
 
 **Development Server Management:**
-The `make dev` command provides intelligent server management:
-- Checks if development server is already running on port 5173
-- Only starts server if not already running (prevents conflicts)
-- Runs server in background with logs written to `dev.log`
-- Use `make dev-logs` to view real-time logs
-- Use `make dev-stop` to cleanly stop the server
+Both `make dev` and `make api-dev` provide intelligent server management:
+- Check if server is already running on respective ports (5173 for frontend, 8080 for API)
+- Only start server if not already running (prevents conflicts)
+- Run servers in background with logs written to respective log files
+- Use `make dev-logs` or `make api-logs` to view logs (reads log files directly)
+- Use `make dev-stop` or `make api-stop` to cleanly stop servers
+
+**Note:** The log commands read log files directly rather than using `tail -f` to avoid timeout issues in some environments.
 
 ## Key Features
 
@@ -141,8 +166,10 @@ The `make dev` command provides intelligent server management:
 5. Mobile-responsive design
 6. **Browser history support** - Back/forward buttons work for program selection
 7. **URL state management** - Bookmarkable conversion states
-8. Monetization placeholders for ads and affiliate links
-9. **Comprehensive data management system with validation, scraping, and backup**
+8. **Go API backend** - Serves conversion data with fallback to static JSON
+9. **API-first architecture** - Frontend tries production API, then localhost, then static files
+10. Monetization placeholders for ads and affiliate links
+11. **Comprehensive data management system with validation, scraping, and backup**
 
 ## React Architecture
 
@@ -155,9 +182,15 @@ The application uses modern React patterns:
 - **LocalStorage**: Advanced settings persisted in browser storage
 
 ### Custom Hooks
-- **useConversions**: Manages conversion data loading and calculations
+- **useConversions**: Manages conversion data loading and calculations (from ConversionContext)
 - **useDollarValues**: Handles currency formatting and dollar value calculations
 - **useURLHistory**: Manages browser history and URL state synchronization
+
+### Context Management
+- **ConversionContext**: Provides global conversion data and API loading logic
+  - Tries production API first (`https://points-converter-api.fly.dev/api/v1/conversions`)
+  - Falls back to localhost API (`http://localhost:8080/api/v1/conversions`)
+  - Final fallback to static JSON (`/data/conversions.json`)
 
 ### Component Patterns
 - **Functional Components**: All components use React function syntax with hooks
@@ -180,6 +213,33 @@ The `conversions.json` file contains:
 - Transfer partners
 - Last updated timestamp
 - Data source information
+
+## Go API Backend
+
+The Go API provides a REST endpoint to serve conversion data:
+
+### API Endpoints
+- `GET /api/v1/conversions` - Returns complete conversion data
+- `GET /api/v1/health` - Health check endpoint
+
+### API Configuration
+- **Framework**: Gin (Go web framework)
+- **CORS**: Configured for localhost development servers
+- **Security**: Trusted proxies disabled for security
+- **Data Loading**: Reads `conversions.json` at startup with fallback paths
+- **Port**: 8080 (configurable via PORT environment variable)
+
+### Local Development
+- Data loaded from `../public/data/conversions.json` (relative to api directory)
+- Hot reload: Restart API server after changes to Go code
+- Logs written to `api/api.log` when using `make api-dev`
+
+### Production Deployment (Fly.io)
+- Deployed at: `https://points-converter-api.fly.dev`
+- Docker containerized with multi-stage build
+- Data copied into container as `conversions.json`
+- Health checks configured via `fly.toml`
+- Auto-scaling with machine sleep when idle
 
 ## Testing
 
@@ -215,7 +275,9 @@ Tests are located in `src/test/` and use mock data from `fixtures.js` to ensure 
 
 ## Deployment
 
-### Cloudflare Pages
+### Frontend Deployment (Static Hosting)
+
+#### Cloudflare Pages
 1. **Connect Repository:**
    - Go to Cloudflare Pages dashboard
    - Click "Create a project" 
@@ -239,7 +301,39 @@ The build process will:
 - Output optimized static files to `dist/` directory
 - Serve the built site with automatic deployments on git push
 
-### Other Platforms
+#### Other Frontend Platforms
 - GitHub Pages: Push to `gh-pages` branch or configure in settings
 - Netlify: Drag and drop the folder or connect repo
 - Vercel: Import project with default settings
+
+### Backend API Deployment (Fly.io)
+
+The Go API is deployed on Fly.io with the following setup:
+
+#### Prerequisites
+- Install Fly CLI: `brew install flyctl` (macOS) or see [Fly.io docs](https://fly.io/docs/hands-on/install-flyctl/)
+- Login: `flyctl auth login`
+
+#### Deployment Configuration
+- **App Name**: `points-converter-api`
+- **Region**: `ord` (Chicago)
+- **URL**: `https://points-converter-api.fly.dev`
+
+#### Key Files
+- `api/fly.toml` - Fly.io app configuration
+- `api/Dockerfile` - Multi-stage Docker build
+- `api/conversions.json` - Data file copied during Docker build
+
+#### Deployment Process
+1. Copy latest data: `cp public/data/conversions.json api/`
+2. Deploy: `cd api && flyctl deploy`
+
+#### Production Features
+- Health checks on `/api/v1/health`
+- Auto-scaling with machine sleep when idle
+- HTTPS by default
+- Resource limits: 256MB RAM, 1 shared CPU
+
+#### Monitoring
+- View logs: `flyctl logs -a points-converter-api`
+- App status: `flyctl status -a points-converter-api`

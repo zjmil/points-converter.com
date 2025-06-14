@@ -1,4 +1,4 @@
-.PHONY: help dev dev-logs dev-stop install clean deploy-test
+.PHONY: help dev dev-logs dev-stop api-dev api-logs api-stop install clean deploy-test
 
 help: ## Show this help message
 	@echo "Available commands:"
@@ -30,6 +30,34 @@ dev-stop: ## Stop development server
 		echo "Development server stopped."; \
 	else \
 		echo "Development server is not running on port 5173."; \
+	fi
+
+api-dev: ## Start API server (only if not already running)
+	@if lsof -ti:8080 > /dev/null 2>&1; then \
+		echo "API server already running on port 8080"; \
+		echo "Logs available at: api/api.log"; \
+		echo "To view logs: tail -f api/api.log"; \
+	else \
+		echo "Starting API server..."; \
+		echo "Logs will be written to: api/api.log"; \
+		cd api && go run . > api.log 2>&1 & \
+		echo "API server started in background. View logs with: make api-logs"; \
+	fi
+
+api-logs: ## View API server logs
+	@if [ -f api/api.log ]; then \
+		tail -f api/api.log; \
+	else \
+		echo "No api/api.log file found. Start the API server first with: make api-dev"; \
+	fi
+
+api-stop: ## Stop API server
+	@if lsof -ti:8080 > /dev/null 2>&1; then \
+		echo "Stopping API server..."; \
+		lsof -ti:8080 | xargs kill; \
+		echo "API server stopped."; \
+	else \
+		echo "API server is not running on port 8080."; \
 	fi
 
 install: ## Install dependencies

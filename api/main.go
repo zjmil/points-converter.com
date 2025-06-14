@@ -31,6 +31,9 @@ func main() {
 	// Create Gin router
 	r := gin.Default()
 
+	// Set trusted proxies (empty for security - no proxies trusted)
+	r.SetTrustedProxies(nil)
+
 	// Add CORS middleware
 	config := cors.DefaultConfig()
 	config.AllowOrigins = []string{"http://localhost:5173", "http://localhost:4173"} // Vite dev and preview servers
@@ -58,8 +61,11 @@ func main() {
 }
 
 func loadConversionData() error {
-	// Get the path to conversions.json relative to the API directory
-	dataPath := filepath.Join("..", "public", "data", "conversions.json")
+	// Look for conversions.json in current directory (Docker) or relative path (local dev)
+	dataPath := "conversions.json"
+	if _, err := os.Stat(dataPath); os.IsNotExist(err) {
+		dataPath = filepath.Join("..", "public", "data", "conversions.json")
+	}
 	
 	// Read the JSON file
 	data, err := os.ReadFile(dataPath)
